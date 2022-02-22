@@ -1,9 +1,10 @@
-import './App.css'
+import RouteList from './routes';
 
-function App() {
+const App = () => {
   return (
-    <h1>projeto integrador</h1>
-  )
+    <>
+      <RouteList />
+    </>
+  );
 }
-
-export default App
+export default App;
