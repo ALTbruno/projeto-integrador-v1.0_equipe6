@@ -13,15 +13,15 @@ public class Category {
     private Long id;
     private String title;
     private String description;
-    private String image;
+    private String urlImage;
 
     public Category() {
     }
 
-    public Category(String title, String description, String image) {
+    public Category(String title, String description, String urlImage) {
         this.title = title;
         this.description = description;
-        this.image = image;
+        this.urlImage = urlImage;
     }
 
     public Long getId() {
@@ -48,11 +48,11 @@ public class Category {
         this.description = description;
     }
 
-    public String getImage() {
-        return image;
+    public String getUrlImage() {
+        return urlImage;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
     }
 }
