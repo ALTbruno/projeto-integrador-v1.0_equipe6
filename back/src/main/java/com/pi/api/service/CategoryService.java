@@ -22,11 +22,11 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
-    public void excluir(Integer id) {
+    public void excluir(Long id) {
         categoryRepository.deleteById(id);
     }
 
-    public Optional<Category> buscarPorId(Integer id) {
+    public Optional<Category> buscarPorId(Long id) {
         return categoryRepository.findById(id);
     }
 

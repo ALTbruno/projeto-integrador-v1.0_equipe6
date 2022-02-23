@@ -22,7 +22,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Category> buscarPorId(@PathVariable Integer id) {
+    public ResponseEntity<Category> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(categoryService.buscarPorId(id).orElse(null));
     }
 
@@ -37,7 +37,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> excluir(@PathVariable Integer id) {
+    public ResponseEntity<String> excluir(@PathVariable Long id) {
         ResponseEntity<String> response = null;
         if (categoryService.buscarPorId(id).isPresent()) {
             categoryService.excluir(id);
