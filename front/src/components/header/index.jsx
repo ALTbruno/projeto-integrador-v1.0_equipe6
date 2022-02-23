@@ -5,7 +5,7 @@ const Header = () => {
     return (
         <>
 
-            <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom bg-primary">
+            <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 bg-primary">
                 <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
                     <svg width="40" height="40" viewBox="0 0 76 56" fill="none" xmlns="http://www.w3.org/2000/svg" class="bi me-2 mx-4" role="img" aria-label="Bootstrap">
                         <path d="M72.4941 0H3.50586C1.56963 0 0 1.54861 0 3.45893V52.5411C0 54.4514 1.56963 56 3.50586 56H72.4941C74.4304 56 76 54.4514 76 52.5411V3.45893C76 1.54861 74.4304 0 72.4941 0Z" fill="#1D1D1B" />

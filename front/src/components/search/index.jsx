@@ -1,13 +1,11 @@
 import React from 'react';
 import './index.scss';
-import Header from '../header';
 import calendar from '../../assets/icons/calendar.svg';
 import localizador from '../../assets/icons/localizador.svg';
 
 export default function Search() {
   return (
     <>
-      <Header/>
       <section id='container-search'>
         <h1>Buscar ofertas em hotéis, casas e muito mais</h1>
         <div className='inputs' >
