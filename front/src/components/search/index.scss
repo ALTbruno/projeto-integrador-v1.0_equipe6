@@ -18,20 +18,23 @@
     }
     .inputs{
         display: flex;
+        justify-content: center;
+        width: 100%;
         .container-destino, .container-date{
             position: relative;
             display: flex;
             align-items: center;
+            width: 442px;
             a{
                 position: absolute;
                 left: 20px;
             }
         }
         input{
+            width: 100%;
             border: none;
             margin-left: 10px;
-            width: 442px;
-            padding: 10px 35px;
+            padding: 8px 35px;
             border-radius: 5px;
             height: 40px;
             font-size: $roboto-medium-14;
@@ -48,5 +51,45 @@
         color: $white;
         font-size: $roboto-bold-16;
         font-weight: $roboto-bold-16-font-weight;
+    }
+}
+
+// responsividade tablet
+@media (min-width: 768px) and (max-width: 1366px) {
+
+    .container-date, .container-destino{
+        width: 254px;
+    }
+}
+
+// responsividade mobile
+@media (max-width: 768px) {
+    #container-search{
+        height: 263px;
+        h1{
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 14px;
+        }
+        .inputs{
+            flex-direction: column;
+            width: 100%;
+            .container-date, .container-destino{
+                width: 100%;
+                margin-bottom: 10px;
+                a{
+                    left: 8px;
+                }
+            }
+            input{
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+        button{
+            margin-left: 0;
+            width: 100%;
+        }
     }
 }
