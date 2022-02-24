@@ -1,9 +1,12 @@
+import RecomendationList from '../../components/recomendationList';
+import Search from '../../components/search';
 
 
 const Home = () => {
   return (
     <>
-        <p>teste</p>
+        <Search />
+        <RecomendationList/>
     </>
   );
 }
