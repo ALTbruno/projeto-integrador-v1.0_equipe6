@@ -10,23 +10,23 @@ const RegisterForm = () => {
                     <form>
                         <div className="user-details">
                             <div className="input-box name">
-                                <label for="inputName" className="details">Nome</label>
+                                <label htmlFor="inputName" className="details">Nome</label>
                                 <input type="text" id="Nome" />
                             </div>
                             <div className="input-box lastname">
-                                <label for="inputLastName" className="details">Sobrenome</label>
+                                <label htmlFor="inputLastName" className="details">Sobrenome</label>
                                 <input type="text" id="Sobrenome" />
                             </div>
                             <div className="input-box email" >
-                                <label for="inputEmail" className="details">Email</label>
+                                <label htmlFor="inputEmail" className="details">Email</label>
                                 <input type="email" id="Email" />
                             </div>
                             <div className="input-box password">
-                                <label for="inputPassword" className="details">Senha</label>
+                                <label htmlFor="inputPassword" className="details">Senha</label>
                                 <input type="password" id="Senha" />
                             </div>
                             <div className="input-box checkpass">
-                                <label for="inputCity" className="details">Confirmar Senha</label>
+                                <label htmlFor="inputCity" className="details">Confirmar Senha</label>
                                 <input type="password" id="ConfirmarSenha" />
                             </div>
                         </div>

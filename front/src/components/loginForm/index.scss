@@ -1,80 +1,75 @@
 @import "../../variables/colors.scss";
 @import "../../variables/typography.scss";
 
-
-
 #LoginForm{
     display: flex;
-    height: 70vh;
+    height: calc(100vh - 128px);
     justify-content: center;
     align-items: center;
     padding: 10px;
-    
-    
-    .container{
-        max-width: 700px;
+    .container-loginForm{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         width: 100%;
-        padding: 25px 30px;    
-        
-        form .user-details .input-box{
-            margin: 20px 16px 12px 16px;
-            width: calc(100% / 2 - 20px);
-            height: 61px;
-
-            
-        }
-
-        .user-details .input-box.email,
-        .user-details .input-box.password{
-            width: 468px;
-            height: 61px;
-        }
-
-        .user-details .input-box input{
-            height: 45px;
-            width: 100%;
-            outline: none;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            padding-left: 15px;
-            font-size: 16px;
-
-        }
-
-        .user-details .input-box .details{
-            font-weight: 500;
-            margin-bottom: 2px;
-        }
-
-        form .btn{
-            height: 40px;
-            margin: 21px 217px 0 217px;
-            width: 206px;
-            padding: 0;
-            border: 0;
-            
-
-            a button{
+    p{
+        margin: 0;
+        text-align: center;
+        font-size: $roboto-medio-12;
+        font-weight: $roboto-medio-12-font-weight;
+    }
+        form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .user-details{
+                min-width: 300px;
+                max-width: 448px;
+                width: 100%;
+            }
+            .user-details .input-box{
+                margin: 20px 16px 12px 16px;
+                height: 61px;  
+            }
+            .user-details .input-box.email,
+            .user-details .input-box.password{
+                height: 61px;
+                font-size: $roboto-medio-12;
+                font-weight: $roboto-medio-12-font-weight;
+            }
+            .user-details .input-box input{
+                height: 45px;
+                width: 100%;
+                outline: none;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                padding-left: 15px;
+                font-size: 16px;
+            }
+            .user-details .input-box label{
+                width: 100%;
+                font-weight: 500;
+                margin-bottom: 2px;
+            }
+            .button{
                 height: 40px;
                 width: 206px;
-                outline: none;
-                background-color: $color-principal;
-                border: 0px solid;
-                border-radius: 10px;
-                color: white;
-                font-size: 100%;
-                
-
-            }
-
-            a button:hover{
-                background: #0d6efd;
-                transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-            }
-
-            p, p a{
-                font-size: smaller;
-                display: block;
+                margin-bottom: 7px;
+                button{
+                    height: 40px;
+                    width: 100%;
+                    background-color: $color-principal;
+                    border: none;
+                    border-radius: 5px;
+                    color: $white;
+                    font-size: $roboto-bold-16;
+                    font-weight: $roboto-bold-16-font-weight;
+                }
+                &:hover{
+                    background: #0d6efd;
+                    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                }
             }
         }
         
@@ -82,23 +77,10 @@
 
     }
 
-    .container .title{
-        flex-wrap: wrap;
-        font-size: 25px;
-        font-weight: 100%;
-        position: relative;
+    .container-loginForm .title{
+        font-size: $roboto-bold-24;
+        font-weight: $roboto-bold-24-font-weight;
         text-align: center;
-        font-weight: bold;
-        font-size: 26px;
-        color: #1DBEB4;
+        color: $color-principal;
     }
-
-    .container form .user-details{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-
-        
-    }
-    
 }
