@@ -1,0 +1,221 @@
+{
+	"id": "a4936d35-e659-4be0-a717-9aa8b8d9310b",
+	"name": "Digital Booking",
+	"timestamp": "2022-02-27T02:23:24.799Z",
+	"collection_id": "17471191-58e69eee-7b25-4320-9d4e-f46d282c8552",
+	"folder_id": 0,
+	"environment_id": "17471191-d465b330-49cd-42a9-b59b-29e10b80419a",
+	"totalPass": 5,
+	"totalFail": 8,
+	"results": [
+		{
+			"id": "8f6a9e43-a470-463e-9d3e-186bad2ec9ca",
+			"name": "Cadastrar",
+			"url": "http://localhost:8080/category",
+			"time": 605,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"POST: Cadastro de categoria com title, description e imageUrl válidos": true,
+				"POST: Cadastro de categoria com title em branco, description válida e imageUrl válida": false,
+				"POST: Cadastro de categoria com title válido, description em branco e imageUrl válida": false,
+				"POST: Cadastro de categoria com title válido, description válida e imageUrl em branco": false,
+				"POST: Cadastro de categoria com title válido, description válida e imageUrl inválida": false
+			},
+			"testPassFailCounts": {
+				"POST: Cadastro de categoria com title, description e imageUrl válidos": {
+					"pass": 1,
+					"fail": 0
+				},
+				"POST: Cadastro de categoria com title em branco, description válida e imageUrl válida": {
+					"pass": 0,
+					"fail": 1
+				},
+				"POST: Cadastro de categoria com title válido, description em branco e imageUrl válida": {
+					"pass": 0,
+					"fail": 1
+				},
+				"POST: Cadastro de categoria com title válido, description válida e imageUrl em branco": {
+					"pass": 0,
+					"fail": 1
+				},
+				"POST: Cadastro de categoria com title válido, description válida e imageUrl inválida": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				605
+			],
+			"allTests": [
+				{
+					"POST: Cadastro de categoria com title, description e imageUrl válidos": true,
+					"POST: Cadastro de categoria com title em branco, description válida e imageUrl válida": false,
+					"POST: Cadastro de categoria com title válido, description em branco e imageUrl válida": false,
+					"POST: Cadastro de categoria com title válido, description válida e imageUrl em branco": false,
+					"POST: Cadastro de categoria com title válido, description válida e imageUrl inválida": false
+				}
+			]
+		},
+		{
+			"id": "d022a5b7-6e0d-42fc-a8b9-42102db06c32",
+			"name": "Listar Todas",
+			"url": "http://localhost:8080/category",
+			"time": 315,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"GET: Listar todas Categorias. Esperado resposta com código 200, Array de objetos não vazio, Posição 0 do array é um objeto": true,
+				"GET: Listar todas Categorias. Esperado array de objetos vazio": false
+			},
+			"testPassFailCounts": {
+				"GET: Listar todas Categorias. Esperado resposta com código 200, Array de objetos não vazio, Posição 0 do array é um objeto": {
+					"pass": 1,
+					"fail": 0
+				},
+				"GET: Listar todas Categorias. Esperado array de objetos vazio": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				315
+			],
+			"allTests": [
+				{
+					"GET: Listar todas Categorias. Esperado resposta com código 200, Array de objetos não vazio, Posição 0 do array é um objeto": true,
+					"GET: Listar todas Categorias. Esperado array de objetos vazio": false
+				}
+			]
+		},
+		{
+			"id": "67cd7654-b590-4776-9d62-9ddd09042e15",
+			"name": "Buscar por ID",
+			"url": "http://localhost:8080/category/1",
+			"time": 76,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"GET: Busca Categoria por ID válido": true,
+				"GET: Busca Categoria por ID inválido": false
+			},
+			"testPassFailCounts": {
+				"GET: Busca Categoria por ID válido": {
+					"pass": 1,
+					"fail": 0
+				},
+				"GET: Busca Categoria por ID inválido": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				76
+			],
+			"allTests": [
+				{
+					"GET: Busca Categoria por ID válido": true,
+					"GET: Busca Categoria por ID inválido": false
+				}
+			]
+		},
+		{
+			"id": "bcd4c512-1107-4c53-ab2b-441fed50bffe",
+			"name": "Atualizar",
+			"url": "http://localhost:8080/category/1",
+			"time": 61,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"PUT: Edição com ID válido": true,
+				"PUT: Edição com ID inválido": false
+			},
+			"testPassFailCounts": {
+				"PUT: Edição com ID válido": {
+					"pass": 1,
+					"fail": 0
+				},
+				"PUT: Edição com ID inválido": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				61
+			],
+			"allTests": [
+				{
+					"PUT: Edição com ID válido": true,
+					"PUT: Edição com ID inválido": false
+				}
+			]
+		},
+		{
+			"id": "02245ee6-204b-440f-80ac-88269b488d94",
+			"name": "Deletar por ID",
+			"url": "http://localhost:8080/category/1",
+			"time": 36,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"DELETE: exclusão de categoria com ID válido": true,
+				"DELETE: exclusão de categoria com ID inválido": false
+			},
+			"testPassFailCounts": {
+				"DELETE: exclusão de categoria com ID válido": {
+					"pass": 1,
+					"fail": 0
+				},
+				"DELETE: exclusão de categoria com ID inválido": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				36
+			],
+			"allTests": [
+				{
+					"DELETE: exclusão de categoria com ID válido": true,
+					"DELETE: exclusão de categoria com ID inválido": false
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 1093,
+	"collection": {
+		"requests": [
+			{
+				"id": "8f6a9e43-a470-463e-9d3e-186bad2ec9ca",
+				"method": "POST"
+			},
+			{
+				"id": "d022a5b7-6e0d-42fc-a8b9-42102db06c32",
+				"method": "GET"
+			},
+			{
+				"id": "67cd7654-b590-4776-9d62-9ddd09042e15",
+				"method": "GET"
+			},
+			{
+				"id": "bcd4c512-1107-4c53-ab2b-441fed50bffe",
+				"method": "PUT"
+			},
+			{
+				"id": "02245ee6-204b-440f-80ac-88269b488d94",
+				"method": "DELETE"
+			}
+		]
+	}
+}
