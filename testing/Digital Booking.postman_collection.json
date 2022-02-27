@@ -1,0 +1,241 @@
+{
+	"info": {
+		"_postman_id": "58e69eee-7b25-4320-9d4e-f46d282c8552",
+		"name": "Digital Booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Cadastrar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST: Cadastro de categoria com title, description e imageUrl válidos\", () => {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST: Cadastro de categoria com title em branco, description válida e imageUrl válida\", () => {\r",
+									"    pm.expect(pm.response.text()).to.include(\"interpolatedMessage='não deve estar em branco', propertyPath=title\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST: Cadastro de categoria com title válido, description em branco e imageUrl válida\", () => {\r",
+									"    pm.expect(pm.response.text()).to.include(\"interpolatedMessage='não deve estar em branco', propertyPath=description\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST: Cadastro de categoria com title válido, description válida e imageUrl em branco\", () => {\r",
+									"    pm.expect(pm.response.text()).to.include(\"interpolatedMessage='não deve estar em branco', propertyPath=imageUrl\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST: Cadastro de categoria com title válido, description válida e imageUrl inválida\", () => {\r",
+									"    pm.expect(pm.response.text()).to.include(\"interpolatedMessage='deve ser uma URL válida', propertyPath=imageUrl\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Praia\",\r\n    \"description\": \"Casas na praia\",\r\n    \"imageUrl\": \"https://cdn.pixabay.com/photo/2018/03/20/02/26/palm-3241933_960_720.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{TEST_URL}}/category",
+							"host": [
+								"{{TEST_URL}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"GET: Listar todas Categorias. Esperado resposta com código 200, Array de objetos não vazio, Posição 0 do array é um objeto\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(jsonData.length>0);\r",
+									"    pm.expect(jsonData[0]).to.be.an(\"object\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET: Listar todas Categorias. Esperado array de objetos vazio\", () => {\r",
+									"    pm.expect(jsonData).to.be.empty;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TEST_URL}}/category",
+							"host": [
+								"{{TEST_URL}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET: Busca Categoria por ID válido\", () => {\r",
+									"    const jsonData = pm.response.json();\r",
+									"\r",
+									"    pm.expect(jsonData).to.be.an(\"object\");\r",
+									"    pm.expect(jsonData.id).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.title).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.description).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.imageUrl).to.be.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET: Busca Categoria por ID inválido\", () => {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TEST_URL}}/category/1",
+							"host": [
+								"{{TEST_URL}}"
+							],
+							"path": [
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"PUT: Edição com ID válido\", () => {\r",
+									"    const reqBody = JSON.parse(pm.request.body.raw);\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const idUrl = parseInt(pm.request.url.path[1]);\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(idUrl).to.equal(jsonData.id);\r",
+									"    pm.expect(reqBody.title).to.equal(jsonData.title);\r",
+									"    pm.expect(reqBody.description).to.equal(jsonData.description);\r",
+									"    pm.expect(reqBody.imageUrl).to.equal(jsonData.imageUrl);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"PUT: Edição com ID inválido\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Cabanas\",\r\n    \"description\": \"Desconecte-se do mundo e conecte-se com a natureza.\",\r\n    \"imageUrl\": \"https://cdn.pixabay.com/photo/2016/12/06/14/33/log-cabin-1886620_960_720.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{TEST_URL}}/category/1",
+							"host": [
+								"{{TEST_URL}}"
+							],
+							"path": [
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"DELETE: exclusão de categoria com ID válido\", () => {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"// teste sem id especificado apaga todos os ids\r",
+									"\r",
+									"pm.test(\"DELETE: exclusão de categoria com ID inválido\", () => {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{TEST_URL}}/category/1",
+							"host": [
+								"{{TEST_URL}}"
+							],
+							"path": [
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
