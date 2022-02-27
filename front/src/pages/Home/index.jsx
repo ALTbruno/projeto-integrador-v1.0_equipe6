@@ -5,8 +5,8 @@ import Search from '../../components/search';
 const Home = () => {
   return (
     <>
-        <Search />
-        <RecomendationList/>
+      <Search />
+      <RecomendationList />
     </>
   );
 }
