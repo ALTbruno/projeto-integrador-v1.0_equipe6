@@ -24,12 +24,23 @@ public class CategoryController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Category>> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(categoryService.buscarPorId(id));
+
+        if (categoryService.idExiste(id)) {
+            return ResponseEntity.ok(categoryService.buscarPorId(id));
+        }
+
+        return ResponseEntity.badRequest().build();
     }
 
-    @PutMapping
-    public ResponseEntity<Category> atualizar(@RequestBody Category categoria) {
-        return categoryService.atualizar(categoria);
+    @PutMapping("/{id}")
+    public ResponseEntity<Category> atualizar(@PathVariable Long id, @RequestBody Category category) {
+
+        if (categoryService.idExiste(id)) {
+            category.setId(id);
+            return ResponseEntity.ok(categoryService.atualizar(category));
+        }
+
+        return ResponseEntity.badRequest().build();
     }
 
     @GetMapping
@@ -40,7 +51,7 @@ public class CategoryController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
 
-        if (categoryService.buscarPorId(id).isPresent()) {
+        if (categoryService.idExiste(id)) {
             categoryService.excluir(id);
             return ResponseEntity.noContent().build();
         }
