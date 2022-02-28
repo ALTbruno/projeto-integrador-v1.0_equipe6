@@ -2,6 +2,7 @@ import { Button, Card, CardGroup, Container, Row, Col, Stack } from "react-boots
 import StarRating from "../avaliationStars";
 import hoteis from "./hoteis.json";
 import { MdRoom, MdWifi, MdPool } from "react-icons/md";
+import Classification from "../classification";
 
 const RecomendationList = () => {
 
