@@ -2,6 +2,7 @@ import { Button, Card, CardGroup, Container, Row, Col, Stack } from "react-boots
 import StarRating from "../avaliationStars";
 import hoteis from "./hoteis.json";
 import { MdRoom, MdWifi, MdPool } from "react-icons/md";
+import Classification from "../classification";
 
 const RecomendationList = () => {
 
@@ -24,12 +25,12 @@ const RecomendationList = () => {
                                 <Card.Text className="mb-1 ">
                                     <MdRoom className="me-1"/>
                                     {localizacao + " . "}
-                                    <Card.Link className="text-decoration-none fw-bold">Mostrar no Mapa</Card.Link>
+                                    <Card.Link className="text-decoration-none fw-bold" style={{color: '#1DBEB4'}}>Mostrar no Mapa</Card.Link>
                                 </Card.Text>
                                 <MdWifi className="me-1"/>
                                 <MdPool className="me-1"/>
                                 <Card.Text className="" style={{fontSize: '10px'}}>{descricao}</Card.Text>
-                                <Card.Link className="btn btn-success text-decoration-none" style={{width: '100%'}}>Ver Mais</Card.Link>
+                                <Card.Link className="btn text-decoration-none w-100" style={{backgroundColor: '#1DBEB4', border: '#1DBEB4'}}>Ver Mais</Card.Link>
                             </Card.Body>
                         </Card>
                     )

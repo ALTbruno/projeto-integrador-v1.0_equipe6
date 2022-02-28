@@ -1,12 +1,13 @@
 package com.pi.api.controller;
 
-
 import com.pi.api.entity.Category;
 import com.pi.api.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @CrossOrigin(origins = "*", allowedHeaders = "")
 @RestController
@@ -18,38 +19,43 @@ public class CategoryController {
 
     @PostMapping()
     public ResponseEntity<Category> cadastrar(@RequestBody Category category) {
-        return ResponseEntity.ok(categoryService.salvar(category));
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.salvar(category));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Category> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(categoryService.buscarPorId(id).orElse(null));
-    }
+    public ResponseEntity<Optional<Category>> buscarPorId(@PathVariable Long id) {
 
-    @PutMapping
-    public ResponseEntity<Category> atualizar(@RequestBody Category categoria) {
-        ResponseEntity<Category> response = null;
-        if (categoria.getId() != null && categoryService.buscarPorId(categoria.getId()).isPresent())
-            response = ResponseEntity.ok(categoryService.atualizar(categoria));
-        else
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        return response;
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> excluir(@PathVariable Long id) {
-        ResponseEntity<String> response = null;
-        if (categoryService.buscarPorId(id).isPresent()) {
-            categoryService.excluir(id);
-            response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Categoria excluída");
-        } else {
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        if (categoryService.idExiste(id)) {
+            return ResponseEntity.ok(categoryService.buscarPorId(id));
         }
-        return response;
+
+        return ResponseEntity.badRequest().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Category> atualizar(@PathVariable Long id, @RequestBody Category category) {
+
+        if (categoryService.idExiste(id)) {
+            category.setId(id);
+            return ResponseEntity.ok(categoryService.atualizar(category));
+        }
+
+        return ResponseEntity.badRequest().build();
     }
 
     @GetMapping
     public ResponseEntity<Iterable<Category>> buscarTodos() {
         return ResponseEntity.ok(categoryService.buscarTodos());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+
+        if (categoryService.idExiste(id)) {
+            categoryService.excluir(id);
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.badRequest().build();
     }
 }

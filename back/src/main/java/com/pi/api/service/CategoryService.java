@@ -11,28 +11,31 @@ import java.util.Optional;
 @Service
 public class CategoryService {
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+	@Autowired
+	private CategoryRepository categoryRepository;
 
-    public Category salvar(Category category) {
-        return categoryRepository.save(category);
-    }
+	public Category salvar(Category category) {
+		return categoryRepository.save(category);
+	}
 
-    public Category atualizar(Category category){
-        return categoryRepository.save(category);
-    }
+	public boolean idExiste(Long id) {
+		return categoryRepository.existsById(id);
+	}
 
-    public void excluir(Long id) {
-        categoryRepository.deleteById(id);
-    }
+	public Category atualizar(Category category) {
+		return categoryRepository.save(category);
+	}
 
-    public Optional<Category> buscarPorId(Long id) {
-        return categoryRepository.findById(id);
-    }
+	public Optional<Category> buscarPorId(Long id) {
+		return categoryRepository.findById(id);
+	}
 
-    public List<Category> buscarTodos() {
-        return categoryRepository.findAll();
-    }
+	public List<Category> buscarTodos() {
+		return categoryRepository.findAll();
+	}
 
+	public void excluir(Long id) {
+			categoryRepository.deleteById(id);
+	}
 
 }
