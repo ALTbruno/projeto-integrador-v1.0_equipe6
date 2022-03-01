@@ -21,6 +21,38 @@ header {
     background: none;
     margin: 0;
 }
+
+#registrado {
+    position: relative;
+    width: 206px;
+    display: flex;
+    align-items: center;
+  }
+  #icon {
+    font-size: $roboto-bold-20;
+    font-weight: $roboto-bold-20-font-weight;
+    width: 45px;
+    height: 45px;
+    padding: 7px;
+    margin-right: 10px;
+    border-radius: 50%;
+    color: #fff;
+    background-color: #383b58;
+  }
+  p{
+      margin: 0;
+      span{
+          color: #fff;
+      }
+  }
+  #logout {
+    top: 0;
+    right: 0;
+    font-size: 22px;
+    position: absolute;
+    background: none;
+    border: none;
+  }
 .navigation{
     display:flex;
     ul{
@@ -28,10 +60,12 @@ header {
         flex-wrap: wrap;
         margin: 0px;
         padding: 0px;
-        li{
+        a{
             list-style: none;
-            padding-right: 10px;
-            padding-left: 25px;
+            padding: 10px 63px;
+            color: $color-principal;
+            border: 1px solid $color-principal;
+            border-radius: 5px;
             margin: 5px
         }
     }
@@ -44,7 +78,10 @@ header {
 }
 
 @media (max-width: 768px){
-    #root > header > div.d-flex > h1{
+    header {
+        box-shadow: 0 4px 10px #00000051;
+    }
+    #registrado{
         display: none;
     }
     #btn-mobile{
@@ -82,6 +119,22 @@ header {
         background: none;
         margin-left: 4px;
         }
+        .details-user{
+            display: flex;
+            text-align: end;
+            flex-direction: column;
+            align-items: flex-end;
+            color: #fff;
+            position: absolute;
+            right: 10px;
+            bottom: 6px;
+            #icon{
+                margin: 0;
+            }
+            span{
+                color: $color2;
+            }
+        }
         h2{
         color: #fff;
         position: absolute;
@@ -89,33 +142,52 @@ header {
         bottom: 6px; 
         }
     }
-    nav{
+    nav:not(.logout){
         position: relative;
         margin-top: 23px;
         padding: 14px;
         :nth-child(3){
-        margin-top: 20px;
+            margin-top: 20px;
         }
         p{
-        color: $color2;
-        font-size: $roboto-bold-16;
-        font-weight: $roboto-bold-16-font-weight;
-        text-align: right;
-        right: 0;
-        margin-bottom: 15px;
+            color: $color2;
+            font-size: $roboto-bold-16;
+            font-weight: $roboto-bold-16-font-weight;
+            text-align: right;
+            right: 0;
+            margin-bottom: 15px;
         }
-        #linha-horizontal{
+    }
+    #linha-horizontal{
         display: flex;
         align-items: center;
         width: 100%;
         color: $color3;
         border: 1px solid #000;
+    }
+
+    nav.logout{
+        position: absolute;
+        right: 15px;
+        bottom: 70px;
+        display: flex;
+        align-items: flex-end;
+        flex-direction: column;
+        width: 100%;
+        padding-left: 40px;
+        p{
+        font-size: $roboto-bold-16;
+        font-weight: $roboto-bold-16-font-weight;
+            span{
+            cursor: pointer;
+            color: $color-principal;
+            }
         }
     }
     .bottom{
         position: absolute;
         bottom: 15px;
-        right: 30px;
+        right: 15px;
         li{
             margin-left: 17px;
             list-style: none;
