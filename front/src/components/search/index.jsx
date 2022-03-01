@@ -19,7 +19,7 @@ export default function Search() {
             <a>
               <img id='calendar' src={calendar} alt="" />
             </a>
-            <input type="text" placeholder='Check in-Check out' />
+            <input type="date" placeholder='Check in-Check out' />
           </div>
           <button>Buscar</button>
         </div>
