@@ -1,0 +1,19 @@
+[
+    {
+        "nome": "Hotel",
+        "imagem": "../../../assets/pictures/hotel.svg",
+        "n-hoteis": "807.105"
+    },{
+        "nome": "Hotels",
+        "imagem": "../../../assets/pictures/hotels.svg",
+        "n-hoteis": "807.105"
+    },{
+        "nome": "Apartamento",
+        "imagem": "../../../assets/pictures/apartamento.svg",
+        "n-hoteis": "807.105"
+    },{
+        "nome": "Cama e café da manhã",
+        "imagem": "../../../assets/pictures/cama.svg",
+        "n-hoteis": "807.105"
+    }
+]
