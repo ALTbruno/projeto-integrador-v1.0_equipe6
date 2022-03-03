@@ -1,3 +1,4 @@
+import "./style.scss"
 import { useState } from 'react';
 import { Button, InputGroup, Stack } from 'react-bootstrap';
 import { MdStarOutline, MdStar } from 'react-icons/md';
@@ -17,7 +18,7 @@ const StarRating = () => {
             return (
                 <label>
                     <input className='d-none' type='radio' name='rating' value={ratingValue} onClick={() => setRating(ratingValue)}/>
-                    <MdStar className='ms-1' color={ratingValue <= rating ? "#1DBEB4" : "#bfbfbf"} />
+                    <MdStar className='star ms-1' color={ratingValue <= rating ? "#1DBEB4" : ""}/>
                 </label> 
              )
         })}      

@@ -3,6 +3,7 @@ import StarRating from "../avaliationStars";
 import hoteis from "./hoteis.json";
 import { MdRoom, MdWifi, MdPool } from "react-icons/md";
 import Classification from "../classification";
+import FavoriteHeart from "../favoriteHeart";
 
 const RecomendationList = () => {
 
@@ -12,14 +13,18 @@ const RecomendationList = () => {
 
     return (
         <>
-            
+             <FavoriteHeart/>
             <Row className="justify-content-center">
                 <h3 className="my-3 ms-5 fw-bold">Recomendações</h3>
                 {hoteis.map(({ foto, nome, localizacao, descricao }) => {
 
                     return (  
                         <Card className="m-3 p-0 d-flex flex-row" style={{maxWidth: '40rem' }}>
+                            <Card.Body className="m-0 p-0 d-flex w-100 position-relative">
                             <Card.Img className="float-start" src={foto} style={{maxWidth: '300px', objectFit: 'cover' }}/>
+                            <FavoriteHeart/>
+                            </Card.Body>
+                            
                             <Card.Body className="col-auto container m-1 p-2">
                             <Card.Body className="d-flex flex-row justify-content-between mb-2 p-0">              
                                 <Card.Title className="mb- fw-bold">  
