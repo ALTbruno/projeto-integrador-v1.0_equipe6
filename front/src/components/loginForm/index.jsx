@@ -105,7 +105,7 @@ const LoginForm = () => {
                             <button type="submit" >Entrar</button>
                         </div>
                     </form>
-                    <p>Ainda não tem conta? <Link to='/'>Registre-se</Link></p>
+                    <p>Ainda não tem conta? <Link to='/register'>Registre-se</Link></p>
                 </div>
             </div>
         </>
