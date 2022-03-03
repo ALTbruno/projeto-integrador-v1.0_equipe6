@@ -19,7 +19,7 @@ const RecomendationList = () => {
                 {hoteis.map(({ foto, nome, localizacao, descricao }) => {
 
                     return (  
-                        <Card className="m-3 p-0 d-flex flex-md-row justify-content-md-center " style={{maxWidth: '40rem' }}>
+                        <Card className="shadow rounded m-3 p-0 d-flex flex-md-row justify-content-md-center " style={{maxWidth: '40rem' }}>
 
                             <Card.Body className="m-0 p-0 d-flex w-100 position-relative justify-content-sm-center">
                                 <Card.Img className="img-fluid" src={foto} style={{objectFit: 'cover' }}/>
@@ -47,7 +47,7 @@ const RecomendationList = () => {
                                 <MdWifi className="me-1"/>
                                 <MdPool className="me-1"/>
                                 <Card.Text className="mt-2 mt-sm-3" style={{fontSize: '10px'}}>{descricao}</Card.Text>
-                                <Card.Link className="btn mt-sm-4 text-decoration-none fw-bold w-100" style={{backgroundColor: '#1DBEB4', border: '#1DBEB4'}}>Ver Mais</Card.Link>
+                                <Card.Link className="btn mt-sm-4 text-decoration-none text-light fw-bold w-100" style={{backgroundColor: '#1DBEB4', border: '#1DBEB4'}}>Ver Mais</Card.Link>
 
                             </Card.Body>
                         </Card>
