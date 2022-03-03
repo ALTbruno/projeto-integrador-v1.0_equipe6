@@ -1,7 +1,10 @@
 import React from 'react';
-import imgCardCategory from '../../../assets/pictures/img-card-category-hotel.svg'
+import hotel from '../../../assets/pictures/hotel.svg';
+import hotels from '../../../assets/pictures/hotels.svg'
+import cama from '../../../assets/pictures/apartamentos.svg'
+import ap from '../../../assets/pictures/cama.svg'
+import categoria from '../../../util/category.json';
 import './index.scss';
-
 
 export default function CardCategory() {
   return (
@@ -12,31 +15,31 @@ export default function CardCategory() {
       <section className='container-card-category'>
         
             <div className="card-category" >
-              <img src={imgCardCategory} alt="" srcset="" />
+              <img src={hotel} alt="" srcset="" />
               <section className='contents-category'>
-                <h2>Hotéis</h2>
-                <p>807.105 hotéis</p>
+                <h2>{categoria[0].nome}</h2>
+                <p>{categoria[0]['n-hoteis']}</p>
               </section>
             </div>
             <div className="card-category" >
-              <img src={imgCardCategory} alt="" srcset="" />
+              <img src={hotels} alt="" srcset="" />
               <section className='contents-category'>
-                <h2>Hotéis</h2>
-                <p>807.105 hotéis</p>
+                <h2>{categoria[1].nome}</h2>
+                <p>{categoria[1]['n-hoteis']}</p>
               </section>
             </div>
             <div className="card-category" >
-              <img src={imgCardCategory} alt="" srcset="" />
+              <img src={ap} alt="" srcset="" />
               <section className='contents-category'>
-                <h2>Hotéis</h2>
-                <p>807.105 hotéis</p>
+                <h2>{categoria[2].nome}</h2>
+                <p>{categoria[2]['n-hoteis']}</p>
               </section>
             </div>
             <div className="card-category" >
-              <img src={imgCardCategory} alt="" srcset="" />
+              <img src={cama} alt="" srcset="" />
               <section className='contents-category'>
-                <h2>Hotéis</h2>
-                <p>807.105 hotéis</p>
+                <h2>{categoria[3].nome}</h2>
+                <p>{categoria[3]['n-hoteis']}</p>
               </section>
             </div>
 
