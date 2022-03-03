@@ -19,23 +19,26 @@ const RecomendationList = () => {
                 {hoteis.map(({ foto, nome, localizacao, descricao }) => {
 
                     return (  
-                        <Card className="m-3 p-0 d-flex flex-row" style={{maxWidth: '40rem' }}>
-                            <Card.Body className="m-0 p-0 d-flex w-100 position-relative">
-                            <Card.Img className="float-start" src={foto} style={{maxWidth: '300px', objectFit: 'cover' }}/>
-                            <FavoriteHeart/>
+                        <Card className="m-3 p-0 d-flex flex-md-row justify-content-md-center " style={{maxWidth: '40rem' }}>
+
+                            <Card.Body className="m-0 p-0 d-flex w-100 position-relative justify-content-sm-center">
+                                <Card.Img className="img-fluid" src={foto} style={{objectFit: 'cover' }}/>
+                                <FavoriteHeart/>
                             </Card.Body>
                             
-                            <Card.Body className="col-auto container m-1 p-2">
-                            <Card.Body className="d-flex flex-row justify-content-between mb-2 p-0">              
-                                <Card.Title className="mb- fw-bold">  
-                                    <Card.Subtitle className="mb-1 d-flex flex-row align-items-center fw-bold" style={{fontSize: '12px'}}> 
-                                        Hotel 
-                                        <StarRating/> 
-                                    </Card.Subtitle>
-                                    {nome}
-                                </Card.Title>
-                                <Classification/>
-                            </Card.Body>        
+                            <Card.Body className="p-3 my-auto">
+
+                                <Card.Body className="d-flex flex-row justify-content-sm-between w-100 mb-2 p-0">              
+                                    <Card.Title className="mb- fw-bold">  
+                                        <Card.Subtitle className="mb-1 d-flex flex-row align-items-center fw-bold" style={{fontSize: '12px'}}> 
+                                            Hotel 
+                                            <StarRating/> 
+                                        </Card.Subtitle>
+                                        {nome}
+                                    </Card.Title>
+                                    <Classification/>
+                                </Card.Body>
+
                                 <Card.Text className="mb-0 ">
                                     <MdRoom className="me-1"/>
                                     {localizacao + " . "}
@@ -43,9 +46,9 @@ const RecomendationList = () => {
                                 </Card.Text>
                                 <MdWifi className="me-1"/>
                                 <MdPool className="me-1"/>
+                                <Card.Text className="mt-2 mt-sm-3" style={{fontSize: '10px'}}>{descricao}</Card.Text>
+                                <Card.Link className="btn mt-sm-4 text-decoration-none fw-bold w-100" style={{backgroundColor: '#1DBEB4', border: '#1DBEB4'}}>Ver Mais</Card.Link>
 
-                                <Card.Text className="mt-2" style={{fontSize: '10px'}}>{descricao}</Card.Text>
-                                <Card.Link className="btn text-decoration-none fw-bold w-100" style={{backgroundColor: '#1DBEB4', border: '#1DBEB4'}}>Ver Mais</Card.Link>
                             </Card.Body>
                         </Card>
                     )
