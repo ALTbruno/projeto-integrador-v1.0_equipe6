@@ -36,7 +36,7 @@ const Header = () => {
     return (
         <>
 
-            <header className="d-flex align-items-center justify-content-between sticky-top bg-primary">
+            <header className="d-flex align-items-center justify-content-between sticky-top">
                 <div className="d-flex ">
                     <a href="/">
                         <img src={logo} alt="logo" />
