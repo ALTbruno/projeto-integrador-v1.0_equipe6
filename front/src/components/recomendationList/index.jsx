@@ -16,10 +16,10 @@ const RecomendationList = () => {
              <FavoriteHeart/>
             <Row className="justify-content-center">
                 <h3 className="my-3 ms-5 fw-bold">Recomendações</h3>
-                {hoteis.map(({ foto, nome, localizacao, descricao }) => {
+                {hoteis.map(({ id, foto, nome, categoria, localizacao, descricao }) => {
 
                     return (  
-                        <Card className="shadow rounded m-3 p-0 d-flex flex-md-row justify-content-md-center " style={{maxWidth: '40rem' }}>
+                        <Card key={{id}} className="shadow rounded m-3 p-0 d-flex flex-md-row justify-content-md-center " style={{maxWidth: '40rem' }}>
 
                             <Card.Body className="m-0 p-0 d-flex w-100 position-relative justify-content-sm-center">
                                 <Card.Img className="img-fluid" src={foto} style={{objectFit: 'cover' }}/>
@@ -31,7 +31,7 @@ const RecomendationList = () => {
                                 <Card.Body className="d-flex flex-row justify-content-sm-between w-100 mb-2 p-0">              
                                     <Card.Title className="mb- fw-bold">  
                                         <Card.Subtitle className="mb-1 d-flex flex-row align-items-center fw-bold" style={{fontSize: '12px'}}> 
-                                            Hotel 
+                                            {categoria} 
                                             <StarRating/> 
                                         </Card.Subtitle>
                                         {nome}
@@ -42,7 +42,7 @@ const RecomendationList = () => {
                                 <Card.Text className="mb-0 ">
                                     <MdRoom className="me-1"/>
                                     {localizacao + " . "}
-                                    <Card.Link className="text-decoration-none fw-bold" style={{color: '#1DBEB4'}}>Mostrar no Mapa</Card.Link>
+                                    <Card.Link  className="text-decoration-none fw-bold" style={{color: '#1DBEB4'}}>Mostrar no Mapa</Card.Link>
                                 </Card.Text>
                                 <MdWifi className="me-1"/>
                                 <MdPool className="me-1"/>
