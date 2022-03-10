@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import user from '../../util/user.json';
-import visible from '../../assets/icons/visible.svg'
-import invisible from '../../assets/icons/invisible.svg'
+import visible from '../../assets/icons/visible.svg';
+import invisible from '../../assets/icons/invisible.svg';
 import './index.scss';
 
 const LoginForm = () => {

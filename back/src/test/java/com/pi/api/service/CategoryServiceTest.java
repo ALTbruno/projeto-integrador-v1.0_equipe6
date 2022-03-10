@@ -29,7 +29,7 @@ class CategoryServiceTest {
 	@Test
 	void cadastrarCategoriaTest() {
 
-		c.setTitle("C");
+		//c.setTitle("C");
 		c.setDescription("Desconecte-se do mundo e conecte-se com a natureza.");
 		c.setImageUrl("https://cdn.pixabay.com/photo/2016/12/06/14/33/log-cabin-1886620_960_720.jpg");
 
@@ -47,7 +47,7 @@ class CategoryServiceTest {
 		Long id = 4L; // id da categoria a ser atualizada
 
 		c.setId(id);
-		c.setTitle("Cabanas");
+		//c.setTitle("Cabanas");
 		c.setDescription(categoryService.buscarPorId(id).get().getDescription());
 		c.setImageUrl(categoryService.buscarPorId(id).get().getImageUrl());
 
