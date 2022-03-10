@@ -13,9 +13,8 @@ const RecomendationList = () => {
 
     return (
         <>
-             <FavoriteHeart/>
             <Row className="justify-content-center">
-                <h3 className="my-3 ms-5 fw-bold">Recomendações</h3>
+                <h3 className="my-3 ms-5 fw-bold ">Recomendações</h3>
                 {hoteis.map(({ id, foto, nome, categoria, localizacao, descricao }) => {
 
                     return (  
