@@ -1,54 +1,62 @@
 [
     {   
+        "ID": "01",
         "foto": "https://cdn.panrotas.com.br/portal-panrotas-statics/media-files-cache/303070/e0a7f59ca8625251fd0c685382d25027belmondcopacabanapalacefachadanoitealta/0,94,2216,1323/1206,720,0.28/0/default.jpg",
-        "categoria": "",
+        "categoria": "Hotel",
         "nome": "Copacabana Palace",
         "localizacao": "Rio de Janeiro",
         "descricao": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's."
     },
     {   
+        "ID": "02",
         "foto": "https://veja.abril.com.br/wp-content/uploads/2020/07/Renaissance.jpg",
-        "categoria": "",
+        "categoria": "Hotel",
         "nome": "Renascence",
         "localizacao": "São Paulo",
         "descricao": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's."
     },
     {   
+        "ID": "03",
         "foto": "https://cdn2.revistahoteis.com.br/wp-content/uploads/2020/06/fachada-hotel-bourbon-ibirapuerasite.jpg",
-        "categoria": "",
+        "categoria": "Hotel",
         "nome": "Hotel Bourbon Convention Ibirapuera",
         "localizacao": "Rio de Janeiro",
         "descricao": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's."
     },
     {   
+        "ID": "04",
         "foto": "https://pix10.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?ca=6&ce=1&s=1024x768",
-        "categoria": "",
+        "categoria": "Hotel",
         "nome": "Copacabana Palace",
         "localizacao": "Rio de Janeiro",
         "descricao": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's."
     },
     {   
+        "ID": "05",
         "foto": "https://pix10.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?ca=6&ce=1&s=1024x768",
-        "categoria": "",
+        "categoria": "Hotel",
         "nome": "Copacabana Palace",
         "localizacao": "Rio de Janeiro",
         "descricao": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's."
     },
     {   
+        "ID": "06",
         "foto": "https://pix10.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?ca=6&ce=1&s=1024x768",
-        "categoria": "",
+        "categoria": "Hotel",
         "nome": "Copacabana Palace",
         "localizacao": "Rio de Janeiro",
         "descricao": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's."
     },
     {   
+        "ID": "07",
         "foto": "https://pix10.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?ca=6&ce=1&s=1024x768",
-        "categoria": "",
+        "categoria": "Hotel",
         "nome": "Copacabana Palace",
         "localizacao": "Rio de Janeiro",
         "descricao": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's."
     },
     {   
+        "ID": "08",
         "foto": "https://pix10.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?ca=6&ce=1&s=1024x768",
         "categoria": "",
         "nome": "Copacabana Palace",

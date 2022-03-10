@@ -28,6 +28,8 @@
             a{
                 position: absolute;
                 left: 20px;
+                top: -2px;
+                z-index: 1;
             }
         }
         input{
@@ -41,7 +43,7 @@
             font-weight: $roboto-bold-14-font-weight;
         }
     }
-    button{
+    button#confirm-search{
         border: none;
         margin-left: 10px;
         border-radius: 5px;
@@ -87,7 +89,7 @@
                 width: 100%;
             }
         }
-        button{
+        button#confirm-search{
             margin-left: 0;
             width: 100%;
         }
