@@ -26,9 +26,10 @@ public class Characteristc {
     @Size(max = 255)
     private String icon;
 
-    @ManyToMany(mappedBy ="characteristc", cascade = CascadeType.ALL)
+    @ManyToOne( cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_products")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Set<Product> product = new HashSet<>();
+    private Product product;
 
     public Characteristc() {
     }

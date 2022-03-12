@@ -36,7 +36,7 @@ public class User {
     private Function function;
 
     @ManyToOne( cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_reservation")
+    @JoinColumn(name = "users")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Reservation reservation;
 

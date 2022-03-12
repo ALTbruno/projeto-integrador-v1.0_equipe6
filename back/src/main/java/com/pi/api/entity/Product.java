@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "products")
@@ -24,17 +26,6 @@ public class Product {
     private String description;
 
     @ManyToOne( cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_reservation")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Reservation reservation;
-
-    @ManyToOne( cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_characteristc")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Characteristc characteristc;
-
-
-    @ManyToOne( cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "id_category")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Category category;
@@ -49,17 +40,26 @@ public class Product {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Image image;
 
-    public Product(String name, String description, Reservation reservation, Characteristc characteristc, Category category, City city, Image image) {
+    @OneToMany(mappedBy ="products", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Set<Reservation> reservation = new HashSet<>();
+
+    @OneToMany(mappedBy ="product", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Set<Characteristc> characteristcs = new HashSet<>();
+
+
+
+
+    public Product() {
+    }
+
+    public Product(String name, String description, Category category, City city, Image image) {
         this.name = name;
         this.description = description;
-        this.reservation = reservation;
-        this.characteristc = characteristc;
         this.category = category;
         this.city = city;
         this.image = image;
-    }
-
-    public Product() {
     }
 
     public Long getId() {
@@ -82,21 +82,6 @@ public class Product {
         this.description = description;
     }
 
-    public Reservation getReservation() {
-        return reservation;
-    }
-
-    public void setReservation(Reservation reservation) {
-        this.reservation = reservation;
-    }
-
-    public Characteristc getCharacteristc() {
-        return characteristc;
-    }
-
-    public void setCharacteristc(Characteristc characteristc) {
-        this.characteristc = characteristc;
-    }
 
     public Category getCategory() {
         return category;

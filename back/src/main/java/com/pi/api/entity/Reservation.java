@@ -26,13 +26,15 @@ public class Reservation {
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date finalReserva;
 
-    @OneToMany(mappedBy ="reservation", cascade = CascadeType.ALL)
+    @ManyToOne( cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Set<Product> product = new HashSet<>();
+    private User users;
 
-    @OneToMany(mappedBy ="reservation", cascade = CascadeType.ALL)
+    @ManyToOne( cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_product")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Set<User> user = new HashSet<>();
+    private Product products;
 
 
     public Reservation() {
