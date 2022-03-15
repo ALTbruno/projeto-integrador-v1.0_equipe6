@@ -10,8 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "CHARACTERISTICS")
-public class Characteristic {
+@Table(name = "characteristics")
+public class Characteristc {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,13 +26,15 @@ public class Characteristic {
     @Size(max = 255)
     private String icon;
 
-    @ManyToMany(mappedBy = "characteristics")
-    private Set<Product> products;
+    @ManyToOne( cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_products")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Product product;
 
-    public Characteristic() {
+    public Characteristc() {
     }
 
-    public Characteristic(String name, String icon) {
+    public Characteristc(String name, String icon) {
         this.name = name;
         this.icon = icon;
     }
@@ -41,7 +43,7 @@ public class Characteristic {
         return id;
     }
 
-    public Characteristic(Long id) {
+    public Characteristc(Long id) {
         this.id = id;
     }
 

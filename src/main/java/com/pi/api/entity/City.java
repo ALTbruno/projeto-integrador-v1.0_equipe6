@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "CITIES")
+@Table(name = "citys")
 public class City {
 
     @Id
@@ -18,13 +18,17 @@ public class City {
     private Long id;
 
     @NotBlank
-    @Size(max = 100)
+    @Size(max = 255)
     private String name;
 
 
     @NotBlank
-    @Size(max = 100)
+    @Size(max = 255)
     private String country;
+
+    @OneToMany(mappedBy ="city", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Set<Product> product = new HashSet<>();
 
     public City() {
     }

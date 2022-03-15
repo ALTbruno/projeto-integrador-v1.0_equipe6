@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "*", allowedHeaders = "")
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/product")
 public class ProductController {
 
     @Autowired
@@ -51,14 +51,17 @@ public class ProductController {
         return ResponseEntity.badRequest().build();
     }
 
-    @GetMapping("/category/{nomeCategoria}")
+    @GetMapping("/{nomeCategoria}")
     public ResponseEntity<List<Product>> buscarCategoria(@PathVariable("nomeCategoria") String nomeCategoria) {
-        return ResponseEntity.ok(productService.listarPorCategoria(nomeCategoria));
+        return ResponseEntity.ok(productService.findByCategory(nomeCategoria));
     }
 
-    @GetMapping("/city/{nomeCidade}")
+    @GetMapping("/{nomeCcidade}")
     public ResponseEntity<List<Product>> buscarCidade(@PathVariable("nomeCidade") String nomeCidade) {
-        return ResponseEntity.ok(productService.listarPorCidade(nomeCidade));
+        return ResponseEntity.ok(productService.findByCity(nomeCidade));
     }
+
+
+
 
 }
