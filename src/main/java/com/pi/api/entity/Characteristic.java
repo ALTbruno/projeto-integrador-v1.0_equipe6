@@ -1,6 +1,7 @@
 package com.pi.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -9,8 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "functions")
-public class Function {
+@Table(name = "CHARACTERISTICS")
+public class Characteristic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,24 +21,28 @@ public class Function {
     @Size(max = 255)
     private String name;
 
-    @OneToMany(mappedBy ="function", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Set<User> User = new HashSet<>();
+    @URL
+    @NotBlank
+    @Size(max = 255)
+    private String icon;
 
+    @ManyToMany(mappedBy = "characteristics")
+    private Set<Product> products;
 
-    public Function() {
+    public Characteristic() {
     }
 
-    public Function(String name) {
+    public Characteristic(String name, String icon) {
         this.name = name;
-    }
-
-    public Function(Long id) {
-        this.id = id;
+        this.icon = icon;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public Characteristic(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -47,4 +52,20 @@ public class Function {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 }
+
+
+
+
+
+
+
+
