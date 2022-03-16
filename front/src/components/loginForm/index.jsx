@@ -1,11 +1,14 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from "../../context/context";
 import user from '../../util/user.json';
 import visible from '../../assets/icons/visible.svg';
 import invisible from '../../assets/icons/invisible.svg';
 import './index.scss';
 
 const LoginForm = () => {
+    const {handleLogin} = useContext(Context);
+    const navigate = useNavigate();
     const [login, setLogin] = useState({
         email: '',
         senha: ''
@@ -30,7 +33,6 @@ const LoginForm = () => {
                 e.nextSibling.style.visibility = 'visible'
             } else {
                 // Retira mensagem de erro
-                console.log("removeu")
                 e.classList.remove('error');
                 e.nextSibling.style.visibility = 'hidden'
                 return true;
@@ -49,8 +51,8 @@ const LoginForm = () => {
         let { email, senha } = login;
         if (verifyInputs()) {
             if (email === user.email && senha === user.senha.toString()) {
-                localStorage.setItem('user', JSON.stringify(user));
-                location.href = '/'
+                handleLogin(user);
+                navigate('/')
             } else {
                 alert("Por favor, tente novamente, suas credenciais são inválidas")
             }
