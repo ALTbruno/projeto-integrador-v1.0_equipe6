@@ -51,12 +51,12 @@ public class ProductController {
         return ResponseEntity.badRequest().build();
     }
 
-    @GetMapping("/category/{nomeCategoria}")
+    @GetMapping("/category={nomeCategoria}")
     public ResponseEntity<List<Product>> buscarCategoria(@PathVariable("nomeCategoria") String nomeCategoria) {
         return ResponseEntity.ok(productService.listarPorCategoria(nomeCategoria));
     }
 
-    @GetMapping("/city/{nomeCidade}")
+    @GetMapping("/city={nomeCidade}")
     public ResponseEntity<List<Product>> buscarCidade(@PathVariable("nomeCidade") String nomeCidade) {
         return ResponseEntity.ok(productService.listarPorCidade(nomeCidade));
     }
