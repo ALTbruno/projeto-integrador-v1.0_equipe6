@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import calendar from "../../assets/icons/calendar.svg";
 import menuLocalizador from "../../assets/icons/icon-menu-localizador.svg";
