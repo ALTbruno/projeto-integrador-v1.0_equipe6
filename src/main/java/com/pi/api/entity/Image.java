@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "images")
+@Table(name = "IMAGES")
 public class Image {
 
     @Id
@@ -24,41 +24,46 @@ public class Image {
     @URL
     @NotBlank
     @Size(max = 255)
-    private String Url;
+    private String url;
 
-    @OneToMany(mappedBy ="image", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Set<Product> product = new HashSet<>();
+//    @OneToMany(mappedBy ="image", cascade = CascadeType.ALL)
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//    private Set<Product> product = new HashSet<>();
 
     public Image() {
     }
 
     public Image(String title, String url) {
         this.title = title;
-        Url = url;
+        url = url;
     }
 
     public Image(Long id) {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
-    }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getUrl() {
-        return Url;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setUrl(String url) {
-        Url = url;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 }

@@ -39,29 +39,12 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public List<Product> findByCategory(String nomeCategoria){
-
-        List<Product> categoria = new ArrayList<>();
-
-        for (Product product :
-                productRepository.findAll()) {
-            if (product.getCategory().equals(nomeCategoria)) {
-                categoria.add(product);
-            }
-        }
-        return categoria;
+    public List<Product> listarPorCategoria(String categoria) {
+        return productRepository.findByCategoryTitle(categoria);
     }
 
-    public List<Product> findByCity(String nomeCidade){
-
-        List<Product> cidade = new ArrayList<>();
-
-        for (Product product :
-                productRepository.findAll()) {
-            if (product.getCity().getName().equalsIgnoreCase(nomeCidade)) {
-                cidade.add(product);
-            }
-        }
-        return cidade;
+    public List<Product> listarPorCidade(String cidade) {
+        return productRepository.findByCityName(cidade);
     }
+
 }

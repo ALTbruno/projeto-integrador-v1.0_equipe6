@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "CATEGORIES")
 public class Category {
 
     @Id
@@ -19,7 +19,7 @@ public class Category {
 
     @NotBlank
     @Size(max = 50)
-    private String qualification;
+    private String title;
 
     @NotBlank
     @Size(max = 255)
@@ -30,15 +30,11 @@ public class Category {
     @Size(max = 255)
     private String imageUrl;
 
-    @OneToMany(mappedBy ="category", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Set<Product> product = new HashSet<>();
-
     public Category() {
     }
 
-    public Category(String qualification, String description, String imageUrl) {
-        this.qualification = qualification;
+    public Category(String title, String description, String imageUrl) {
+        this.title = title;
         this.description = description;
         this.imageUrl = imageUrl;
     }
@@ -51,12 +47,12 @@ public class Category {
         this.id = id;
     }
 
-    public String getQualification() {
-        return qualification;
+    public String getTitle() {
+        return title;
     }
 
-    public void setQualification(String qualification) {
-        this.qualification = qualification;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
