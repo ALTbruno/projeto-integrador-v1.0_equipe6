@@ -1,6 +1,48 @@
 @import '../../variables/colors.scss';
 @import '../../variables/typography.scss';
 
+.datalist{
+    display: none;
+    position: absolute;
+    background-color: white;
+    border-radius: 0 0 5px 5px;
+    width: calc(100% - 10px);
+    padding: 0 5px 16px 15px;
+    max-height: 10rem;
+    overflow-y: auto;
+    top: 115%;
+    margin-left: 10px;
+    z-index: 10;
+    box-shadow: 0 4px 4px #00000025;
+    &::-webkit-scrollbar{
+        display: none;
+    }
+    .option {
+        display: flex;
+        background-color: white;
+        padding: 11px 0 11px 0;
+        color: #000;
+        border-bottom: 1px $color-principal solid;
+        font-size: $roboto-bold-16;
+        font-weight: $roboto-bold-16-font-weight;
+        cursor: pointer;
+        .contents{
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+        }
+        img{
+            pointer-events: none;
+            margin-right: 20px;
+        }
+        span{
+            font-size: $roboto-bold-14;
+            font-weight: $roboto-bold-14-font-weight;
+            pointer-events: none;
+            color: $color3;
+        }
+    }
+  }
 #container-search{
     display: flex;
     align-items: center;
@@ -66,6 +108,14 @@
 
 // responsividade mobile
 @media (max-width: 768px) {
+    .datalist{
+        width: 100%;
+        margin-left: 0;
+        .option{
+            font-size: $roboto-bold-14;
+            font-weight: $roboto-bold-14-font-weight;
+        }
+    }
     #container-search{
         height: 263px;
         h1{
