@@ -4,6 +4,7 @@ import hoteis from "./hoteis.json";
 import { MdRoom, MdWifi, MdPool } from "react-icons/md";
 import Classification from "../classification";
 import FavoriteHeart from "../favoriteHeart";
+import ProdutosModal from "../predutosModal";
 
 const RecomendationList = () => {
 

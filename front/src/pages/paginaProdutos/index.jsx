@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import StarRating from "../../components/avaliationStars";
 import Classification from "../../components/classification";
-
+import ProdutosModal from "../../components/predutosModal";
+import ProdutosCarrosel from "../../components/produtosCarrosel";
 
 const PaginaProdutos = () => {
+
+
 
     return (
         <>
@@ -50,7 +53,7 @@ const PaginaProdutos = () => {
                         <img className="img-fluid rounded-3" src="https://pix10.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?ca=6&ce=1&s=1024x768" alt="" srcset="" />
                     </div>
                     <div className="p-1 w-100 position-relative">
-                        <p className="position-absolute end-0 bottom-0 text-light mb-3 me-4">ver mais</p>
+                    <ProdutosModal/>
                         <img className="img-fluid rounded-3" src="https://pix10.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?ca=6&ce=1&s=1024x768" alt="" srcset="" /> 
                     </div>
                 </div>
@@ -60,16 +63,21 @@ const PaginaProdutos = () => {
             {/* Bloco de Descrição */}
             <div>
                 <h2>bloco descrição</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam adipisci modi blanditiis harum velit repellat et nisi qui delectus! Earum culpa ex natus non laudantium repellat voluptatibus, incidunt amet quibusdam!</p>
             </div>
 
             {/* Bloco de Caracteristicas do Produto */}
             <div>
                 <h2>bloco caracteristicas do produto</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam adipisci modi blanditiis harum velit repellat et nisi qui delectus! Earum culpa ex natus non laudantium repellat voluptatibus, incidunt amet quibusdam!</p>
+
             </div>
             
             {/* Bloco Politicas do Produto */}
             <div>
                 <h2>bloco politicas do produto</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam adipisci modi blanditiis harum velit repellat et nisi qui delectus! Earum culpa ex natus non laudantium repellat voluptatibus, incidunt amet quibusdam!</p>
+
             </div>
 
         </>
