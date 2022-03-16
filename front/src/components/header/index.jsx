@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Context } from '../../context/context';
 import logo from '../../assets/pictures/logo.svg';
 import menu from '../../assets/icons/header-átomo-menu.svg';
 import facebook from '../../assets/icons/facebook.svg';
@@ -9,48 +10,44 @@ import linkedin from '../../assets/icons/linkedin.svg';
 import './index.scss';
 
 const Header = () => {
+    const { handleLogout, logado } = useContext(Context)
+    const [initials, setInitials] = useState('');
     const [isVisible, setisVisible] = useState(false);
     const [user, setUser] = useState(null);
-    const [initials, setInitials] = useState('');
-    const [loading, setLoading] = useState(true);
     const location = useLocation();
 
     useEffect(() => {
-        setUser(JSON.parse(localStorage.getItem('user')));
+        let user = JSON.parse(localStorage.getItem('user'));
         if (user) {
+            setUser(user);
             setInitials((user.nome[0].toUpperCase() + user.sobrenome[0].toUpperCase()));
+        } else {
+            setInitials('');
         }
-        setLoading(false);
-    }, [loading]);
+    }, [logado]);
 
     const toggleHamburger = () => {
         setisVisible(!isVisible)
     }
 
-    const handleLogout = () => {
-        localStorage.removeItem('user');
-        setUser(null);
-        window.location.reload()
-    }
-
     return (
         <>
-
             <header className="d-flex align-items-center justify-content-between sticky-top">
                 <div className="d-flex ">
-                    <a href="/">
+                    <Link to="/">
                         <img src={logo} alt="logo" />
-                    </a>
+                    </Link>
                     <h1 className="align-items-end" >Sinta-se em casa</h1>
                 </div>
-                {initials ? <div id="registrado">
-                    <div id="icon">{initials}</div>
-                    <p>
-                        Olá,<br />
-                        <span>{`${user.nome} ${user.sobrenome}`}</span>
-                    </p>
-                    <button id="logout" onClick={() => handleLogout()}>X</button>
-                </div> :
+                {initials ?
+                    <div id="registrado">
+                        <div id="icon">{initials}</div>
+                        <p>
+                            Olá,<br />
+                            <span>{`${user.nome} ${user.sobrenome}`}</span>
+                        </p>
+                        <button id="logout" onClick={() => (handleLogout())}>X</button>
+                    </div> :
                     <div className='navigation'>
                         <ul>
                             {location.pathname === '/' || location.pathname === '/login' ?
@@ -58,8 +55,7 @@ const Header = () => {
                             {location.pathname === '/' || location.pathname === '/register' ?
                                 <Link to='/login' >Iniciar sessão</Link> : ''}
                         </ul>
-                    </div>
-                }
+                    </div>}
                 <button onClick={toggleHamburger} id="btn-mobile" className="hamburger">
                     <img src={menu} className={`burger burger1${isVisible ? "-open" : ''}`} />
                 </button>
@@ -75,7 +71,7 @@ const Header = () => {
                     </div>
                     {initials ?
                         <nav className='logout'>
-                            <p>Deseja <span onClick={() => handleLogout()}>encerrar a sessão</span>?</p>
+                            <p>Deseja <span onClick={() => (handleLogout())}>encerrar a sessão</span>?</p>
                             <div id="linha-horizontal" />
                         </nav> :
                         <nav>
