@@ -5,6 +5,7 @@ import Header from '../components/header';
 import { Auth } from '../context/context';
 import LoginPage from "../pages/Login";
 import RegisterPage from '../pages/Register';
+import PaginaProdutos from '../pages/paginaProdutos';
 
 const RouteList = () => (
     <BrowserRouter>
@@ -14,6 +15,7 @@ const RouteList = () => (
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path='/register' element={<RegisterPage />} />
+                <Route path='/produto' element={<PaginaProdutos />} />
             </Routes>
             <Footer />
         </Auth>
