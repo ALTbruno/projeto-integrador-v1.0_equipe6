@@ -1,50 +1,33 @@
-import React from 'react';
-import hotel from '../../../assets/pictures/hotel.svg';
-import hotels from '../../../assets/pictures/hotels.svg'
-import cama from '../../../assets/pictures/apartamentos.svg'
-import ap from '../../../assets/pictures/cama.svg'
-import categoria from '../../../util/category.json';
+import React, { useEffect, useState } from 'react';
+import api from '../../../services';
 import './index.scss';
 
 export default function CardCategory() {
+  const [category, setCategory] = useState([]);
+
+  useEffect(() => {
+    api.get('/category').then(response => {
+      setCategory(response.data);
+    })
+  }, []);
+
   return (
     <>
-    <div className="container-category">
+      <div className="container-category">
 
-      <h2 className='title-container-category'>Buscar por tipo de acomodação</h2>
-      <section className='container-card-category'>
-        
-            <div className="card-category" >
-              <img src={hotel} alt="" srcset="" />
+        <h2 className='title-container-category'>Buscar por tipo de acomodação</h2>
+        <section className='container-card-category'>
+          {category.map(item => (
+            <div className="card-category" key={item.description} >
+              <img src={item.imageUrl} alt={item.imageUrl} srcset="" />
               <section className='contents-category'>
-                <h2>{categoria[0].nome}</h2>
-                <p>{categoria[0]['n-hoteis']}</p>
+                <h2>{item.description}</h2> {/*falta nome da categoria no JSON*/}
+                <p>807.105</p> {/*quantidade de acomodações*/}
               </section>
             </div>
-            <div className="card-category" >
-              <img src={hotels} alt="" srcset="" />
-              <section className='contents-category'>
-                <h2>{categoria[1].nome}</h2>
-                <p>{categoria[1]['n-hoteis']}</p>
-              </section>
-            </div>
-            <div className="card-category" >
-              <img src={ap} alt="" srcset="" />
-              <section className='contents-category'>
-                <h2>{categoria[2].nome}</h2>
-                <p>{categoria[2]['n-hoteis']}</p>
-              </section>
-            </div>
-            <div className="card-category" >
-              <img src={cama} alt="" srcset="" />
-              <section className='contents-category'>
-                <h2>{categoria[3].nome}</h2>
-                <p>{categoria[3]['n-hoteis']}</p>
-              </section>
-            </div>
-
-      </section>
-    </div>
+          ))}
+        </section>
+      </div>
     </>
   )
 }
