@@ -1,0 +1,26 @@
+import {useState} from "react"
+import { Modal, Button } from "react-bootstrap";
+import ProdutosCarrosel from "../produtosCarrosel";
+
+const ProdutosModal = () => {
+
+    const [show, setShow] = useState(false)
+
+    const handleShow = () => setShow(true);
+    const handleClose = () => setShow(false);
+    
+
+    return (
+        <>
+            <a className="btn position-absolute end-0 bottom-0 text-light mb-3 me-3" onClick={handleShow} >ver mais</a>
+            
+            <Modal show={show} onHide={handleClose} animation={false}>
+                <Modal.Body>
+                    <ProdutosCarrosel/>
+                </Modal.Body>
+            </Modal>
+        </>
+    )
+}
+
+export default ProdutosModal

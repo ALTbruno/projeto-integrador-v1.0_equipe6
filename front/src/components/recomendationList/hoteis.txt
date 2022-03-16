@@ -1,6 +1,0 @@
-[
-    {"id":1,"title":"Praia","description":"Casas na praia","imageUrl":"https://cdn.pixabay.com/photo/2018/03/20/02/26/palm-3241933_960_720.jpg"},
-    {"id":2,"title":"Cabanas","description":"Desconecte-se do mundo e conecte-se com a natureza.","imageUrl":"https://cdn.pixabay.com/photo/2016/12/06/14/33/log-cabin-1886620_960_720.jpg"},
-    {"id":3,"title":"Fazendas","description":"Tranquilidade e paz ouvindo o som dos animais.","imageUrl":"https://cdn.pixabay.com/photo/2018/03/30/10/33/farm-3275018_960_720.jpg"},
-    {"id":4,"title":"Castelos","description":"Descrição castelos","imageUrl":"https://cdn.pixabay.com/photo/2021/08/23/07/38/castle-6566978_960_720.jpg"}
-]
