@@ -1,10 +1,12 @@
 package com.pi.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,64 +19,57 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @DateTimeFormat(pattern = "HH:mm:ss")
-    private Time horarioInicio;
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+    private LocalDateTime horarioInicio;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date inicioReserva;
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+    private LocalDateTime inicioReserva;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date finalReserva;
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+    private LocalDateTime finalReserva;
 
-    @OneToMany(mappedBy ="reservation", cascade = CascadeType.ALL)
+
+    @ManyToOne( cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_product")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Set<Product> product = new HashSet<>();
-
-    @OneToMany(mappedBy ="reservation", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Set<User> user = new HashSet<>();
+    private Product products;
 
 
     public Reservation() {
     }
 
-    public Reservation(Time horarioInicio, Date inicioReserva, Date finalReserva) {
+
+    public Reservation(LocalDateTime horarioInicio, LocalDateTime inicioReserva, LocalDateTime finalReserva) {
         this.horarioInicio = horarioInicio;
         this.inicioReserva = inicioReserva;
         this.finalReserva = finalReserva;
-    }
-
-
-
-    public Reservation(Long id) {
-        this.id = id;
     }
 
     public Long getId() {
         return id;
     }
 
-    public Time getHorarioInicio() {
+    public LocalDateTime getHorarioInicio() {
         return horarioInicio;
     }
 
-    public void setHorarioInicio(Time horarioInicio) {
+    public void setHorarioInicio(LocalDateTime horarioInicio) {
         this.horarioInicio = horarioInicio;
     }
 
-    public Date getInicioReserva() {
+    public LocalDateTime getInicioReserva() {
         return inicioReserva;
     }
 
-    public void setInicioReserva(Date inicioReserva) {
+    public void setInicioReserva(LocalDateTime inicioReserva) {
         this.inicioReserva = inicioReserva;
     }
 
-    public Date getFinalReserva() {
+    public LocalDateTime getFinalReserva() {
         return finalReserva;
     }
 
-    public void setFinalReserva(Date finalReserva) {
+    public void setFinalReserva(LocalDateTime finalReserva) {
         this.finalReserva = finalReserva;
     }
 }

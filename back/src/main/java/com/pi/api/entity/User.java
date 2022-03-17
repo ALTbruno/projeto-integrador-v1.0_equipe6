@@ -35,26 +35,15 @@ public class User {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Function function;
 
-    @ManyToOne( cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_reservation")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Reservation reservation;
-
 
     public User() {
     }
 
-    public User(String name, String sobrenome, String email, String senha, Function function, Reservation reservation) {
+    public User(String name, String sobrenome, String email, String senha) {
         this.name = name;
         this.sobrenome = sobrenome;
         this.email = email;
         this.senha = senha;
-        this.function = function;
-        this.reservation = reservation;
-    }
-
-    public User(Long id) {
-        this.id = id;
     }
 
     public Long getId() {
