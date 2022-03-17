@@ -10,7 +10,7 @@ export default function Result() {
 
     useEffect(() => {
         api.get('products/6').then(response => {
-            this.setHotel((state) => (response.data));
+            this.setHotel(response.data);
         })
     }, [])
         console.log(hotel)
@@ -19,7 +19,7 @@ export default function Result() {
             <Search />
             <div>
                 <p>{hotel.name}</p>
-                <p>{hotel.characteristics}</p>
+                <p>{this.hotel.images[0].url}</p>
                 {/* <img src={`${hotel.images[0].url}`} alt="hotel" /> */}
             </div>
         </>
