@@ -6,7 +6,7 @@ export default function CardCategory() {
   const [category, setCategory] = useState([]);
 
   useEffect(() => {
-    api.get('/category').then(response => {
+    api.get('/categories').then(response => {
       setCategory(response.data);
     })
   }, []);
@@ -21,7 +21,7 @@ export default function CardCategory() {
             <div className="card-category" key={item.description} >
               <img src={item.imageUrl} alt={item.imageUrl} srcset="" />
               <section className='contents-category'>
-                <h2>{item.description}</h2> {/*falta nome da categoria no JSON*/}
+                <h2>{item.title}</h2> {/*falta nome da categoria no JSON*/}
                 <p>807.105</p> {/*quantidade de acomodações*/}
               </section>
             </div>

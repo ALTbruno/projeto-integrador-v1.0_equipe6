@@ -1,5 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
+import { useLocation, useNavigate } from "react-router-dom";
+import api from '../../services/index.js';
 import calendar from "../../assets/icons/calendar.svg";
 import menuLocalizador from "../../assets/icons/icon-menu-localizador.svg";
 import localizador from "../../assets/icons/localizador.svg";
@@ -10,35 +12,22 @@ import "./index.scss";
 export default function Search() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [city, setCitys] = useState(["São Luis", "São Paulo", "Maranhão", "Bahia","Fortaleza", "Rio de Janeiro",
-  ]);
+  const [city, setCitys] = useState([]);
   const [widthScreen, setWidthScreen] = useState(window.innerWidth);
   const [datalist, setDatalist] = useState(document.getElementById("citys"));
-  const [valueInput, setValueInput] = useState('');
+  const [cityForSearch, setCityForSearch] = useState('');
+  const days = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado",];
+  const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+  const navigate = useNavigate();
+  const location = useLocation();
   window.addEventListener("resize", () => setWidthScreen(window.innerWidth));
-  const days = [
-    "Domingo",
-    "Segunda",
-    "Terça",
-    "Quarta",
-    "Quinta",
-    "Sexta",
-    "Sabado",
-  ];
-  const months = [
-    "Janeiro",
-    "Fevereiro",
-    "Março",
-    "Abril",
-    "Maio",
-    "Junho",
-    "Julho",
-    "Agosto",
-    "Setembro",
-    "Outubro",
-    "Novembro",
-    "Dezembro",
-  ];
+
+  useEffect(() => {
+    api.get('cities').then(response =>{
+      setCitys(response.data)
+    })
+    setDatalist(document.getElementById("citys"));
+  }, [])
 
   const locale = {
     localize: {
@@ -50,7 +39,7 @@ export default function Search() {
     },
   };
   const [myRef, setMyRef] = useState(false);
-  
+
   const setValuesDate = (dates) => {
     const [start, end] = dates;
     setStartDate(start);
@@ -62,13 +51,13 @@ export default function Search() {
     myRef.setOpen(false);
   };
 
-  
-  
+
+
   const mostOptions = (event) => {
     let value = event.target.value;
     let options = document.getElementsByClassName("option");
-    
-    
+
+
     for (const opt of options) {
       let text = opt.attributes.value.value.toLowerCase();
       if (text.includes(value.toLowerCase())) {
@@ -79,20 +68,16 @@ export default function Search() {
     }
   };
 
-  useEffect(() =>{
-    setDatalist(document.getElementById("citys"));
-  },[])
-  
   const displayOptions = () => {
     datalist.style.display = "block";
   };
 
   const close = () => {
-     window.onclick = (e) => {
-      if (e.target.className === "option"){
-        setValueInput(e.target.attributes.value.value);
+    window.onclick = (e) => {
+      if (e.target.className === "option") {
+        setCityForSearch(e.target.attributes.value.value);
         datalist.style.display = "none"
-      } else if (e.target.id === "input-destino"){
+      } else if (e.target.id === "input-destino") {
         datalist.style.display = "block"
       } else {
         datalist.style.display = "none"
@@ -105,11 +90,16 @@ export default function Search() {
     close()
   };
 
+  const searchByCitys = (e) => {
+    e.preventDefault();
+    navigate(`/search/${cityForSearch}`)
+  }
+
   return (
     <>
       <section id="container-search">
-        <h1>Buscar ofertas em hotéis, casas e muito mais</h1>
-        <form className="inputs">
+        {location.pathname.indexOf('/search')? <h1>Buscar ofertas em hotéis, casas e muito mais</h1> : null  }
+        <form className="inputs" onSubmit={(e) => searchByCitys(e)}>
           <div className="container-destino">
             <a>
               <img id="localizador" src={localizador} alt="icon-localizador" />
@@ -125,11 +115,11 @@ export default function Search() {
             />
             <div className="datalist" onClick={(e) => setValue(e)} id="citys">
               {city.map((city) => (
-                <div className="option" value={city} key={city}>
+                <div className="option" value={city.name} key={city.id}>
                   <img src={menuLocalizador} alt={menuLocalizador} className="icon" />
                   <div className="contents" >
-                    {city}
-                    <span>Brasil</span>
+                    {city.name}
+                    <span>{city.country}</span>
                   </div>
                 </div>
               ))}
