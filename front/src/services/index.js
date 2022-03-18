@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://digital-booking.herokuapp.com/'
+    baseURL: 'http://ec2-3-223-123-204.compute-1.amazonaws.com:8080/'
 });
 
 export default api;
