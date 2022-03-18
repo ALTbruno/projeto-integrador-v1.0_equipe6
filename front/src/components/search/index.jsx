@@ -23,7 +23,7 @@ export default function Search() {
   window.addEventListener("resize", () => setWidthScreen(window.innerWidth));
 
   useEffect(() => {
-    api.get('cities').then(response =>{
+    api.get('cities').then(response => {
       setCitys(response.data)
     })
     setDatalist(document.getElementById("citys"));
@@ -98,7 +98,7 @@ export default function Search() {
   return (
     <>
       <section id="container-search">
-        {location.pathname.indexOf('/search')? <h1>Buscar ofertas em hotéis, casas e muito mais</h1> : null  }
+        <h1>Buscar ofertas em hotéis, casas e muito mais</h1>
         <form className="inputs" onSubmit={(e) => searchByCitys(e)}>
           <div className="container-destino">
             <a>
