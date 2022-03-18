@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../../../services';
 import './index.scss';
 
 export default function CardCategory() {
-  const [category, setCategory] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     api.get('/categories').then(response => {
-      setCategory(response.data);
+      setCategories(response.data);
     })
   }, []);
 
@@ -17,11 +19,11 @@ export default function CardCategory() {
 
         <h2 className='title-container-category'>Buscar por tipo de acomodação</h2>
         <section className='container-card-category'>
-          {category.map(item => (
-            <div className="card-category" key={item.description} >
-              <img src={item.imageUrl} alt={item.imageUrl} srcset="" />
+          {categories.map(category => (
+            <div onClick={() => navigate(`/category/${category.title}`)} className="card-category" key={category.id} >
+              <img src={category.imageUrl} alt={category.imageUrl} srcset="" />
               <section className='contents-category'>
-                <h2>{item.title}</h2> {/*falta nome da categoria no JSON*/}
+                <h2>{category.title}</h2>
                 <p>807.105</p> {/*quantidade de acomodações*/}
               </section>
             </div>

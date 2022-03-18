@@ -2,7 +2,8 @@
 @import '../../../variables/typography.scss';
 
 .container-category{
-   padding: 40px; 
+    background-color: #EBEBEE;
+    padding: 40px; 
 }
 .title-container-category{
     font-size: $roboto-bold-24;
@@ -15,11 +16,16 @@
     place-items: center;
 }
 .card-category{
+    cursor: pointer;
     width: 310px;
     background-color: $white;
     box-shadow: 0 4px 4px #00000025;
     border-radius: 10px;
+    transition: all 0.3s ease;
     margin-bottom: 20px;
+    &:hover{
+        transform: scale3d(1.02, 1.02, 1.02);
+    }
     img{
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
