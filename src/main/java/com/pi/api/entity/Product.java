@@ -8,7 +8,6 @@ import org.hibernate.annotations.FetchMode;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -38,7 +37,7 @@ public class Product {
 	private City city;
 
 	@OneToMany
-	@JoinColumn(name = "image_id")
+//	@JoinColumn(name = "product_id")
 	@Fetch(FetchMode.JOIN)
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Set<Image> images;

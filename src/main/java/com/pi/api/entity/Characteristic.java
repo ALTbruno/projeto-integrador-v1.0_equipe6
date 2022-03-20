@@ -1,12 +1,10 @@
 package com.pi.api.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -17,6 +15,7 @@ public class Characteristic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     @NotBlank
     @Size(max = 255)
     private String name;

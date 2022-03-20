@@ -1,13 +1,10 @@
 package com.pi.api.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "CATEGORIES")
@@ -17,6 +14,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     @NotBlank
     @Size(max = 50)
     private String title;
