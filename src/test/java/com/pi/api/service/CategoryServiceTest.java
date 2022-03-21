@@ -10,7 +10,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@Disabled
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class CategoryServiceTest {
 
