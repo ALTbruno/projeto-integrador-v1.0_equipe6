@@ -28,13 +28,16 @@ public class Category {
     @Size(max = 255)
     private String imageUrl;
 
+    private Long totalProducts;
+
     public Category() {
     }
 
-    public Category(String title, String description, String imageUrl) {
+    public Category(String title, String description, String imageUrl, Long totalProducts) {
         this.title = title;
         this.description = description;
         this.imageUrl = imageUrl;
+        this.totalProducts = totalProducts;
     }
 
     public Long getId() {
@@ -67,5 +70,13 @@ public class Category {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Long getTotalProducts() {
+        return totalProducts;
+    }
+
+    public void setTotalProducts(Long totalProducts) {
+        this.totalProducts = totalProducts;
     }
 }

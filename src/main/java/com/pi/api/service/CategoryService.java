@@ -2,6 +2,7 @@ package com.pi.api.service;
 
 import com.pi.api.entity.Category;
 import com.pi.api.repository.CategoryRepository;
+import com.pi.api.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,9 @@ public class CategoryService {
 
 	@Autowired
 	private CategoryRepository categoryRepository;
+
+	@Autowired
+	private ProductRepository productRepository;
 
 	public Category salvar(Category category) {
 		return categoryRepository.save(category);
@@ -31,7 +35,13 @@ public class CategoryService {
 	}
 
 	public List<Category> buscarTodos() {
-		return categoryRepository.findAll();
+		List<Category> categories = categoryRepository.findAll();
+
+		for (Category category : categories) {
+			category.setTotalProducts(productRepository.countProductByCategoryId(category.getId()));
+		}
+
+		return categories;
 	}
 
 	public void excluir(Long id) {
