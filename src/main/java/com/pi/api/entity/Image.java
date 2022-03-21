@@ -26,16 +26,16 @@ public class Image {
     @Size(max = 255)
     private String url;
 
-//    @OneToMany(mappedBy ="image", cascade = CascadeType.ALL)
-//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-//    private Set<Product> product = new HashSet<>();
+    @OneToMany(mappedBy ="images", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Set<Product> product = new HashSet<>();
 
     public Image() {
     }
 
     public Image(String title, String url) {
         this.title = title;
-        url = url;
+        this.url = url;
     }
 
     public Image(Long id) {

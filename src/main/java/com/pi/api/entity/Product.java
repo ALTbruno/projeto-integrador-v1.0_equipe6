@@ -37,14 +37,10 @@ public class Product {
 	private City city;
 
 	@OneToMany
-//	@JoinColumn(name = "product_id")
 	@Fetch(FetchMode.JOIN)
+	@JoinColumn(name = "id_image")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Set<Image> images;
-
-//	@OneToMany(mappedBy ="products", cascade = CascadeType.ALL)
-//	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-//	private Set<Reservation> reservation = new HashSet<>();
 
 	@ManyToMany
 	@Fetch(FetchMode.JOIN)
@@ -60,20 +56,6 @@ public class Product {
 	public Product() {
 	}
 
-//	public Product(String name, String description, Category category, City city, Image image) {
-//		this.name = name;
-//		this.description = description;
-//		this.category = category;
-//		this.city = city;
-//		this.image = image;
-//	}
-
-	public Product(String name, String description, Category category, City city) {
-		this.name = name;
-		this.description = description;
-		this.category = category;
-		this.city = city;
-	}
 
 	public Long getId() {
 		return id;

@@ -28,6 +28,8 @@ public class Category {
     @Size(max = 255)
     private String imageUrl;
 
+    @NotBlank
+    @Size(max = 50)
     private Long totalProducts;
 
     public Category() {
