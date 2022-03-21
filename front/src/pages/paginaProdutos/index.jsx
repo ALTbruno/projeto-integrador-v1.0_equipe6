@@ -6,6 +6,18 @@ import ProdutosCarrosel from "../../components/produtosCarrosel";
 
 const PaginaProdutos = () => {
 
+    const api = axios.create({
+        baseURL: 'http://ec2-3-223-123-204.compute-1.amazonaws.com:8080/'
+    });
+
+    const [produtos, setProdutos] = useState([]);
+  
+    useEffect(() => {
+        api.get('/products').then((response) => {
+        setProdutos(response.data);
+        console.log(produtos)
+      })
+    }, []);
 
 
     return (
