@@ -5,7 +5,6 @@ import com.pi.api.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,12 +38,16 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public List<Product> listarPorCategoria(String categoria) {
-        return productRepository.findByCategoryTitle(categoria);
+    public List<Product> listarPorCategoria(String categoryTitle) {
+        return productRepository.findByCategoryTitleContainingIgnoreCase(categoryTitle);
     }
 
-    public List<Product> listarPorCidade(String cidade) {
-        return productRepository.findByCityName(cidade);
+    public List<Product> listarPorCidade(String cityName) {
+        return productRepository.findByCityNameContainingIgnoreCase(cityName);
+    }
+
+    public Long contarProdutosPorCategoria(Long id) {
+        return productRepository.countProductByCategoryId(id);
     }
 
 }

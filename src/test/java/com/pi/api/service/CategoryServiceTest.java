@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@Disabled
 class CategoryServiceTest {
 
 //	Category c = new Category();

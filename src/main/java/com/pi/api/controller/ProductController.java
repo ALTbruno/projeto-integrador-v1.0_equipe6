@@ -38,6 +38,16 @@ public class ProductController {
         return ResponseEntity.ok(productService.buscarTodos());
     }
 
+//    @PutMapping("/{id}")
+//    public ResponseEntity<Product> atualizar(@PathVariable Long id, @RequestBody Product product) {
+//
+//        if (productService.idExiste(id)) {
+//            return ResponseEntity.ok(productService.atualizar(product));
+//        }
+//
+//        return ResponseEntity.badRequest().build();
+//    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
 
@@ -49,13 +59,14 @@ public class ProductController {
         return ResponseEntity.badRequest().build();
     }
 
-    @GetMapping("/category/{nomeCategoria}")
-    public ResponseEntity<List<Product>> buscarCategoria(@PathVariable("nomeCategoria") String nomeCategoria) {
-        return ResponseEntity.ok(productService.listarPorCategoria(nomeCategoria));
+    @GetMapping("/category={categoryTitle}")
+    public ResponseEntity<List<Product>> buscarPorCategoria(@PathVariable String categoryTitle) {
+        return ResponseEntity.ok(productService.listarPorCategoria(categoryTitle));
     }
 
-    @GetMapping("/city/{nomeCidade}")
-    public ResponseEntity<List<Product>> buscarCidade(@PathVariable("nomeCidade") String nomeCidade) {
-        return ResponseEntity.ok(productService.listarPorCidade(nomeCidade));
+    @GetMapping("/city={cityName}")
+    public ResponseEntity<List<Product>> buscarPorCidade(@PathVariable String cityName) {
+        return ResponseEntity.ok(productService.listarPorCidade(cityName));
     }
+
 }
