@@ -3,6 +3,7 @@ CREATE TABLE categories (
 	title VARCHAR(50),
     description VARCHAR(255),
     image_url VARCHAR(255),
+    total_products BIGINT,
     PRIMARY KEY (id)
 );
 
