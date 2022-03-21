@@ -1,10 +1,13 @@
 package com.pi.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "CATEGORIES")
@@ -14,7 +17,6 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
     @NotBlank
     @Size(max = 50)
     private String title;
@@ -28,16 +30,13 @@ public class Category {
     @Size(max = 255)
     private String imageUrl;
 
-    private Long totalProducts;
-
     public Category() {
     }
 
-    public Category(String title, String description, String imageUrl, Long totalProducts) {
+    public Category(String title, String description, String imageUrl) {
         this.title = title;
         this.description = description;
         this.imageUrl = imageUrl;
-        this.totalProducts = totalProducts;
     }
 
     public Long getId() {
@@ -70,13 +69,5 @@ public class Category {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    public Long getTotalProducts() {
-        return totalProducts;
-    }
-
-    public void setTotalProducts(Long totalProducts) {
-        this.totalProducts = totalProducts;
     }
 }

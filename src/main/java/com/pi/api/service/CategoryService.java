@@ -15,9 +15,6 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 
-	@Autowired
-	private ProductRepository productRepository;
-
 	public Category salvar(Category category) {
 		return categoryRepository.save(category);
 	}
@@ -35,17 +32,11 @@ public class CategoryService {
 	}
 
 	public List<Category> buscarTodos() {
-		List<Category> categories = categoryRepository.findAll();
-
-		for (Category category : categories) {
-			category.setTotalProducts(productRepository.countProductByCategoryId(category.getId()));
-		}
-
-		return categories;
+		return categoryRepository.findAll();
 	}
 
 	public void excluir(Long id) {
-			categoryRepository.deleteById(id);
+		categoryRepository.deleteById(id);
 	}
 
 }
