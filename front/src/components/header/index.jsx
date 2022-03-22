@@ -75,10 +75,10 @@ const Header = () => {
                             <div id="linha-horizontal" />
                         </nav> :
                         <nav>
-                            {location.pathname === "/login" ?
+                            {location.pathname === "/register" ?
                                 '' : <p><Link to="/register" onClick={toggleHamburger}>Criar conta</Link></p>}
                             {location.pathname === "/login" || location.pathname === "/register" ? '' : <div id="linha-horizontal" />}
-                            {location.pathname === "/register" ?
+                            {location.pathname === "/login" ?
                                 '' : <p><Link to="/login" onClick={toggleHamburger}>Fazer login</Link></p>}
                         </nav>}
                     <section className="bottom d-flex justify-content-end ">

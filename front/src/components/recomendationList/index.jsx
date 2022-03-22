@@ -45,11 +45,11 @@ const RecomendationList = () => {
       }]);
     const navigate = useNavigate()
   
-    // useEffect(() => {
-    //     api.get('/products').then((response) => {
-    //         setProdutos(response.data);
-    //     });
-    // }, [])
+    useEffect(() => {
+        api.get('/products').then((response) => {
+            setProdutos(response.data);
+        });
+    }, [])
 
     return (
         <>
