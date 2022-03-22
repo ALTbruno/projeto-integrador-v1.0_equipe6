@@ -53,13 +53,13 @@ const RecomendationList = () => {
 
     return (
         <>
-            <section className="justify-content-center">
-                <h3 className="my-3 fw-bold ">Recomendações</h3>
+            <section className="justify-content-center d-flex flex-wrap">
+                <h3 className="my-3 w-100 fw-bold ">Recomendações</h3>
                 {produtos.map((item) => (
                     <Card key={item.id} value={item.name} className="shadow rounded m-3 p-0 d-flex flex-md-row justify-content-md-center " style={{ maxWidth: '40rem' }}>
 
-                        <Card.Body className="m-0 p-0 d-flex w-100 position-relative justify-content-sm-center">
-                            <Card.Img className="img-fluid" src={item.images[0].url ? item.images[0].url : ''} />
+                        <Card.Body className="m-0 p-0 d-flex position-relative" style={{ width: "640px", height:"300px"}}>
+                            <Card.Img className="w-100" style={{objectFit: "cover"}} src={item.images[0].url ? item.images[0].url : ''} />
                             <FavoriteHeart />
                         </Card.Body>
 
