@@ -1,5 +1,7 @@
-import { useState } from "react";
 import { Carousel } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import api from '../../services/index';
 
 const ProdutosCarrosel = () => {
 
@@ -9,15 +11,57 @@ const ProdutosCarrosel = () => {
     setIndex(selectedIndex);
     }
 
+    const [produtos, setProdutos] = useState({
+        "id": null,
+        "name": "",
+        "description": "",
+        "category": {
+            "id": null,
+            "title": "",
+            "description": "",
+            "imageUrl": "",
+            "totalProducts": null
+        },
+        "city": {
+            "id": null,
+            "name": "",
+            "country": ""
+        },
+        "images": [
+            {
+                "id": null,
+                "title": "",
+                "url": ""
+            }
+        ],
+        "characteristics": [
+            {
+                "id": null,
+                "name": "",
+                "icon": ""
+            }
+        ]
+    });
+    const { id } = useParams();
+    console.log(id)
+
+    useEffect(() => {
+        api.get(`/products/${id}`).then(response => {
+            setProdutos(response.data);
+        })
+    }, [id]);
+
+    console.log(produtos)
+
     return (
         <>
             <Carousel activeIndex={index} onSelect={handleSelect}>
 
-            {[ ... Array(5)].map(() => {
+            {produtos.images.map(() => {
 
                 return (
                     <Carousel.Item>
-                        <img className="img-fluid rounded-3 w-100" src="https://pix10.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?ca=6&ce=1&s=1024x768" alt="" srcset="" />
+                        <img className="img-fluid rounded-3 w-100" src={produtos.images[0].url} alt="" srcset="" />
                     </Carousel.Item>
                     
                 )

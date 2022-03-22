@@ -74,25 +74,25 @@ const PaginaProdutos = () => {
             <div className="p-2 border d-flex align-items-center justify-content-center mw-100">
 
                 <div className="p-1 w-50" >
-                    <img className="img-fluid rounded-3" src="https://pix10.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?ca=6&ce=1&s=1024x768" alt="" srcset="" />
+                    <img className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
                 </div>
 
                 <div className="w-25" >
                     <div className="p-1 w-100">
-                        <img className="img-fluid rounded-3" src="https://pix10.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?ca=6&ce=1&s=1024x768" alt="" srcset="" />
+                        <img className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
                     </div>
                     <div className="p-1 w-100">
-                        <img className="img-fluid rounded-3" src="https://pix10.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?ca=6&ce=1&s=1024x768" alt="" srcset="" />
+                        <img className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
                     </div>
                 </div>
 
                 <div className="w-25" >
                     <div className="p-1 w-100">
-                        <img className="img-fluid rounded-3" src="https://pix10.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?ca=6&ce=1&s=1024x768" alt="" srcset="" />
+                        <img className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
                     </div>
                     <div className="p-1 w-100 position-relative">
                         <ProdutosModal />
-                        <img className="img-fluid rounded-3" src="https://pix10.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?ca=6&ce=1&s=1024x768" alt="" srcset="" />
+                        <img className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
                     </div>
                 </div>
 
