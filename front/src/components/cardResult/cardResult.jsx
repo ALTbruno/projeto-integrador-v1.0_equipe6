@@ -3,29 +3,57 @@ import { useNavigate } from 'react-router-dom';
 import localizador from '../../assets/icons/localizador.svg';
 import wifi from '../../assets/icons/wifi.svg';
 import natacao from '../../assets/icons/natacao.svg';
-import hotelimg from '../../assets/pictures/hotel.svg';
 import starIcon from '../../assets/icons/star.svg';
 import './index.scss'
 
 
 export default function cardResult({ item }) {
-    const [hotel, setHotel] = useState(item);
+    const [hotel, setHotel] = useState({
+        "id": null,
+        "name": "",
+        "description": "",
+        "category": {
+          "id": null,
+          "title": "",
+          "description": "",
+          "imageUrl": ""
+        },
+        "city": {
+          "id": null,
+          "name": "",
+          "country": ""
+        },
+        "images": [
+          {
+            "id": null,
+            "title": "",
+            "url": ""
+          }
+        ],
+        "characteristics": [
+          {
+            "id": null,
+            "name": "",
+            "icon": ""
+          }
+        ]
+      });
     const navigate = useNavigate();
 
     useEffect(() => {
         setHotel(item);
-    }, [item]);
+        console.log(item);
+    }, []);
 
-    const redirect = () => {
-
-    }
 
     return (
         <>
             {/* A verificar como ficará a rota de detalhe do produto */}
             <div onClick={() => navigate(`/produto/${item.id}`)} className="card-result">
                 {/* por enquanto uma imagem padrão para todos os cards gerados, pois alguns hoteis estavam sem imagem, quanto tiverem imagem a verificar tamanho e proporção da mesma no card */}
-                <img className='img-result' src={hotelimg} alt="" />
+                <div className="container-image">
+                  <img className='img-result' src={hotel.images[0].url ?  hotel.images[0].url : ''} alt="" />
+                </div>
                 <section className='content-result'>
                     <div>
                         <h2 className='title-result'>{hotel.name}</h2>

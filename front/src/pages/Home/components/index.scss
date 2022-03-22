@@ -4,6 +4,20 @@
 .container-category{
     background-color: #EBEBEE;
     padding: 40px; 
+    .active.carousel-item{
+        display: flex ;
+        justify-content: space-around;
+    }
+    .carousel-item-next.carousel-item-start, .carousel-item-prev.carousel-item-end{
+        display: flex;
+        justify-content: space-around;
+    }
+    .active.carousel-item-start.carousel-item{
+        justify-content: space-around;
+    }
+    .carousel-control-next, .carousel-control-prev{
+        width: 50px;
+    }
 }
 .title-container-category{
     font-size: $roboto-bold-24;
@@ -49,12 +63,12 @@
 }
 
 
-@media (max-width: 1090px) {
+@media (max-width: 1100px) {
+    .container-card-category {
+        grid-template-columns: repeat(1, 1fr);
+    }
     .container-category{
         padding: 30px;
-    }
-    .container-card-category{
-        grid-template-columns: repeat(2 , 1fr);
     }
     .card-category{
         width: 347px;

@@ -19,7 +19,7 @@ const RouteList = () => (
                 <Route path="/category/:category" element={<HoteisSearchByCategory />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path='/register' element={<RegisterPage />} />
-                <Route path='/produto' element={<PaginaProdutos />} />
+                <Route path='/produto/:id' element={<PaginaProdutos />} />
             </Routes>
             <Footer />
         </Auth>

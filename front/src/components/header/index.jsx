@@ -50,10 +50,10 @@ const Header = () => {
                     </div> :
                     <div className='navigation'>
                         <ul>
-                            {location.pathname === '/' || location.pathname === '/login' ?
-                                <Link to='/register' >Criar conta</Link> : ''}
-                            {location.pathname === '/' || location.pathname === '/register' ?
-                                <Link to='/login' >Iniciar sessão</Link> : ''}
+                            {location.pathname === '/register'?
+                                '' : <Link to='/register' >Criar conta</Link>}
+                            {location.pathname === '/login' ?
+                                '' : <Link to='/login' >Iniciar sessão</Link>}
                         </ul>
                     </div>}
                 <button onClick={toggleHamburger} id="btn-mobile" className="hamburger">
@@ -75,11 +75,11 @@ const Header = () => {
                             <div id="linha-horizontal" />
                         </nav> :
                         <nav>
-                            {location.pathname === "/" || location.pathname === "/login" ?
-                                <p><Link to="/register" onClick={toggleHamburger}>Criar conta</Link></p> : ''}
-                            {location.pathname === "/" ? <div id="linha-horizontal" /> : ''}
-                            {location.pathname === "/" || location.pathname === "/register" ?
-                                <p><Link to="/login" onClick={toggleHamburger}>Fazer login</Link></p> : ''}
+                            {location.pathname === "/login" ?
+                                '' : <p><Link to="/register" onClick={toggleHamburger}>Criar conta</Link></p>}
+                            {location.pathname === "/login" || location.pathname === "/register" ? '' : <div id="linha-horizontal" />}
+                            {location.pathname === "/register" ?
+                                '' : <p><Link to="/login" onClick={toggleHamburger}>Fazer login</Link></p>}
                         </nav>}
                     <section className="bottom d-flex justify-content-end ">
                         <ul className="d-flex ">
