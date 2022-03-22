@@ -62,8 +62,8 @@ const RecomendationList = () => {
                     
                     <Card key={item.id} value={item.name} className="shadow rounded m-3 p-0 d-flex flex-md-row justify-content-md-center " style={{ maxWidth: '35rem' }}>
 
-                        <Card.Body className="m-0 p-0 d-flex w-100 position-relative justify-content-sm-center">
-                            <Card.Img className="img-fluid img-start mx-0" src={item.images[0].url ? item.images[0].url : ''} />
+                        <Card.Body className="m-0 p-0 d-flex position-relative" style={{ width: "640px", height:"300px"}}>
+                            <Card.Img className="w-100" style={{objectFit: "cover"}} src={item.images[0].url ? item.images[0].url : ''} />
                             <FavoriteHeart />
                         </Card.Body>
 
