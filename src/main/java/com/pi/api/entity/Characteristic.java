@@ -25,7 +25,7 @@ public class Characteristic {
     @Size(max = 255)
     private String icon;
 
-    @ManyToMany(mappedBy = "characteristics")
+    @ManyToMany(mappedBy = "characteristics", cascade = CascadeType.ALL)
     private Set<Product> products;
 
     public Characteristic() {

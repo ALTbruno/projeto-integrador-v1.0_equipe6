@@ -26,7 +26,7 @@ public class Image {
     @Size(max = 255)
     private String url;
 
-    @OneToMany(mappedBy = "images")
+    @OneToMany(mappedBy = "images", cascade = CascadeType.ALL)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Set<Product> products;
 
