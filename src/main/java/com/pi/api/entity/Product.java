@@ -38,7 +38,9 @@ public class Product {
 
 	@ManyToMany
 	@Fetch(FetchMode.JOIN)
-	@JoinColumn(name = "id_product")
+	@JoinTable(name = "PRODUCTS_IMAGES",
+			joinColumns = @JoinColumn(name = "product_id"),
+			inverseJoinColumns = @JoinColumn(name = "images_id"))
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Set<Image> images;
 
@@ -56,34 +58,16 @@ public class Product {
 
 
 
-
 	public Product() {
 	}
 
-
-
-//	public Product(String name, String description, Category category, City city) {
-//		this.name = name;
-//		this.description = description;
-//		this.category = category;
-//		this.city = city;
-//	}
-
-
-	public Product(String name, String description, Category category, City city, Set<Image> images) {
+	public Product(String name, String description, Category category, City city, Set<Image> images, Set<Characteristic> characteristics) {
 		this.name = name;
 		this.description = description;
 		this.category = category;
 		this.city = city;
 		this.images = images;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+		this.characteristics = characteristics;
 	}
 
 	public String getName() {
@@ -124,5 +108,13 @@ public class Product {
 
 	public void setImages(Set<Image> images) {
 		this.images = images;
+	}
+
+	public Set<Characteristic> getCharacteristics() {
+		return characteristics;
+	}
+
+	public void setCharacteristics(Set<Characteristic> characteristics) {
+		this.characteristics = characteristics;
 	}
 }
