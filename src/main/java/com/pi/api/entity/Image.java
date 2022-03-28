@@ -27,6 +27,7 @@ public class Image {
     private String url;
 
     @OneToMany(mappedBy = "images")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Set<Product> products;
 
 
