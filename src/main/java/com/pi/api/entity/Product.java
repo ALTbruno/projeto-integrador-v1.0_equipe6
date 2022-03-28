@@ -36,9 +36,9 @@ public class Product {
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private City city;
 
-	@OneToMany
-//	@JoinColumn(name = "product_id")
+	@ManyToMany
 	@Fetch(FetchMode.JOIN)
+	@JoinColumn(name = "id_product")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Set<Image> images;
 
@@ -60,23 +60,30 @@ public class Product {
 	public Product() {
 	}
 
-//	public Product(String name, String description, Category category, City city, Image image) {
+
+
+//	public Product(String name, String description, Category category, City city) {
 //		this.name = name;
 //		this.description = description;
 //		this.category = category;
 //		this.city = city;
-//		this.image = image;
 //	}
 
-	public Product(String name, String description, Category category, City city) {
+
+	public Product(String name, String description, Category category, City city, Set<Image> images) {
 		this.name = name;
 		this.description = description;
 		this.category = category;
 		this.city = city;
+		this.images = images;
 	}
 
 	public Long getId() {
 		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -94,7 +101,6 @@ public class Product {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 
 	public Category getCategory() {
 		return category;
@@ -118,13 +124,5 @@ public class Product {
 
 	public void setImages(Set<Image> images) {
 		this.images = images;
-	}
-
-	public Set<Characteristic> getCharacteristics() {
-		return characteristics;
-	}
-
-	public void setCharacteristics(Set<Characteristic> characteristics) {
-		this.characteristics = characteristics;
 	}
 }
