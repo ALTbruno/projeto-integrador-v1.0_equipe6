@@ -36,7 +36,7 @@ public class Product {
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private City city;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@Fetch(FetchMode.JOIN)
 	@JoinTable(name = "PRODUCTS_IMAGES",
 			joinColumns = @JoinColumn(name = "product_id"),
@@ -48,7 +48,7 @@ public class Product {
 //	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 //	private Set<Reservation> reservation = new HashSet<>();
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@Fetch(FetchMode.JOIN)
 	@JoinTable(name = "PRODUCT_CHARACTERISTIC",
 			joinColumns = @JoinColumn(name = "product_id"),
