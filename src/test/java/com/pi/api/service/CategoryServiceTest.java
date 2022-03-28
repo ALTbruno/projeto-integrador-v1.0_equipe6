@@ -1,17 +1,17 @@
-package com.pi.api.service;
-
-import com.pi.api.entity.Category;
-import org.junit.jupiter.api.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-@SpringBootTest
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class CategoryServiceTest {
+//package com.pi.api.service;
+//
+//import com.pi.api.entity.Category;
+//import org.junit.jupiter.api.*;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.test.context.SpringBootTest;
+//
+//import java.util.List;
+//
+//import static org.junit.jupiter.api.Assertions.*;
+//
+//@SpringBootTest
+//@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+//class CategoryServiceTest {
 
 //	Category c = new Category();
 //
@@ -74,5 +74,5 @@ class CategoryServiceTest {
 //
 //		Assertions.assertTrue(categoryService.buscarPorId(id).isEmpty());
 //	}
-
-}
+//
+//}
