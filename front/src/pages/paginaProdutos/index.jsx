@@ -1,12 +1,14 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import api from '../../services/index';
 import StarRating from "../../components/avaliationStars";
 import Classification from "../../components/classification";
 import ProdutosModal from "../../components/predutosModal";
 
+
 const PaginaProdutos = () => {
-    const [produtos, setProdutos] = useState({
+
+    const [produtos, setProdutos] = useState({  
         "id": null,
         "name": "",
         "description": "",
@@ -37,8 +39,8 @@ const PaginaProdutos = () => {
             }
         ]
     });
+
     const { id } = useParams();
-    console.log(id)
 
     useEffect(() => {
         api.get(`/products/${id}`).then(response => {
@@ -47,8 +49,6 @@ const PaginaProdutos = () => {
     }, [id]);
 
     console.log(produtos)
-
-
     return (
         <>
             {/* Bloco de Titulo */}
@@ -64,7 +64,9 @@ const PaginaProdutos = () => {
 
             {/* Bloco de Endereço */}
             <div className="p-1 d-flex align-items-center" style={{ backgroundColor: "#bfbfbf" }}>
+                <p>Cidade</p>
                 <div className="ms-auto me-5 d-flex align-items-center">
+                    <Link to="/produto/:id/reserva">reserva</Link>
                     <StarRating />
                     <Classification />
                 </div>
@@ -72,44 +74,51 @@ const PaginaProdutos = () => {
 
             {/* Bloco de Imagem */}
             <div className="p-2 border d-flex align-items-center justify-content-center mw-100">
-
+            
+                {console.log(produtos.images[0].url)}
                 <div className="p-1 w-50" >
-                    <img className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
+                    <img key={produtos.images[0].id} className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
                 </div>
 
                 <div className="w-25" >
                     <div className="p-1 w-100">
-                        <img className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
+                        <img key={produtos.images[0].id} className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
                     </div>
                     <div className="p-1 w-100">
-                        <img className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
+                        <img key={produtos.images[0].id} className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
                     </div>
                 </div>
 
                 <div className="w-25" >
                     <div className="p-1 w-100">
-                        <img className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
+                        <img key={produtos.images[0].id} className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
                     </div>
                     <div className="p-1 w-100 position-relative">
                         <ProdutosModal />
-                        <img className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
+                        <img key={produtos.images[0].id} className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
                     </div>
                 </div>
 
             </div>
 
             {/* Bloco de Descrição */}
-            <div style={{ backgroundColor: "#bfbfbf" }}>
-                <h2>Descrição</h2>
-                <p>{produtos.description}</p>
+            <div className="p-3" >
+                <div className="p-1" style={{ backgroundColor: "#bfbfbf" }}>
+                    <h2 className="ms-3" >Descrição</h2>
+                </div>
+                <div className="p-1">
+                    <p>{produtos.description}</p>
+                </div>
             </div>
 
             {/* Bloco de Caracteristicas do Produto */}
-            <div>
-                <h2>Caracteristicas</h2>
+            <div className="p-3">
+                <div className="p-1" style={{ backgroundColor: "#bfbfbf" }}>
+                    <h2 className="ms-3" style={{ backgroundColor: "#bfbfbf" }}>Caracteristicas</h2>
+                </div>
                 {produtos.characteristics.map(characteristic => (
-                    <div className="p-1 d-flex" style={{ backgroundColor: "#bfbfbf" }}>
-                        <div className="">
+                    <div className="p-1 d-flex" >
+                        <div className="p-1">
                             <p>{characteristic.name}</p>
                         </div>
                     </div>
@@ -118,10 +127,13 @@ const PaginaProdutos = () => {
             </div>
 
             {/* Bloco Politicas do Produto */}
-            <div>
-                <h2>bloco politicas do produto</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam adipisci modi blanditiis harum velit repellat et nisi qui delectus! Earum culpa ex natus non laudantium repellat voluptatibus, incidunt amet quibusdam!</p>
-
+            <div className="p-3">
+                <div className="p-1" style={{ backgroundColor: "#bfbfbf" }}>    
+                    <h2 className="ms-3" style={{ backgroundColor: "#bfbfbf" }}>Bloco Politicas do Produto</h2>
+                </div>
+                <div className="p-1">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam adipisci modi blanditiis harum velit repellat et nisi qui delectus! Earum culpa ex natus non laudantium repellat voluptatibus, incidunt amet quibusdam!</p>
+                </div>
             </div>
         </>
     )

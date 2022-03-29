@@ -3,6 +3,7 @@ import CardCategory from './components/cardCategory'
 import Search from '../../components/search';
 
 
+
 const Home = () => {
   return (
     <>

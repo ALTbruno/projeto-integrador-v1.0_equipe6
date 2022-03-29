@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import { Card } from "react-bootstrap";
+import { Row, Card, CardGroup } from "react-bootstrap";
 import { MdRoom, MdWifi, MdPool } from "react-icons/md";
 import StarRating from "../avaliationStars";
 import api from '../../services/index';
 import Classification from "../classification";
 import FavoriteHeart from "../favoriteHeart";
 import { useNavigate } from 'react-router-dom';
-import { CardGroup } from "react-bootstrap";
-import { Row } from "react-bootstrap";
+
 
 
 
@@ -60,7 +59,7 @@ const RecomendationList = () => {
                 <Row className="justify-content-center">
                 {produtos.map((item) => (
                     
-                    <Card key={item.id} value={item.name} className="shadow rounded m-3 p-0 d-flex flex-md-row justify-content-md-center " style={{ maxWidth: '35rem' }}>
+                    <Card key={item.id} value={item.name} className="shadow rounded m-3 p-0 d-flex flex-md-row justify-content-md-center " style={{ maxWidth: '40rem' }}>
 
                         <Card.Body className="m-0 p-0 d-flex position-relative" style={{ width: "640px", height:"300px"}}>
                             <Card.Img className="w-100" style={{objectFit: "cover"}} src={item.images[0].url ? item.images[0].url : ''} />
@@ -88,7 +87,7 @@ const RecomendationList = () => {
                             <MdWifi className="me-1" />
                             <MdPool className="me-1" />
                             <Card.Text className="mt-2 mt-sm-3" style={{ fontSize: '10px' }}>{item.description}</Card.Text>
-                            <Card.Link onClick={() => navigate(`/produto/${item.id}` )} className="btn mt-sm-4 text-decoration-none text-light fw-bold w-100" style={{ backgroundColor: '#1DBEB4', border: '#1DBEB4' }}>Ver Mais</Card.Link>
+                            <Card.Link onClick={() => navigate(`/produto/${item.name}` )} className="btn mt-sm-4 text-decoration-none text-light fw-bold w-100" style={{ backgroundColor: '#1DBEB4', border: '#1DBEB4' }}>Ver Mais</Card.Link>
 
                         </Card.Body>
                     </Card>

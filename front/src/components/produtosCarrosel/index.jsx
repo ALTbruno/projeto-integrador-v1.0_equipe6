@@ -57,11 +57,11 @@ const ProdutosCarrosel = () => {
         <>
             <Carousel activeIndex={index} onSelect={handleSelect}>
 
-            {produtos.images.map(() => {
+            {produtos.images.map((item) => {
 
                 return (
                     <Carousel.Item>
-                        <img className="img-fluid rounded-3 w-100" src={produtos.images[0].url} alt="" srcset="" />
+                        <img className="img-fluid rounded-3 w-100" src={item.url} alt="" srcset="" />
                     </Carousel.Item>
                     
                 )

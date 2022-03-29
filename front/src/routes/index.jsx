@@ -8,6 +8,7 @@ import HoteisSearchByCategory from '../pages/BuscaHoteisCategoria';
 import LoginPage from "../pages/Login";
 import RegisterPage from '../pages/Register';
 import PaginaProdutos from '../pages/paginaProdutos';
+import PaginaReserva from '../pages/paginaReservas';
 
 const RouteList = () => (
     <BrowserRouter>
@@ -20,6 +21,7 @@ const RouteList = () => (
                 <Route path="/login" element={<LoginPage />} />
                 <Route path='/register' element={<RegisterPage />} />
                 <Route path='/produto/:id' element={<PaginaProdutos />} />
+                <Route path='/produto/:id/reserva' element={<PaginaReserva />} />
             </Routes>
             <Footer />
         </Auth>
