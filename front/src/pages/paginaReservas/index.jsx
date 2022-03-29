@@ -1,7 +1,6 @@
 import { Card } from "react-bootstrap";
 import { CardImg } from "react-bootstrap";
 import { Form, FormGroup, FormControl, FormLabel } from "react-bootstrap";
-import Classification from "../../components/classification";
 import StarRating from "../../components/avaliationStars";
 
 
@@ -48,6 +47,7 @@ const PaginaReserva = () => {
                     <div>
                         //calendario
                     </div>
+
                 </div>
 
                 {/* Detalhes da Reserva */}
@@ -69,14 +69,14 @@ const PaginaReserva = () => {
                         <Card.Text className="my-2">Confira</Card.Text>
                         <Card.Link className="mt-4 border btn w-100 decoration-none">Confirmar Reserva</Card.Link>
                     </Card.Body>
-
                 </Card>
+
             </div>  
 
             {/* Bloco Politicas do Produto */}
             <div className="mt-5 p-3">
                 <div className="p-1" style={{ backgroundColor: "#bfbfbf" }}>    
-                    <h2 className="ms-3" style={{ backgroundColor: "#bfbfbf" }}>Bloco Politicas do Produto</h2>
+                    <h2 className="ms-3" style={{ backgroundColor: "#bfbfbf" }}>Politicas do Produto</h2>
                 </div>
                 <div className="p-1">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam adipisci modi blanditiis harum velit repellat et nisi qui delectus! Earum culpa ex natus non laudantium repellat voluptatibus, incidunt amet quibusdam!</p>
