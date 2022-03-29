@@ -8,6 +8,7 @@ import HoteisSearchByCategory from '../pages/BuscaHoteisCategoria';
 import LoginPage from "../pages/Login";
 import RegisterPage from '../pages/Register';
 import PaginaProdutos from '../pages/paginaProdutos';
+import React from 'react';
 
 const RouteList = () => (
     <BrowserRouter>

@@ -8,6 +8,7 @@ import instagram from '../../assets/icons/ig.svg';
 import twitter from '../../assets/icons/twitter.svg';
 import linkedin from '../../assets/icons/linkedin.svg';
 import './index.scss';
+import React from 'react';
 
 const Header = () => {
     const { handleLogout, logado } = useContext(Context)

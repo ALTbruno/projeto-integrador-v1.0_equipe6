@@ -5,6 +5,7 @@ import user from '../../util/user.json';
 import visible from '../../assets/icons/visible.svg';
 import invisible from '../../assets/icons/invisible.svg';
 import './index.scss';
+import React from 'react';
 
 const LoginForm = () => {
     const {handleLogin} = useContext(Context);

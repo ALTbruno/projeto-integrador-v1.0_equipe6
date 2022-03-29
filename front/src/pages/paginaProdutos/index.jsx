@@ -5,6 +5,7 @@ import StarRating from "../../components/avaliationStars";
 import Classification from "../../components/classification";
 import ProdutosModal from "../../components/predutosModal";
 
+
 const PaginaProdutos = () => {
     const [produtos, setProdutos] = useState({
         "id": null,
