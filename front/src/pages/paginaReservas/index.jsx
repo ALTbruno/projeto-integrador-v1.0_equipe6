@@ -84,7 +84,7 @@ const PaginaReserva = () => {
             </div>
 
         </>
-    )
+    ) 
 }
 
 export default PaginaReserva;
