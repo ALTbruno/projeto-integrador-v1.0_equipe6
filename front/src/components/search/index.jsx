@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import api from '../../services/index.js';
 import calendar from "../../assets/icons/calendar.svg";
 import menuLocalizador from "../../assets/icons/icon-menu-localizador.svg";
@@ -8,19 +8,35 @@ import localizador from "../../assets/icons/localizador.svg";
 import "react-datepicker/dist/react-datepicker.css";
 import "./calendar.scss";
 import "./index.scss";
+import { useCallback } from "react";
 
 export default function Search() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [city, setCitys] = useState([]);
-  const [widthScreen, setWidthScreen] = useState(window.innerWidth);
   const [datalist, setDatalist] = useState(document.getElementById("citys"));
   const [cityForSearch, setCityForSearch] = useState('');
   const days = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado",];
   const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
   const navigate = useNavigate();
-  const location = useLocation();
-  window.addEventListener("resize", () => setWidthScreen(window.innerWidth));
+  
+  const [largeWidth, setLargeWidth] = useState(false)
+  
+  useEffect(() => {
+    window.innerWidth > 1207 ? setLargeWidth(true) : setLargeWidth(false)  
+    const handleResize = () => {
+      if (window.innerWidth > 1207) {
+        setLargeWidth(true)
+      } else {
+        setLargeWidth(false)
+      }
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+
+  }, [])
+
 
   useEffect(() => {
     api.get('cities').then(response => {
@@ -56,7 +72,7 @@ export default function Search() {
   const mostOptions = (event) => {
     let value = event.target.value;
     let options = document.getElementsByClassName("option");
-
+    setCityForSearch(value);
 
     for (const opt of options) {
       let text = opt.attributes.value.value.toLowerCase();
@@ -142,7 +158,7 @@ export default function Search() {
               minDate={new Date() - 2}
               dateFormat="dd/MM/yyyy"
               selectsRange={true}
-              monthsShown={widthScreen < 1207 ? 1 : 2}
+              monthsShown={largeWidth ? 2 : 1}
               excludeDates={[new Date()]}
               //close calendar
               ref={(r) => {
