@@ -6,9 +6,23 @@ import './index.scss';
 
 export default function CardCategory() {
   const [categories, setCategories] = useState([]);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [largeWidth, setLargeWidth] = useState(false)
   const navigate = useNavigate();
-  window.addEventListener("resize", () => setWindowWidth(window.innerWidth))
+  
+  useEffect(() => {
+    window.innerWidth > 1100 ? setLargeWidth(true) : setLargeWidth(false)  
+    const handleResize = () => {
+      if (window.innerWidth > 1100) {
+        setLargeWidth(true)
+      } else {
+        setLargeWidth(false)
+      }
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [])
+
 
   useEffect(() => {
     api.get('/categories').then(response => {
@@ -40,7 +54,7 @@ export default function CardCategory() {
       <div className="container-category">
 
         <h2 className='title-container-category'>Buscar por tipo de acomodação</h2>
-        {windowWidth > 1100 ?
+        {largeWidth ?
           <Carousel variant="dark" className='container-card-category'>
             {categories.map(item => (
               <Carousel.Item key={item.id}>
