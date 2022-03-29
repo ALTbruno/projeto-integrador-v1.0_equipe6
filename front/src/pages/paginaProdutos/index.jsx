@@ -29,6 +29,26 @@ const PaginaProdutos = () => {
                 "id": null,
                 "title": "",
                 "url": ""
+            },
+            {
+                "id": null,
+                "title": "",
+                "url": ""
+            },
+            {
+                "id": null,
+                "title": "",
+                "url": ""
+            },
+            {
+                "id": null,
+                "title": "",
+                "url": ""
+            },
+            {
+                "id": null,
+                "title": "",
+                "url": ""
             }
         ],
         "characteristics": [
@@ -75,23 +95,23 @@ const PaginaProdutos = () => {
             {/* Bloco de Imagem */}
             <div className="p-2 border d-flex align-items-center justify-content-center mw-100">
             
-                {console.log(produtos.images[0].url)}
+    
                 <div className="p-1 w-50" >
                     <img key={produtos.images[0].id} className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
                 </div>
 
                 <div className="w-25" >
                     <div className="p-1 w-100">
-                        <img key={produtos.images[0].id} className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
+                        <img key={produtos.images[1].id} className="img-fluid rounded-3" src={produtos.images[1].url} alt="" srcset="" />
                     </div>
                     <div className="p-1 w-100">
-                        <img key={produtos.images[0].id} className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
+                        <img key={produtos.images[2].id} className="img-fluid rounded-3" src={produtos.images[2].url} alt="" srcset="" />
                     </div>
                 </div>
 
                 <div className="w-25" >
                     <div className="p-1 w-100">
-                        <img key={produtos.images[0].id} className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
+                        <img key={produtos.images[3].id} className="img-fluid rounded-3" src={produtos.images[3].url} alt="" srcset="" />
                     </div>
                     <div className="p-1 w-100 position-relative">
                         <ProdutosModal />

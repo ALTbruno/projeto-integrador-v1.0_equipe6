@@ -87,7 +87,7 @@ const RecomendationList = () => {
                             <MdWifi className="me-1" />
                             <MdPool className="me-1" />
                             <Card.Text className="mt-2 mt-sm-3" style={{ fontSize: '10px' }}>{item.description}</Card.Text>
-                            <Card.Link onClick={() => navigate(`/produto/${item.name}` )} className="btn mt-sm-4 text-decoration-none text-light fw-bold w-100" style={{ backgroundColor: '#1DBEB4', border: '#1DBEB4' }}>Ver Mais</Card.Link>
+                            <Card.Link onClick={() => navigate(`/produto/${item.id}` )} className="btn mt-sm-4 text-decoration-none text-light fw-bold w-100" style={{ backgroundColor: '#1DBEB4', border: '#1DBEB4' }}>Ver Mais</Card.Link>
 
                         </Card.Body>
                     </Card>
