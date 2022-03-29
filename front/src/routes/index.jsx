@@ -9,6 +9,7 @@ import LoginPage from "../pages/Login";
 import RegisterPage from '../pages/Register';
 import PaginaProdutos from '../pages/paginaProdutos';
 import PaginaReserva from '../pages/paginaReservas';
+import React from 'react';
 
 const RouteList = () => (
     <BrowserRouter>
