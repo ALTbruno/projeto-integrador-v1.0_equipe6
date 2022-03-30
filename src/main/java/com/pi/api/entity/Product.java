@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
-@Table(name = "products")
+@Table(name = "PRODUCTS")
 public class Product {
 
 	@Id
@@ -23,7 +23,7 @@ public class Product {
 	private String name;
 
 	@NotBlank
-	@Size(max = 255)
+	@Size(max = 1000)
 	private String description;
 
 	@ManyToOne
@@ -36,19 +36,13 @@ public class Product {
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private City city;
 
-	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToMany
+//	@JoinColumn(name = "product_id")
 	@Fetch(FetchMode.JOIN)
-	@JoinTable(name = "PRODUCTS_IMAGES",
-			joinColumns = @JoinColumn(name = "product_id"),
-			inverseJoinColumns = @JoinColumn(name = "images_id"))
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Set<Image> images;
 
-//	@OneToMany(mappedBy ="products", cascade = CascadeType.ALL)
-//	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-//	private Set<Reservation> reservation = new HashSet<>();
-
-	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@ManyToMany
 	@Fetch(FetchMode.JOIN)
 	@JoinTable(name = "PRODUCT_CHARACTERISTIC",
 			joinColumns = @JoinColumn(name = "product_id"),
@@ -57,25 +51,22 @@ public class Product {
 	private Set<Characteristic> characteristics;
 
 
-
 	public Product() {
 	}
 
-	public Product(String name, String description, Category category, City city, Set<Image> images, Set<Characteristic> characteristics) {
+	public Product(String name, String description, Category category, City city) {
 		this.name = name;
 		this.description = description;
 		this.category = category;
 		this.city = city;
-		this.images = images;
-		this.characteristics = characteristics;
-	}
-
-	public Long getId() {
-		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public String getName() {

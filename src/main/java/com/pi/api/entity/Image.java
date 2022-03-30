@@ -26,23 +26,14 @@ public class Image {
     @Size(max = 255)
     private String url;
 
-    @OneToMany(mappedBy = "images", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Set<Product> products;
-
 
     public Image() {
     }
 
-    public Image(String title, String url) {
-        this.title = title;
-        url = url;
-    }
-
-    public Image(Long id) {
-        this.id = id;
-    }
-
+	public Image(String title, String url) {
+		this.title = title;
+		this.url = url;
+	}
 
 	public Long getId() {
 		return id;

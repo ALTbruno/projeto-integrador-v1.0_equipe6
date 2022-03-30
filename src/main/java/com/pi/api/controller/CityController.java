@@ -15,7 +15,7 @@ public class CityController {
     @Autowired
     private CityService cityService;
 
-    @PostMapping()
+    @PostMapping("/add")
     public ResponseEntity<City> cadastrar(@RequestBody City city) {
         return ResponseEntity.status(HttpStatus.CREATED).body(cityService.salvar(city));
     }

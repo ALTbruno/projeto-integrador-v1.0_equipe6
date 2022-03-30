@@ -17,7 +17,7 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @PostMapping()
+    @PostMapping("/add")
     public ResponseEntity<Category> cadastrar(@RequestBody Category category) {
         return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.salvar(category));
     }
@@ -32,7 +32,7 @@ public class CategoryController {
         return ResponseEntity.badRequest().build();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
     public ResponseEntity<Category> atualizar(@PathVariable Long id, @RequestBody Category category) {
 
         if (categoryService.idExiste(id)) {
@@ -48,7 +48,7 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.buscarTodos());
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
 
         if (categoryService.idExiste(id)) {

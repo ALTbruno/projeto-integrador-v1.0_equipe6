@@ -18,7 +18,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @PostMapping()
+    @PostMapping("/add")
     public ResponseEntity<Product> cadastrar(@RequestBody Product product) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.salvar(product));
     }
@@ -38,17 +38,18 @@ public class ProductController {
         return ResponseEntity.ok(productService.buscarTodos());
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Product> atualizar(@PathVariable Long id, @RequestBody Product product) {
-//
-//        if (productService.idExiste(id)) {
-//            return ResponseEntity.ok(productService.atualizar(product));
-//        }
-//
-//        return ResponseEntity.badRequest().build();
-//    }
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<Product> atualizar(@PathVariable Long id, @RequestBody Product product) {
 
-    @DeleteMapping("/{id}")
+        if (productService.idExiste(id)) {
+            product.setId(id);
+            return ResponseEntity.ok(productService.atualizar(product));
+        }
+
+        return ResponseEntity.badRequest().build();
+    }
+
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
 
         if (productService.idExiste(id)) {

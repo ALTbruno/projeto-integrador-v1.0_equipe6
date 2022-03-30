@@ -25,7 +25,7 @@ public class Characteristic {
     @Size(max = 255)
     private String icon;
 
-    @ManyToMany(mappedBy = "characteristics", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "characteristics")
     private Set<Product> products;
 
     public Characteristic() {
@@ -40,7 +40,7 @@ public class Characteristic {
         return id;
     }
 
-    public Characteristic(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -60,11 +60,3 @@ public class Characteristic {
         this.icon = icon;
     }
 }
-
-
-
-
-
-
-
-
