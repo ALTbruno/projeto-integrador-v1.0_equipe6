@@ -2,6 +2,7 @@ import { Card } from "react-bootstrap";
 import { CardImg } from "react-bootstrap";
 import { Form, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import StarRating from "../../components/avaliationStars";
+import {AiOutlineCheckCircle} from "react-icons/ai"
 
 
 const PaginaReserva = () => {
@@ -23,6 +24,7 @@ const PaginaReserva = () => {
 
                 {/* Formulario */}
                 <div className="">
+                    <h5>Complete seus Dados</h5>
                     <Form className="card mb-5 p-3 d-flex flex-row justify-content-around" style={{width: '50rem'}}>
                         <FormGroup className="mx-2 w-100">
                             <FormLabel className="mb-0"> Nome</FormLabel>
@@ -44,15 +46,49 @@ const PaginaReserva = () => {
                     </Form>
 
                     {/* Calendario */}
+                    <h5>Selecione sua Data de Reserva</h5>
                     <div>
                         //calendario
                     </div>
+
+                    {/* Horario da reserva */}
+                    <h5>Seu Horário de Chegada</h5>
+                    <Card className="p-3" style={{width: '50rem'}}>
+                        <Card.Title className="my-4"> <AiOutlineCheckCircle/> Seu quarto estará pronto para check-in...</Card.Title>
+                        <Card.Body className="d-flex">
+                            <FormGroup className="me-2 w-100">
+                                <FormLabel>Indique sua hora prevista de chegada</FormLabel>
+                                <Form.Select className="">
+                                        <option></option>
+                                        <option value="1">07:00</option>
+                                        <option value="1">07:15</option>
+                                        <option value="1">07:30</option>
+                                        <option value="1">07:45</option>
+                                        <option value="1">08:00</option>
+                                        <option value="1">08:15</option>
+                                </Form.Select>
+                            </FormGroup>
+                            <FormGroup className="ms-2 w-100">
+                                <FormLabel>Indique sua hora prevista de Saída</FormLabel>
+                                <Form.Select className="">
+                                    <option></option>
+                                    <option value="1">07:00</option>
+                                    <option value="1">07:15</option>
+                                    <option value="1">07:30</option>
+                                    <option value="1">07:45</option>
+                                    <option value="1">08:00</option>
+                                    <option value="1">08:15</option>
+                                </Form.Select>
+                            </FormGroup>
+                        </Card.Body>
+                        
+                    </Card>
 
                 </div>
 
                 {/* Detalhes da Reserva */}
                 <Card className="" style={{width: '20rem'}}>
-                    <Card.Title className="p-1 text-center">
+                    <Card.Title className="p-1 text-center ">
                         Detalhes da Reserva
                     </Card.Title>
                     
@@ -66,7 +102,7 @@ const PaginaReserva = () => {
                     <Card.Body>
                         <Card.Subtitle className="my-2">Localização</Card.Subtitle>
                         <Card.Text className="my-2">Check-in</Card.Text>
-                        <Card.Text className="my-2">Confira</Card.Text>
+                        <Card.Text className="my-2">Check-out</Card.Text>
                         <Card.Link className="mt-4 border btn w-100 decoration-none">Confirmar Reserva</Card.Link>
                     </Card.Body>
                 </Card>
