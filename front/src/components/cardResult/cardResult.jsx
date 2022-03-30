@@ -5,6 +5,7 @@ import wifi from '../../assets/icons/wifi.svg';
 import natacao from '../../assets/icons/natacao.svg';
 import starIcon from '../../assets/icons/star.svg';
 import './index.scss'
+import React from 'react'
 
 
 export default function cardResult({ item }) {
@@ -60,7 +61,7 @@ export default function cardResult({ item }) {
                         <p className='category-result'>{hotel.category.title}</p>
                     </div>
                     <section className='locatizacao-result'>
-                        <img src={localizador} alt="" srcset="" />
+                        <img src={localizador} alt="" srcSet="" />
                         <p>{hotel.city.name} - <span>MOSTRAR NO MAPA</span></p>
                     </section>
                     <div className='characteristics-result'>
@@ -75,11 +76,11 @@ export default function cardResult({ item }) {
                         <p>Muito bom</p>
                     </div>
                     <div className='stars'>
-                        <img src={starIcon} alt="" srcset="" />
-                        <img src={starIcon} alt="" srcset="" />
-                        <img src={starIcon} alt="" srcset="" />
-                        <img src={starIcon} alt="" srcset="" />
-                        <img src={starIcon} alt="" srcset="" />
+                        <img src={starIcon} alt="" srcSet="" />
+                        <img src={starIcon} alt="" srcSet="" />
+                        <img src={starIcon} alt="" srcSet="" />
+                        <img src={starIcon} alt="" srcSet="" />
+                        <img src={starIcon} alt="" srcSet="" />
                     </div>
                 </section>
             </div>

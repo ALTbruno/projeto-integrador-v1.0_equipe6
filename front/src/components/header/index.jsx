@@ -8,7 +8,7 @@ import instagram from '../../assets/icons/ig.svg';
 import twitter from '../../assets/icons/twitter.svg';
 import linkedin from '../../assets/icons/linkedin.svg';
 import './index.scss';
-import React from 'react';
+import React, { Component } from 'react'
 
 const Header = () => {
     const { handleLogout, logado } = useContext(Context)
@@ -84,10 +84,10 @@ const Header = () => {
                         </nav>}
                     <section className="bottom d-flex justify-content-end ">
                         <ul className="d-flex ">
-                            <li><img src={facebook} alt="facebook" srcset="" /></li>
-                            <li><img src={linkedin} alt="linkedin" srcset="" /></li>
-                            <li><img src={twitter} alt="twitter" srcset="" /></li>
-                            <li><img src={instagram} alt="instagram" srcset="" /></li>
+                            <li><img src={facebook} alt="facebook" srcSet="" /></li>
+                            <li><img src={linkedin} alt="linkedin" srcSet="" /></li>
+                            <li><img src={twitter} alt="twitter" srcSet="" /></li>
+                            <li><img src={instagram} alt="instagram" srcSet="" /></li>
                         </ul>
                     </section>
                 </div>

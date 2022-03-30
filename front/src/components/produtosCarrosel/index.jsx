@@ -2,6 +2,7 @@ import { Carousel } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import api from '../../services/index';
+import React from 'react'
 
 const ProdutosCarrosel = () => {
 
@@ -57,11 +58,11 @@ const ProdutosCarrosel = () => {
         <>
             <Carousel activeIndex={index} onSelect={handleSelect}>
 
-            {produtos.images.map(() => {
+            {produtos.images.map((item) => {
 
                 return (
-                    <Carousel.Item>
-                        <img className="img-fluid rounded-3 w-100" src={produtos.images[0].url} alt="" srcset="" />
+                    <Carousel.Item key={item.id}>
+                        <img className="img-fluid rounded-3 w-100" src={produtos.images[0].url} alt="" srcSet="" />
                     </Carousel.Item>
                     
                 )

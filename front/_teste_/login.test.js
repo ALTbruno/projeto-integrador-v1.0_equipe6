@@ -1,12 +1,11 @@
 import User from '../src/util/user.json';
 import 'regenerator-runtime/runtime';
 import request from 'supertest';
-import App from '../src/App';
-import React from 'react'
-import { fireEvent, render, waitFor } from '@testing-library/react-native/build';
-import '@testing-library/jest-native/extend-expect';
-import {screen} from '@testing-library/dom';
-import '@testing-library/jest-dom';
+import App from '../src/App.jsx';
+import React, { Component } from 'react'
+import {render, screen} from '../src/test-utils/testing-library-utils';
+import {CardCategory} from '../src/pages/Home/components/cardCategory';
+
 
 
 jest.setTimeout(30000);
@@ -28,9 +27,11 @@ describe("Iniciar sessão", () => {
     it("verificação do nome, JSON", () => {
         expect(User).toHaveProperty('nome');
     });
-    it('Novo teste', () => {
+    it('Novo teste', async () => {
         render(<App />);
-        screen.findByRole('button',{name: 'Buscar'});
+        
+        const findEmail = await screen.getByPlaceholderText('senha')
+        expect(findEmail).toEqual('senha')
     })
     /*     it('Teste de rotas com supertest', async () => {
             const response = await request(App).get("/login")
