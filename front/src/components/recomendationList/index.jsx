@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Card } from "react-bootstrap";
+import { Row, Card, CardGroup } from "react-bootstrap";
 import { MdRoom, MdWifi, MdPool } from "react-icons/md";
 import StarRating from "../avaliationStars";
 import api from '../../services/index';
@@ -61,7 +61,7 @@ const RecomendationList = () => {
                 <Row className="justify-content-center">
                 {produtos.map((item) => (
                     
-                    <Card key={item.id} value={item.name} className="shadow rounded m-3 p-0 d-flex flex-md-row justify-content-md-center " style={{ maxWidth: '35rem' }}>
+                    <Card key={item.id} value={item.name} className="shadow rounded m-3 p-0 d-flex flex-md-row justify-content-md-center " style={{ maxWidth: '40rem' }}>
 
                         <Card.Body className="m-0 p-0 d-flex position-relative" style={{ width: "640px", height:"300px"}}>
                             <Card.Img className="w-100" style={{objectFit: "cover"}} src={item.images[0].url ? item.images[0].url : ''} />

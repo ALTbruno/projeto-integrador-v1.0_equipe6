@@ -9,8 +9,10 @@
     "test": "jest"
   },
   "dependencies": {
-    "@babel/core": "^7.17.8",
+    "@babel/core": "^7.17.5",
     "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.10.4",
+    "@react-google-maps/api": "^2.7.0",
     "axios": "^0.26.0",
     "jest-scss-transform": "^1.0.1",
     "jest-svg-transformer": "^1.0.0",
