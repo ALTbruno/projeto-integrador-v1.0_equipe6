@@ -1,6 +1,7 @@
 import {useState} from "react"
 import { Modal, Button } from "react-bootstrap";
 import ProdutosCarrosel from "../produtosCarrosel";
+import React from 'react';
 
 const ProdutosModal = () => {
 
