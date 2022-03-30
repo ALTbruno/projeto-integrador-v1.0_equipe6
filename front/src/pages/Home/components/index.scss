@@ -18,6 +18,9 @@
     .carousel-control-next, .carousel-control-prev{
         width: 50px;
     }
+    .carousel-indicators{
+        margin-bottom: 0;
+    }
 }
 .title-container-category{
     font-size: $roboto-bold-24;

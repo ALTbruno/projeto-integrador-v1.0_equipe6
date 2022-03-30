@@ -1,10 +1,15 @@
-import { createContext, useState} from 'react';
-import React, { Component } from 'react'
+import { createContext, useState, useEffect} from 'react';
 
 const Context = createContext()
 
 function Auth({ children }) {
     const [logado, setLogado] = useState(false);
+    useEffect(() => {
+        const user = localStorage.getItem('user');
+        if (user) {
+            setLogado(true);
+        }
+    }, []);
     
     const handleLogout = () => {
         localStorage.removeItem('user');

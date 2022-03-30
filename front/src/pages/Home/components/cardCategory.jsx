@@ -54,6 +54,23 @@ export default function CardCategory() {
       <div className="container-category">
 
         <h2 className='title-container-category'>Buscar por tipo de acomodação</h2>
+        {largeWidth ?
+          <Carousel variant="dark" className='container-card-category'>
+          {categories.map((item, index) => (
+            <Carousel.Item key={index}>
+              {item.map(category => (
+                <div onClick={() => navigate(`/category/${category.title}`)} className="card-category" key={category.title} >
+                  <img src={category.imageUrl} alt={category.imageUrl} srcSet="" />
+                  <section className='contents-category'>
+                    <h2>{category.title}</h2>
+                    <p>{category.totalProducts}</p>
+                  </section>
+                </div>
+              ))}
+            </Carousel.Item>
+          ))}
+        </Carousel>
+          :
         <Carousel variant="dark" className='container-card-category'>
           {categories.map(item => (
             item.map(category => (
@@ -68,7 +85,7 @@ export default function CardCategory() {
               </Carousel.Item>
             ))
           ))}
-        </Carousel>
+        </Carousel>}
       </div>
     </>
   )

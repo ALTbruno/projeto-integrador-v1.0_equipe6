@@ -1,19 +1,41 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../context/context";
+import { ToastContainer, toast } from 'react-toastify';
 import user from '../../util/user.json';
 import visible from '../../assets/icons/visible.svg';
 import invisible from '../../assets/icons/invisible.svg';
+import 'react-toastify/dist/ReactToastify.css';
 import './index.scss';
-import React from 'react';
 
 const LoginForm = () => {
-    const {handleLogin} = useContext(Context);
     const navigate = useNavigate();
+    const { handleLogin } = useContext(Context);
     const [login, setLogin] = useState({
         email: '',
         senha: ''
     })
+
+    const notify = () => toast.error(' Preencha os campos corretamente!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+
+    const notifyErrorReservaLogin = () => toast.error('Para fazer uma reserva você precisa estar logado', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+
 
     /** Salva os dados fornecidos pelo usuario */
     const fillLogin = (event) => {
@@ -24,25 +46,37 @@ const LoginForm = () => {
     /** Faz a verificação dos campos preenchidos pelo usuario*/
     const verifyInputs = () => {
         let inputs = document.getElementsByTagName('input');
-        let password = inputs[1]
         // Verifica se todos os campos estão preenchidos
         for (let e of inputs) {
+            // verificação de vazio ou com pseudoelemento :invalid
             if (e.value === '') {
                 e.classList.add('error');
                 e.focus();
                 // Retorna mensagem de erro
                 e.nextSibling.style.visibility = 'visible'
+                e.nextSibling.textContent = 'Este campo é obrigatorio'
             } else {
                 // Retira mensagem de erro
                 e.classList.remove('error');
+                if (e.type === 'password') {
+                    e.nextSibling.textContent = 'Este campo é obrigatorio'
+                }
                 e.nextSibling.style.visibility = 'hidden'
-                return true;
+            }
+
+            // Verifica o tamanho da senha
+            if (e.type === 'password' && e.value.length >= 1 && e.value.length < 6) {
+                console.log("senha curta")
+                e.classList.add('error');
+                e.focus();
+                // Retorna mensagem de erro
+                e.nextSibling.style.visibility = 'visible'
+                e.nextSibling.textContent = 'A senha deve ter no mínimo 6 caracteres'
             }
         }
-        // Verifica o tamanho da senha
-        if (password.value.length < 6) {
-            alert('Por favor, tente novamente, suas credenciais são inválidas')
-            password.focus();
+        
+        if (inputs[0].value === '' || inputs[1].value === '') {
+            notify();
         }
     }
 
@@ -55,7 +89,15 @@ const LoginForm = () => {
                 handleLogin(user);
                 navigate('/')
             } else {
-                alert("Por favor, tente novamente, suas credenciais são inválidas")
+                toast.error("Por favor, tente novamente, suas credenciais são inválidas", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                })
             }
         }
     }
@@ -80,7 +122,6 @@ const LoginForm = () => {
 
 
 
-
     return (
         <>
             <div id="LoginForm">
@@ -96,7 +137,7 @@ const LoginForm = () => {
 
                             <div className="input-box password">
                                 <label htmlFor="inputPassword" >Senha</label>
-                                <input id="password" onChange={fillLogin} name="senha" type="password"  />
+                                <input id="password" onChange={fillLogin} name="senha" type="password" />
                                 <span className="error-message d-flex justify-content-end">Este campo é obrigatorio</span>
                                 <a onClick={togleVisibilityPassword}>
                                     <img id="visible" src={visible} alt="password-visible" />
@@ -110,6 +151,7 @@ const LoginForm = () => {
                     </form>
                     <p>Ainda não tem conta? <Link to='/register'>Registre-se</Link></p>
                 </div>
+                <ToastContainer />
             </div>
         </>
     )
