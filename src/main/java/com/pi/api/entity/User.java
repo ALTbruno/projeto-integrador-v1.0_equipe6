@@ -1,5 +1,7 @@
 package com.pi.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -30,6 +32,7 @@ public class User {
 
 	@NotBlank
 	@Size(min = 8)
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
 
 	@Enumerated(value = EnumType.STRING)
