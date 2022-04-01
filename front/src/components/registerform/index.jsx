@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import visible from '../../assets/icons/visible.svg'
 import invisible from '../../assets/icons/invisible.svg'
 import './index.scss';
+import {RegisterPage} from '../../pages/Register/index'
 
 const RegisterForm = () => {
 

@@ -2,7 +2,7 @@ import "./style.scss"
 import {AiOutlineHeart, AiFillHeart} from 'react-icons/ai'
 import { Button } from "react-bootstrap";
 import { useState} from "react";
-import React from 'react'
+import React, { Component } from 'react'
 
 
 const FavoriteHeart = () => {

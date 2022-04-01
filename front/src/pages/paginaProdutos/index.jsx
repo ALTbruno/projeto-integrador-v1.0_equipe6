@@ -4,6 +4,7 @@ import api from '../../services/index';
 import StarRating from "../../components/avaliationStars";
 import Classification from "../../components/classification";
 import ProdutosModal from "../../components/predutosModal";
+import React, { Component } from 'react'
 
 
 const PaginaProdutos = () => {
@@ -63,8 +64,7 @@ const PaginaProdutos = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        api.get(`/products/${id}`).then(response => {
-            setProdutos(response.data);
+        api.get(`/products/${id}`).then(response => {setProdutos(response.data);
         })
     }, [id]);
 
@@ -97,25 +97,25 @@ const PaginaProdutos = () => {
             
     
                 <div className="p-1 w-50" >
-                    <img key={produtos.images[0].id} className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
+                    <img key={produtos.images[0].id} className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcSet="" />
                 </div>
 
                 <div className="w-25" >
                     <div className="p-1 w-100">
-                        <img key={produtos.images[1].id} className="img-fluid rounded-3" src={produtos.images[1].url} alt="" srcset="" />
+                        <img key={produtos.images[1].id} className="img-fluid rounded-3" src={produtos.images[1].url} alt="" srcSet="" />
                     </div>
                     <div className="p-1 w-100">
-                        <img key={produtos.images[2].id} className="img-fluid rounded-3" src={produtos.images[2].url} alt="" srcset="" />
+                        <img key={produtos.images[2].id} className="img-fluid rounded-3" src={produtos.images[2].url} alt="" srcSet="" />
                     </div>
                 </div>
 
                 <div className="w-25" >
                     <div className="p-1 w-100">
-                        <img key={produtos.images[3].id} className="img-fluid rounded-3" src={produtos.images[3].url} alt="" srcset="" />
+                        <img key={produtos.images[3].id} className="img-fluid rounded-3" src={produtos.images[3].url} alt="" srcSet="" />
                     </div>
                     <div className="p-1 w-100 position-relative">
                         <ProdutosModal />
-                        <img key={produtos.images[0].id} className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
+                        <img key={produtos.images[0].id} className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcSet="" />
                     </div>
                 </div>
 
@@ -137,7 +137,7 @@ const PaginaProdutos = () => {
                     <h2 className="ms-3" style={{ backgroundColor: "#bfbfbf" }}>Caracteristicas</h2>
                 </div>
                 {produtos.characteristics.map(characteristic => (
-                    <div className="p-1 d-flex" >
+                    <div className="p-1 d-flex" key={characteristic.id}>
                         <div className="p-1">
                             <p>{characteristic.name}</p>
                         </div>

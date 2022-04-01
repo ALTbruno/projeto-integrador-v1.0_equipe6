@@ -1,7 +1,8 @@
 import { render } from '@testing-library/react';
-import {CardCategory} from '../pages/Home/components/cardCategory';
+import {RegisterForm} from '../components/registerform/index';
+import React, { Component } from 'react'
 
-const renderWithContext = (ui, App) => render(ui, {wrapper: CardCategory, ...App});
+const renderWithContext = (ui, register) => render(ui, {wrapper: RegisterForm, ...register});
 
 export * from '@testing-library/react';
 export {renderWithContext as render};
