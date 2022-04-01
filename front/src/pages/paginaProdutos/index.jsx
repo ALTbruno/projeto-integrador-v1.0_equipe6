@@ -4,6 +4,7 @@ import api from '../../services/index';
 import StarRating from "../../components/avaliationStars";
 import Classification from "../../components/classification";
 import ProdutosModal from "../../components/predutosModal";
+import Map from "../../components/locationMap/Map";
 
 
 const PaginaProdutos = () => {
@@ -112,7 +113,7 @@ const PaginaProdutos = () => {
                 <div className="w-25" >
                     <div className="p-1 w-100">
                         <img key={produtos.images[3].id} className="img-fluid rounded-3" src={produtos.images[3].url} alt="" srcset="" />
-                    </div>
+                     </div>
                     <div className="p-1 w-100 position-relative">
                         <ProdutosModal />
                         <img key={produtos.images[0].id} className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcset="" />
@@ -144,6 +145,20 @@ const PaginaProdutos = () => {
                     </div>
                 ))}
 
+            </div>
+
+            {/* Calendario */}
+            <div>
+                //Calendario
+            </div>
+
+            {/* Mapa */}
+            
+            <div className="mb-2 p-3">
+                <div className=" my-3 p-1" style={{ backgroundColor: "#bfbfbf" }}>
+                    <h2 className="ms-3" style={{ backgroundColor: "#bfbfbf" }}>Onde você vai estar</h2>
+                </div>
+                <Map/>
             </div>
 
             {/* Bloco Politicas do Produto */}
