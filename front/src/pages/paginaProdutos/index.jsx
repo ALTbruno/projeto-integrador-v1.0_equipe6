@@ -79,7 +79,7 @@ const PaginaProdutos = () => {
                     <h2 className="ms-5 my-0 fw-bold text-light">{produtos.name}</h2>
                 </div>
                 <div className="ms-auto me-5 text-light">
-                    <p>voltar</p>
+                    <a href="/">voltar</a>
                 </div>
             </div>
 

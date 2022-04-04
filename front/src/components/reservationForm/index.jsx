@@ -6,7 +6,7 @@ export const ReservationForm = () => {
 
     return (
         <>
-            <div className="w-50">
+            <div className="w-xl-50 mx-md-3 mx-sm-3 mx-lg-5">
                     <h5>Complete seus Dados</h5>
                     <Form className="card mb-5 p-4 d-flex flex-lg-row justify-content-lg-around w-100">
                         <FormGroup className="mx-2 w-100">
