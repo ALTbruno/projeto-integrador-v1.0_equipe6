@@ -138,7 +138,7 @@ const LoginForm = () => {
 
                             <div className="input-box password">
                                 <label htmlFor="password" >Senha</label>
-                                <input id="password" onChange={fillLogin} name="senha" type="password" />
+                                <input id="password" onChange={fillLogin} name="password" type="password" />
                                 <span className="error-message d-flex justify-content-end">Este campo é obrigatorio</span>
                                 <a onClick={togleVisibilityPassword}>
                                     <img id="visible" src={visible} alt="password-visible" />
