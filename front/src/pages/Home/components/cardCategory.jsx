@@ -11,24 +11,31 @@ export default function CardCategory() {
 
   useEffect(() => {
     window.innerWidth > 1100 ? setLargeWidth(true) : setLargeWidth(false)
-    const handleResize = () => {
-      if (window.innerWidth > 1100) {
-        setLargeWidth(true)
-      } else {
-        setLargeWidth(false)
+    const handleLargeWidth = (value) => {
+      if (value != largeWidth) {
+        setLargeWidth(value)
       }
     }
-
+    const handleResize = () => {
+      if (window.innerWidth > 1100) {
+        handleLargeWidth(true)
+      } else {
+        handleLargeWidth(false)
+      }
+    }
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [])
+  }, [largeWidth])
+
 
 
   useEffect(() => {
-    api.get('/categories').then(response => {
-      separar(response.data, 3);
-    })
-  }, []);
+    if (categories.length === 0) {
+      api.get('/categories').then(response => {
+        separar(response.data.slice(0, 6), 3);
+      })
+    }
+  }, [categories])
 
   const separar = (base, maximo) => {
     var resultado = [[]];
@@ -56,36 +63,38 @@ export default function CardCategory() {
         <h2 className='title-container-category'>Buscar por tipo de acomodação</h2>
         {largeWidth ?
           <Carousel variant="dark" className='container-card-category'>
-          {categories.map((item, index) => (
-            <Carousel.Item key={index}>
-              {item.map(category => (
-                <div onClick={() => navigate(`/category/${category.title}`)} className="card-category" key={category.title} >
-                  <img src={category.imageUrl} alt={category.imageUrl} srcSet="" />
-                  <section className='contents-category'>
-                    <h2>{category.title}</h2>
-                    <p>{category.totalProducts}</p>
-                  </section>
-                </div>
-              ))}
-            </Carousel.Item>
-          ))}
-        </Carousel>
-          :
-        <Carousel variant="dark" className='container-card-category'>
-          {categories.map(item => (
-            item.map(category => (
-              <Carousel.Item key={category.id}>
-                <div onClick={() => navigate(`/category/${category.title}`)} className="card-category">
-                  <img src={category.imageUrl} alt={category.imageUrl} srcSet="" />
-                  <section className='contents-category'>
-                    <h2>{category.title}</h2>
-                    <p>{category.totalProducts}</p> {/*quantidade de acomodações*/}
-                  </section>
-                </div>
+            {categories.map((item, index) => (
+              <Carousel.Item key={index}>
+                {item.map(category => (
+                  <>
+                  <div onClick={() => navigate(`/category/${category.title}`)} className="card-category" key={category.title} >
+                    <img src={category.imageUrl} alt={category.imageUrl} srcSet="" />
+                    <section className='contents-category'>
+                      <h2>{category.title}</h2>
+                      <p>{category.totalProducts}</p>
+                    </section>
+                  </div>
+                  </>
+                ))}
               </Carousel.Item>
-            ))
-          ))}
-        </Carousel>}
+            ))}
+          </Carousel>
+          :
+          <Carousel variant="dark" className='container-card-category'>
+            {categories.map(item => (
+              item.map((category, index) => (
+                <Carousel.Item key={category.title}>
+                  <div onClick={() => navigate(`/category/${category.title}`)} className="card-category">
+                    <img src={category.imageUrl} alt={category.imageUrl} srcSet="" />
+                    <section className='contents-category'>
+                      <h2>{category.title}</h2>
+                      <p>{`${category.totalProducts} ${category.title}`}</p> {/*quantidade de acomodações*/}
+                    </section>
+                  </div>
+                </Carousel.Item>
+              ))
+            ))}
+          </Carousel>}
       </div>
     </>
   )

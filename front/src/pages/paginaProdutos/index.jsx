@@ -1,15 +1,21 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import DatePicker from 'react-datepicker';
 import api from '../../services/index';
 import StarRating from "../../components/avaliationStars";
 import Classification from "../../components/classification";
 import ProdutosModal from "../../components/predutosModal";
 import React from 'react'
 import Map from "../../components/locationMap/Map";
+import './calendar.scss'
+import 'react-datepicker/dist/react-datepicker.css';
 
 
 const PaginaProdutos = () => {
-
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+    const [largeWidth, setLargeWidth] = useState(false);
+    const { id } = useParams();
     const [produtos, setProdutos] = useState({  
         "id": null,
         "name": "",
@@ -62,14 +68,45 @@ const PaginaProdutos = () => {
         ]
     });
 
-    const { id } = useParams();
 
     useEffect(() => {
         api.get(`/products/${id}`).then(response => {setProdutos(response.data);
         })
     }, [id]);
-
-    console.log(produtos)
+  
+    useEffect(() => {
+      window.innerWidth > 559 ? setLargeWidth(true) : setLargeWidth(false);
+      const handleResize = () => {
+        if (window.innerWidth > 559) {
+          setLargeWidth(true);
+        } else {
+          setLargeWidth(false);
+        }
+      };
+  
+      window.addEventListener('resize', handleResize);
+  
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+  
+    const days = [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado' ];
+    const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+    const locale = {
+      localize: {
+        day: (n) => days[n],
+        month: (n) => months[n],
+      },
+      formatLong: {
+        date: () => 'mm/dd/yyyy',
+      },
+    };
+  
+    const setValuesDate = (dates) => {
+      const [start, end] = dates;
+      setStartDate(start);
+      setEndDate(end);
+    };
+    
     return (
         <>
             {/* Bloco de Titulo */}
@@ -79,7 +116,7 @@ const PaginaProdutos = () => {
                     <h2 className="ms-5 my-0 fw-bold text-light">{produtos.name}</h2>
                 </div>
                 <div className="ms-auto me-5 text-light">
-                    <p>voltar</p>
+                    <a href="/">voltar</a>
                 </div>
             </div>
 
@@ -87,7 +124,7 @@ const PaginaProdutos = () => {
             <div className="p-1 d-flex align-items-center" style={{ backgroundColor: "#bfbfbf" }}>
                 <p>Cidade</p>
                 <div className="ms-auto me-5 d-flex align-items-center">
-                    <Link to="/produto/:id/reserva">reserva</Link>
+                    <Link to={`/produto/${id}/reserva`}>reserva</Link>
                     <StarRating />
                     <Classification />
                 </div>
@@ -148,9 +185,32 @@ const PaginaProdutos = () => {
             </div>
 
             {/* Calendario */}
-            <div>
-                //Calendario
-            </div>
+            <section className="container-reserva">
+        <h1>Datas disponiveis</h1>
+        <div className="container-calendar">
+          <DatePicker
+            inline
+            id="calendar"
+            locale={locale}
+            formatWeekDay={(locale) => locale[0]}
+            placeholder={true}
+            selected={startDate}
+            onChange={setValuesDate}
+            setOpen={true}
+            shouldCloseOnSelect={false}
+            startDate={startDate}
+            endDate={endDate}
+            minDate={new Date() - 2}
+            dateFormat="dd/MM/yyyy"
+            selectsRange={true}
+            monthsShown={largeWidth ? 2 : 1}
+          />
+          <div className="content-calendar">
+            <h3>Adicione as datas da sua viagem para obter preço exatos</h3>
+            <button>Iniciar reserva</button>
+          </div>
+        </div>
+      </section>
 
             {/* Mapa */}
             

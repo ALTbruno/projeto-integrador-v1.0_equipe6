@@ -21,7 +21,7 @@ const Header = () => {
         let user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             setUser(user);
-            setInitials((user.nome[0].toUpperCase() + user.sobrenome[0].toUpperCase()));
+            setInitials((user.firstName[0].toUpperCase() + user.lastName[0].toUpperCase()));
         } else {
             setInitials('');
         }
@@ -45,7 +45,8 @@ const Header = () => {
                         <div id="icon">{initials}</div>
                         <p>
                             Olá,<br />
-                            <span>{`${user.nome} ${user.sobrenome}`}</span>
+                            <span>{`${user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1)}
+                             ${user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1)}`}</span>
                         </p>
                         <button id="logout" onClick={() => (handleLogout())}>X</button>
                     </div> :
@@ -66,7 +67,7 @@ const Header = () => {
                         {initials ?
                             <div className='details-user'>
                                 <div id='icon'>{initials.toUpperCase()}</div>
-                                <p>Olá, <br /><span>{user.nome} {user.sobrenome}</span></p>
+                                <p>Olá, <br /><span>{user.firstName} {user.lastName}</span></p>
                             </div> :
                             <h2>MENU</h2>}
                     </div>
