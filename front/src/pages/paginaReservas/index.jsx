@@ -1,7 +1,8 @@
 import { Card, CardImg } from "react-bootstrap";
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ReservationForm } from "../../components/reservationForm";
 import StarRating from "../../components/avaliationStars";
+import './calendar.scss';
 
 
 
@@ -23,20 +24,20 @@ const PaginaReserva = () => {
             <div className="mt-5 d-lg-flex justify-content-around">
 
                 {/* Formulario */}
-                <ReservationForm/>
+                <ReservationForm />
 
                 {/* Detalhes da Reserva */}
                 <Card className="w-lg-25">
                     <Card.Title className="p-1 text-center ">
                         Detalhes da Reserva
                     </Card.Title>
-                    
+
                     <CardImg src="https://content.r9cdn.net/rimg/himg/1b/c5/19/ice-46638-72596683_3XL-661640.jpg?width=335&height=268&crop=true" />
 
                     <Card.Body>
                         <Card.Subtitle className="mb-1 d-flex flex-row align-items-center fw-bold" style={{ fontSize: '12px' }}>Categoria</Card.Subtitle>
                         <Card.Title className="mb- fw-bold">Nome</Card.Title>
-                        <StarRating/>
+                        <StarRating />
                     </Card.Body>
                     <Card.Body>
                         <Card.Subtitle className="my-2">Localização</Card.Subtitle>
@@ -46,11 +47,11 @@ const PaginaReserva = () => {
                     </Card.Body>
                 </Card>
 
-            </div>  
+            </div>
 
             {/* Bloco Politicas do Produto */}
             <div className="mt-5 p-3">
-                <div className="p-1" style={{ backgroundColor: "#bfbfbf" }}>    
+                <div className="p-1" style={{ backgroundColor: "#bfbfbf" }}>
                     <h2 className="ms-3" style={{ backgroundColor: "#bfbfbf" }}>Politicas do Produto</h2>
                 </div>
                 <div className="p-1">
@@ -59,7 +60,7 @@ const PaginaReserva = () => {
             </div>
 
         </>
-    ) 
+    )
 }
 
 export default PaginaReserva;
