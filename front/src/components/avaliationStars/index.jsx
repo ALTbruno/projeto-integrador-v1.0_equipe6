@@ -1,8 +1,7 @@
 import "./style.scss"
 import { useState } from 'react';
-import { Button, InputGroup, Stack } from 'react-bootstrap';
-import { MdStarOutline, MdStar } from 'react-icons/md';
-import React, { Component } from 'react'
+import { MdStar } from 'react-icons/md';
+import React from 'react'
 
 
 const StarRating = () => {
