@@ -1,10 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import api from "../../services/index";
 import visible from '../../assets/icons/visible.svg'
 import invisible from '../../assets/icons/invisible.svg'
 import './index.scss';
 
 const RegisterForm = () => {
+    const [userForRegister, setUserForRegister] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+    })
+
+    const notify = () => toast.error(' Preencha os campos corretamente!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+
+    const registerConfirm = () => {
+        toast.success('Você se registrou com sucesso', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            onClose: () => {
+                window.location.href = '/login'
+            }
+        })
+    }
+
+    const fillUserForRegister = (e) => {
+        setUserForRegister({
+            ...userForRegister,
+            [e.target.name]: e.target.value
+        })
+    }
 
     /** Função faz a troca da visibilidade da senha */
     const togleVisibilityPassword = () => {
@@ -23,24 +63,69 @@ const RegisterForm = () => {
         }
     }
 
-    const verifyInputs = (e) => {
-        e.preventDefault()
-        let inputs = document.getElementsByTagName('input');
-        // Verifica se todos os campos estão preenchidos
-        for (let e of inputs) {
-            if (e.value === '') {
-                e.classList.add('error');
-                e.focus();
-                // Retorna mensagem de erro
-                e.nextSibling.style.visibility = 'visible';
-            } else {
-                // Retira mensagem de erro
-                e.nextSibling.style.visibility = 'hidden'
-                e.classList.remove('error');
-            }
+    /** Função que faz o cadastro do usuário */
+    const registerUser = async (e) => {
+        e.preventDefault();
+        if (verifyInputs()) {
+            api.post('/users/customers/register', userForRegister)
+                .then(response => {
+                    registerConfirm()
+                    resetInputs();
+                }).catch(error => {
+                    console.log(error)
+                })
         }
     }
 
+    const verifyInputs = () => {
+        let inputs = document.getElementsByTagName('input');
+        // Verifica se todos os campos estão preenchidos
+        function verify() {
+            for (let e of inputs) {
+                if (e.value === '') {
+                    e.classList.add('error');
+                    e.focus();
+                    // Retorna mensagem de erro
+                    e.nextSibling.style.visibility = 'visible';
+                    e.nextSibling.textContent = 'Este campo é obrigatorio';
+                    // Retira mensagem de erro
+                    notify();
+                    return false
+                } else {
+                    e.nextSibling.style.visibility = 'hidden';
+                    e.classList.remove('error');
+                }
+                if ((e.id === 'password' || e.id === 'ConfirmarSenha') && e.value.length >= 1 && e.value.length < 8) {
+                    e.classList.add('error');
+                    e.focus();
+                    // Retorna mensagem de erro
+                    e.nextSibling.style.visibility = 'visible'
+                    e.nextSibling.textContent = 'A senha deve ter no mínimo 8 caracteres'
+                    notify();
+                    return false
+                }
+            }
+            if (inputs.ConfirmarSenha.value !== inputs.password.value) {
+                inputs.ConfirmarSenha.classList.add('error');
+                inputs.ConfirmarSenha.focus();
+                // Retorna mensagem de erro
+                inputs.ConfirmarSenha.nextSibling.style.visibility = 'visible'
+                inputs.ConfirmarSenha.nextSibling.textContent = 'As senhas devem ser iguais'
+                notify();
+                return false
+            }
+            return true
+        }
+        return verify()
+    }
+    const resetInputs = () => {
+        let inputs = document.getElementsByTagName('input');
+        for (let e of inputs) {
+            e.value = '';
+            e.nextSibling.style.visibility = 'hidden';
+            e.classList.remove('error');
+        }
+    }
     return (
         <>
             <div id="RegisterForm">
@@ -85,6 +170,7 @@ const RegisterForm = () => {
                     </form>
                 </div>
             </div>
+            <ToastContainer />
         </>
     )
 }

@@ -2,19 +2,18 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../context/context";
 import { ToastContainer, toast } from 'react-toastify';
-import user from '../../util/user.json';
+import api from "../../services/index";
 import visible from '../../assets/icons/visible.svg';
 import invisible from '../../assets/icons/invisible.svg';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.scss';
-import React from "react";
 
 const LoginForm = () => {
     const navigate = useNavigate();
     const { handleLogin } = useContext(Context);
     const [login, setLogin] = useState({
         email: '',
-        senha: ''
+        password: ''
     })
 
     const notify = () => toast.error(' Preencha os campos corretamente!', {
@@ -56,6 +55,7 @@ const LoginForm = () => {
                 // Retorna mensagem de erro
                 e.nextSibling.style.visibility = 'visible'
                 e.nextSibling.textContent = 'Este campo é obrigatorio'
+                return false
             } else {
                 // Retira mensagem de erro
                 e.classList.remove('error');
@@ -67,29 +67,42 @@ const LoginForm = () => {
 
             // Verifica o tamanho da senha
             if (e.type === 'password' && e.value.length >= 1 && e.value.length < 6) {
-                console.log("senha curta")
                 e.classList.add('error');
                 e.focus();
                 // Retorna mensagem de erro
                 e.nextSibling.style.visibility = 'visible'
                 e.nextSibling.textContent = 'A senha deve ter no mínimo 6 caracteres'
+                return false
             }
         }
-        
+
         if (inputs[0].value === '' || inputs[1].value === '') {
             notify();
+            return false
         }
+        return true
     }
+    const parseJwt = (token) => {
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+    
+        return JSON.parse(jsonPayload);
+    };
 
     /** Ofetua o login do usuario e o redireciona para a home */
     const loginUser = (e) => {
         e.preventDefault()
-        let { email, senha } = login;
+        let { email, password} = login;
         if (verifyInputs()) {
-            if (email === user.email && senha === user.senha.toString()) {
-                handleLogin(user);
-                navigate('/')
-            } else {
+            api.post('/users/login', { email, password }).then(response => {
+                let token = response.data.accessToken;
+                let user = parseJwt(token);
+                handleLogin(token, user);
+                navigate('/');
+            }).catch(error => {
                 toast.error("Por favor, tente novamente, suas credenciais são inválidas", {
                     position: "top-right",
                     autoClose: 5000,
@@ -99,9 +112,11 @@ const LoginForm = () => {
                     draggable: true,
                     progress: undefined,
                 })
-            }
+            })
         }
+
     }
+
 
     /** Função faz a troca da visibilidade da senha */
     const togleVisibilityPassword = () => {
@@ -128,7 +143,7 @@ const LoginForm = () => {
             <div id="LoginForm">
                 <div className="container-loginForm">
                     <h1 className="title">Iniciar Sessão</h1>
-                    <form onSubmit={loginUser}>
+                    <form onSubmit={(e) => loginUser(e)}>
                         <div className="user-details">
                             <div className="input-box email">
                                 <label htmlFor="email" >Email</label>
@@ -138,7 +153,7 @@ const LoginForm = () => {
 
                             <div className="input-box password">
                                 <label htmlFor="password" >Senha</label>
-                                <input id="password" onChange={fillLogin} name="senha" type="password" />
+                                <input id="password" onChange={fillLogin} name="password" type="password" />
                                 <span className="error-message d-flex justify-content-end">Este campo é obrigatorio</span>
                                 <a onClick={togleVisibilityPassword}>
                                     <img id="visible" src={visible} alt="password-visible" />
