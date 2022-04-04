@@ -4,7 +4,7 @@ import api from '../../services/index';
 import StarRating from "../../components/avaliationStars";
 import Classification from "../../components/classification";
 import ProdutosModal from "../../components/predutosModal";
-import React, { Component } from 'react'
+import React from 'react'
 import Map from "../../components/locationMap/Map";
 
 
@@ -112,7 +112,7 @@ const PaginaProdutos = () => {
 
                 <div className="w-25" >
                     <div className="p-1 w-100">
-                        <img key={produtos.images[3].id} className="img-fluid rounded-3" src={produtos.images[3].url} alt="" srcset="" />
+                        <img key={produtos.images[3].id} className="img-fluid rounded-3" src={produtos.images[3].url} alt="" srcSet="" />
                      </div>
                     <div className="p-1 w-100 position-relative">
                         <ProdutosModal />

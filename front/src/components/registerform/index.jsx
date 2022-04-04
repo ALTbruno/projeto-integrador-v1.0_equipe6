@@ -49,24 +49,24 @@ const RegisterForm = () => {
                     <form onSubmit={verifyInputs}>
                         <section className="nome-sobrenome">
                             <div className="input-box name">
-                                <label htmlFor="inputName" >Nome</label>
-                                <input type="text" id="Nome" />
+                                <label htmlFor="Nome" >Nome</label>
+                                <input type="text" id="Nome" name="nome"/>
                                 <span className="error-message d-flex justify-content-end">Este campo é obrigatorio</span>
                             </div>
                             <div className="input-box lastname">
-                                <label htmlFor="inputLastName" >Sobrenome</label>
-                                <input type="text" id="Sobrenome" />
+                                <label htmlFor="Sobrenome" >Sobrenome</label>
+                                <input type="text" id="Sobrenome" name="sobrenome"/>
                                 <span className="error-message d-flex justify-content-end">Este campo é obrigatorio</span>
                             </div>
                         </section>
                         <div className="input-box email" >
-                            <label htmlFor="inputEmail" >Email</label>
-                            <input type="email" id="Email" />
+                            <label htmlFor="Email" >Email</label>
+                            <input type="email" id="Email" name="email"/>
                             <span className="error-message d-flex justify-content-end">Este campo é obrigatorio</span>
                         </div>
                         <div className="input-box password">
-                            <label htmlFor="inputPassword" >Senha</label>
-                            <input id="password" type="password" />
+                            <label htmlFor="password" >Senha</label>
+                            <input id="password" type="password" name="senha"/>
                             <span className="error-message d-flex justify-content-end">Este campo é obrigatorio</span>
                             <a onClick={togleVisibilityPassword}>
                                 <img id="visible" src={visible} alt="password-visible" />
@@ -74,8 +74,8 @@ const RegisterForm = () => {
                             </a>
                         </div>
                         <div className="input-box checkpass">
-                            <label htmlFor="inputCity" >Confirmar Senha</label>
-                            <input type="password" id="ConfirmarSenha" />
+                            <label htmlFor="ConfirmarSenha" >Confirmar Senha</label>
+                            <input type="password" id="ConfirmarSenha" name="confirm"/>
                             <span className="error-message d-flex justify-content-end">Este campo é obrigatorio</span>
                         </div>
                         <div className="btn">

@@ -1,7 +1,6 @@
 import { Card } from "react-bootstrap";
 import { CardImg } from "react-bootstrap";
 import { Form, FormGroup, FormControl, FormLabel } from "react-bootstrap";
-import StarRating from "../../components/avaliationStars";
 import {AiOutlineCheckCircle} from "react-icons/ai";
 import React from 'react';
 

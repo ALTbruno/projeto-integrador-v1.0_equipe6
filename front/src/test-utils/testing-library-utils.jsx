@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
-import {RegisterForm} from '../components/registerform/index';
+import {BrowserRouter} from 'react-router-dom'
 import React, { Component } from 'react'
 
-const renderWithContext = (ui, register) => render(ui, {wrapper: RegisterForm, ...register});
+const renderWithContext = (ui, teste) => render(ui, {wrapper: BrowserRouter, ...teste});
 
 export * from '@testing-library/react';
 export {renderWithContext as render};
