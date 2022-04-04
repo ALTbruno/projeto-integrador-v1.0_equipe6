@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react';
-import { ReservationForm } from "../../components/reservationForm";
 import api from '../../services/index';
 import { ReservationDetailCard } from '../../components/reservationDetailCard';
 import React, { useState, useEffect } from 'react';
