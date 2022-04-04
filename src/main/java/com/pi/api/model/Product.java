@@ -59,16 +59,52 @@ public class Product {
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Set<Characteristic> characteristics;
 
+	@NotBlank
+	@Size(max = 1000)
+	private String latitude;
+
+	@NotBlank
+	@Size(max = 1000)
+	private String longitude;
+
+
+
 
 	public Product() {
 	}
 
-	public Product(String name, String description, Category category, City city, Set<LocalDate> unavailableDates) {
+//	public Product(String name, String description, Category category, City city, Set<LocalDate> unavailableDates) {
+//		this.name = name;
+//		this.description = description;
+//		this.category = category;
+//		this.city = city;
+//		this.unavailableDates = unavailableDates;
+//	}
+
+
+	public Product(String name, String description, Category category, City city, String latitude, String longitude) {
 		this.name = name;
 		this.description = description;
 		this.category = category;
 		this.city = city;
-//		this.unavailableDates = unavailableDates;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
 	}
 
 	public void setId(Long id) {
