@@ -1,5 +1,6 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { Auth } from '../context/context';
+import { ToastContainer } from 'react-toastify';
 import Footer from '../components/footer';
 import Header from '../components/header';
 import Home from '../pages/Home';
@@ -25,6 +26,7 @@ const RouteList = () => (
                 <Route path='/produto/:id/reserva' element={<PaginaReserva />} />
             </Routes>
             <Footer />
+            <ToastContainer />
         </Auth>
     </BrowserRouter>
 )

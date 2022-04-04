@@ -14,10 +14,14 @@ function Auth({ children }) {
     
     const handleLogout = () => {
         localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        // api.defaults.headers.common['Authorization'] = '';
         setLogado(false);
     }
-    const handleLogin = (user) =>{
+    const handleLogin = (token, user) =>{
+        localStorage.setItem('token', JSON.stringify(token));
         localStorage.setItem('user', JSON.stringify(user));
+        // api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         setLogado(true);
     }
 
