@@ -3,6 +3,7 @@ import { ReservationDetailCard } from '../../components/reservationDetailCard';
 import React, { useState, useEffect } from 'react';
 import { ReservationForm } from "../../components/reservationForm";
 import './calendar.scss';
+import { useParams } from 'react-router-dom';
 
 
 
@@ -21,12 +22,13 @@ const PaginaReserva = () => {
         }
     }]);
     
+    const { id } = useParams();
 
     useEffect(() => {
-        api.get(`/products/`).then(response => {
+        api.get(`/products/${id}`).then(response => {
             setProdutos(response.data.slice(0, 6));
         })
-    }, []);
+    }, [id]);
 
     return (
         <>
@@ -37,7 +39,7 @@ const PaginaReserva = () => {
                     <h2 className="ms-5 my-0 fw-bold text-light">Nome</h2>
                 </div>
                 <div className="ms-auto me-5 text-light">
-                    <a href={`/produto/${produtos.id}`}>voltar</a>
+                    <a href={`/produto/${id}`}>voltar</a>
                 </div>
             </div>
 

@@ -124,7 +124,7 @@ const PaginaProdutos = () => {
             <div className="p-1 d-flex align-items-center" style={{ backgroundColor: "#bfbfbf" }}>
                 <p>Cidade</p>
                 <div className="ms-auto me-5 d-flex align-items-center">
-                    <Link to="/produto/:id/reserva">reserva</Link>
+                    <Link to={`/produto/${id}/reserva`}>reserva</Link>
                     <StarRating />
                     <Classification />
                 </div>
