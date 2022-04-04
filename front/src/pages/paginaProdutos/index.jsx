@@ -116,7 +116,7 @@ const PaginaProdutos = () => {
                      </div>
                     <div className="p-1 w-100 position-relative">
                         <ProdutosModal />
-                        <img key={produtos.images[0].id} className="img-fluid rounded-3" src={produtos.images[0].url} alt="" srcSet="" />
+                        <img key={produtos.images[4].id} className="img-fluid rounded-3" src={produtos.images[4].url} alt="" srcSet="" />
                     </div>
                 </div>
 

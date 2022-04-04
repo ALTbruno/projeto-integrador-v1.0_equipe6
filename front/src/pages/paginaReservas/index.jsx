@@ -21,12 +21,12 @@ const PaginaReserva = () => {
                 </div>
             </div>
 
-            <div className="mt-5 d-flex justify-content-around">
+            <div className="mt-5 d-lg-flex justify-content-sm-center">
 
                 {/* Formulario */}
-                <div className="">
+                <div className="mx-5">
                     <h5>Complete seus Dados</h5>
-                    <Form className="card mb-5 p-3 d-flex flex-row justify-content-around" style={{width: '50rem'}}>
+                    <Form className="card mb-5 p-2 d-flex flex-lg-row justify-content-lg-around w-100">
                         <FormGroup className="mx-2 w-100">
                             <FormLabel className="mb-0"> Nome</FormLabel>
                             <FormControl type="text" placeholder="Digite seu nome"/>
@@ -39,10 +39,7 @@ const PaginaReserva = () => {
                             <FormControl type="text" placeholder="Digite seu sobrenome"/>
 
                             <FormLabel className="mb-0 mt-4">Cidade</FormLabel>
-                            <Form.Select>
-                                <option>Selecione a Cidade</option>
-                                <option value="1">São Paulo</option>
-                            </Form.Select>
+                            <FormControl type="text" placeholder="Digite sua cidade"/>
                         </FormGroup>
                     </Form>
 
@@ -53,12 +50,12 @@ const PaginaReserva = () => {
                     </div>
 
                     {/* Horario da reserva */}
-                    <h5>Seu Horário de Chegada</h5>
-                    <Card className="p-3" style={{width: '50rem'}}>
+                    <h5 className="mt-sm-5">Seu Horário de Chegada</h5>
+                    <Card className="p-3 w-100">
                         <Card.Title className="my-4"> <AiOutlineCheckCircle/> Seu quarto estará pronto para check-in...</Card.Title>
-                        <Card.Body className="d-flex">
+                        <Card.Body className="d-xl-flex">
                             <FormGroup className="me-2 w-100">
-                                <FormLabel>Indique sua hora prevista de chegada</FormLabel>
+                                <FormLabel className="w-100">Indique sua hora prevista de chegada</FormLabel>
                                 <Form.Select className="">
                                         <option></option>
                                         <option value="1">07:00</option>
@@ -69,8 +66,8 @@ const PaginaReserva = () => {
                                         <option value="1">08:15</option>
                                 </Form.Select>
                             </FormGroup>
-                            <FormGroup className="ms-2 w-100">
-                                <FormLabel>Indique sua hora prevista de Saída</FormLabel>
+                            <FormGroup className="ms-xl-2 mt-sm-3 w-100">
+                                <FormLabel className="w-100">Indique sua hora prevista de Saída</FormLabel>
                                 <Form.Select className="">
                                     <option></option>
                                     <option value="1">07:00</option>
@@ -88,7 +85,7 @@ const PaginaReserva = () => {
                 </div>
 
                 {/* Detalhes da Reserva */}
-                <Card className="" style={{width: '20rem'}}>
+                <Card className="mx-5 mt-sm-5 w-lg-25">
                     <Card.Title className="p-1 text-center ">
                         Detalhes da Reserva
                     </Card.Title>
