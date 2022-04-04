@@ -1,6 +1,8 @@
 package com.pi.api.service;
 
-import com.pi.api.entity.Reservation;
+import com.pi.api.model.Product;
+import com.pi.api.model.Reservation;
+//import com.pi.api.entity.UnavailableDate;
 import com.pi.api.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,10 @@ public class ReservationService {
 
 	@Autowired
 	private ReservationRepository reservationRepository;
+
+//	boolean dataIndisponivel(LocalDate checkinDate) {
+//		return reservationRepository.existsByCheckinDateGreaterThanEqualAndCheckinDateLessThanEqual(checkinDate, checkinDate);
+//	}
 
 	public Reservation reservar(Reservation reservation) throws Exception {
 
@@ -27,6 +33,20 @@ public class ReservationService {
 
 		if (checkoutDate.isBefore(checkinDate))
 			throw new Exception("A data de CheckOut não pode ser anterior a data de CheckIn");
+
+//		if (dataIndisponivel(reservation.getCheckinDate()))
+//			throw new Exception("Data indisponivel");
+
+//		Set<LocalDate> datasReservadas = (Set<LocalDate>) checkinDate.datesUntil(checkoutDate);
+//		Product product = reservation.getProduct();
+//		product@.setUnavailableDates(datasReservadas);
+
+
+//		while (checkinDate.isBefore(checkoutDate)) {
+//			System.out.println(checkinDate);
+//			product.setUnavailableDates(checkinDate);
+//			checkinDate = checkinDate.plusDays(1);
+//		}
 
 		return reservationRepository.save(reservation);
 	}

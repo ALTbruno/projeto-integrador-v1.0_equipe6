@@ -1,6 +1,6 @@
 package com.pi.api.controller;
 
-import com.pi.api.entity.City;
+import com.pi.api.model.City;
 import com.pi.api.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*", allowedHeaders = "")
 @RestController
-@RequestMapping("/cities")
+@RequestMapping("/api/cities")
 public class CityController {
 
     @Autowired
@@ -21,8 +21,8 @@ public class CityController {
     }
 
     @GetMapping
-    public ResponseEntity<Iterable<City>> buscarTodos() {
-        return ResponseEntity.ok(cityService.buscarTodos());
+    public ResponseEntity<Iterable<City>> listar() {
+        return ResponseEntity.ok(cityService.listar());
     }
 
 }

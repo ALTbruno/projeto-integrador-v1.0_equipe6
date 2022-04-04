@@ -1,6 +1,6 @@
 package com.pi.api.service;
 
-import com.pi.api.entity.Product;
+import com.pi.api.model.Product;
 import com.pi.api.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class ProductService {
         return productRepository.findById(id);
     }
 
-    public List<Product> buscarTodos() {
+    public List<Product> listar() {
         return productRepository.findAll();
     }
 

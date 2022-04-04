@@ -1,6 +1,6 @@
 package com.pi.api.controller;
 
-import com.pi.api.entity.Reservation;
+import com.pi.api.model.Reservation;
 import com.pi.api.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "")
 @RestController
-@RequestMapping("/reservations")
+@RequestMapping("/api/reservations")
 public class ReservationController {
 
 	@Autowired

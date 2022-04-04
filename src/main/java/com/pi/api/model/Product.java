@@ -1,4 +1,4 @@
-package com.pi.api.entity;
+package com.pi.api.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -8,6 +8,7 @@ import org.hibernate.annotations.FetchMode;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
@@ -25,6 +26,14 @@ public class Product {
 	@NotBlank
 	@Size(max = 1000)
 	private String description;
+
+//	@ManyToMany
+//	@Fetch(FetchMode.JOIN)
+//	@JoinTable(name = "PRODUCT_UNAVAILABLEDATES",
+//			joinColumns = @JoinColumn(name = "product_id"),
+//			inverseJoinColumns = @JoinColumn(name = "unavailabledate_id"))
+//	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//	private UnavailableDate date;
 
 	@ManyToOne
 	@JoinColumn(name = "id_category")
@@ -54,11 +63,12 @@ public class Product {
 	public Product() {
 	}
 
-	public Product(String name, String description, Category category, City city) {
+	public Product(String name, String description, Category category, City city, Set<LocalDate> unavailableDates) {
 		this.name = name;
 		this.description = description;
 		this.category = category;
 		this.city = city;
+//		this.unavailableDates = unavailableDates;
 	}
 
 	public void setId(Long id) {
@@ -116,4 +126,12 @@ public class Product {
 	public void setCharacteristics(Set<Characteristic> characteristics) {
 		this.characteristics = characteristics;
 	}
+//
+//	public UnavailableDate getUnavailableDate() {
+//		return date;
+//	}
+//
+//	public void setUnavailableDates(UnavailableDate date) {
+//		this.date = date;
+//	}
 }

@@ -1,6 +1,6 @@
 package com.pi.api.service;
 
-import com.pi.api.entity.Category;
+import com.pi.api.model.Category;
 import com.pi.api.repository.CategoryRepository;
 import com.pi.api.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class CategoryService {
 		return categoryRepository.findById(id);
 	}
 
-	public List<Category> buscarTodos() {
+	public List<Category> listar() {
 		List<Category> categories = categoryRepository.findAll();
 
 		for (Category category : categories) {

@@ -1,6 +1,6 @@
 package com.pi.api.service;
 
-import com.pi.api.entity.City;
+import com.pi.api.model.City;
 import com.pi.api.repository.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class CityService {
         return cityRepository.save(city);
     }
 
-    public List<City> buscarTodos() {
+    public List<City> listar() {
         return cityRepository.findAll();
     }
 

@@ -1,6 +1,6 @@
 package com.pi.api.controller;
 
-import com.pi.api.entity.Product;
+import com.pi.api.model.Product;
 import com.pi.api.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "*", allowedHeaders = "")
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/api/products")
 public class ProductController {
 
     @Autowired
@@ -34,8 +34,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Iterable<Product>> buscarTodos() {
-        return ResponseEntity.ok(productService.buscarTodos());
+    public ResponseEntity<Iterable<Product>> listar() {
+        return ResponseEntity.ok(productService.listar());
     }
 
     @PutMapping("/edit/{id}")

@@ -1,6 +1,6 @@
 package com.pi.api.controller;
 
-import com.pi.api.entity.Category;
+import com.pi.api.model.Category;
 import com.pi.api.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "*", allowedHeaders = "")
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("/api/categories")
 public class CategoryController {
 
     @Autowired
@@ -44,8 +44,8 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<Iterable<Category>> buscarTodos() {
-        return ResponseEntity.ok(categoryService.buscarTodos());
+    public ResponseEntity<Iterable<Category>> listar() {
+        return ResponseEntity.ok(categoryService.listar());
     }
 
     @DeleteMapping("/delete/{id}")

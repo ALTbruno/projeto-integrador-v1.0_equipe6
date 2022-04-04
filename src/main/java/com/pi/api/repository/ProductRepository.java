@@ -1,8 +1,7 @@
 package com.pi.api.repository;
 
-import com.pi.api.entity.Product;
+import com.pi.api.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

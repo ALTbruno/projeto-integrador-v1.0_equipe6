@@ -1,4 +1,4 @@
-package com.pi.api.entity;
+package com.pi.api.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
