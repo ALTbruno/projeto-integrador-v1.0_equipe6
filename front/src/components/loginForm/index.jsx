@@ -7,6 +7,7 @@ import visible from '../../assets/icons/visible.svg';
 import invisible from '../../assets/icons/invisible.svg';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.scss';
+import React from "react";
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -130,13 +131,13 @@ const LoginForm = () => {
                     <form onSubmit={loginUser}>
                         <div className="user-details">
                             <div className="input-box email">
-                                <label htmlFor="inputEmail" >Email</label>
+                                <label htmlFor="email" >Email</label>
                                 <input onChange={fillLogin} name="email" type="email" id="email" />
-                                <span className="error-message d-flex justify-content-end">Este campo é obrigatorio</span>
+                                <span className="error-message d-flex justify-content-end" >Este campo é obrigatorio</span>
                             </div>
 
                             <div className="input-box password">
-                                <label htmlFor="inputPassword" >Senha</label>
+                                <label htmlFor="password" >Senha</label>
                                 <input id="password" onChange={fillLogin} name="senha" type="password" />
                                 <span className="error-message d-flex justify-content-end">Este campo é obrigatorio</span>
                                 <a onClick={togleVisibilityPassword}>

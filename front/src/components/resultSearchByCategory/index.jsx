@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import CardResult from '../../components/cardResult/cardResult';
 import api from '../../services';
 
-export default function Index() {
+export default function ResultByCategory() {
   const [hoteis, setHoteis] = useState([]);
   const { category } = useParams();
 

@@ -6,7 +6,7 @@ import api from '../../services/index';
 import Classification from "../classification";
 import FavoriteHeart from "../favoriteHeart";
 import { Link } from 'react-router-dom';
-import React, { Component } from 'react'
+import React from 'react'
 
 
 

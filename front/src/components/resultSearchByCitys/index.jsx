@@ -4,7 +4,7 @@ import CardResult from '../cardResult/cardResult';
 import api from '../../services/index';
 import './index.scss';
 
-export default function Result() {
+export default function ResultByCity() {
   const [hoteis, setHoteis] = useState([]);
   const { city } = useParams();
 
