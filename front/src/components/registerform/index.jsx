@@ -131,7 +131,7 @@ const RegisterForm = () => {
             <div id="RegisterForm">
                 <div className="container-form">
                     <h1 className="title">Criar conta</h1>
-                    <form onSubmit={verifyInputs}>
+                    <form onSubmit={(e) => registerUser(e)}>
                         <section className="nome-sobrenome">
                             <div className="input-box name">
                                 <label htmlFor="Nome" >Nome</label>
