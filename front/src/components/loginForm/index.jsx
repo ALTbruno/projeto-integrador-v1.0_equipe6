@@ -7,6 +7,7 @@ import visible from '../../assets/icons/visible.svg';
 import invisible from '../../assets/icons/invisible.svg';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.scss';
+import React from "react";
 
 const LoginForm = () => {
     const navigate = useNavigate();
