@@ -4,7 +4,7 @@ import { Form, FormGroup, FormControl, FormLabel, Card } from "react-bootstrap";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import 'react-datepicker/dist/react-datepicker.css';
 
-export const ReservationForm = () => {
+export const ReservationForm = (props) => {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [largeWidth, setLargeWidth] = useState(false);
@@ -63,10 +63,9 @@ export const ReservationForm = () => {
         setEndDate(end);
     };
 
-
     return (
         <>
-            <div className="w-xl-50 mx-md-3 mx-sm-3 mx-lg-5">
+            <div className="w-xl-50 mx-sm-3">
                     <h5>Complete seus Dados</h5>
                     <Form className="card mb-5 p-4 d-flex flex-lg-row justify-content-lg-around w-100">
                         <FormGroup className="mx-2 w-100">
@@ -117,7 +116,7 @@ export const ReservationForm = () => {
                         <FormGroup className="me-2 mb-sm-3 w-100">
                             <FormLabel className="w-100">Hora prevista de chegada</FormLabel>
                             <Form.Select className="">
-                                <option></option>
+                                <option>Selecione um horário</option>
                                 <option value="1">07:00</option>
                                 <option value="1">07:15</option>
                                 <option value="1">07:30</option>
@@ -129,7 +128,7 @@ export const ReservationForm = () => {
                         <FormGroup className="ms-2 w-100">
                             <FormLabel className="w-100">Hora prevista de Saída</FormLabel>
                             <Form.Select className="">
-                                <option></option>
+                                <option>Selecione um horário</option>
                                 <option value="1">07:00</option>
                                 <option value="1">07:15</option>
                                 <option value="1">07:30</option>

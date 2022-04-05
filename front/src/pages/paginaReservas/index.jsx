@@ -26,9 +26,10 @@ const PaginaReserva = () => {
 
     useEffect(() => {
         api.get(`/products/${id}`).then(response => {
-            setProdutos(response.data.slice(0, 6));
+            setProdutos(response.data);
         })
     }, [id]);
+
 
     return (
         <>
@@ -46,7 +47,7 @@ const PaginaReserva = () => {
             <div className="mt-5 d-lg-flex justify-content-center">
 
                 {/* Formulario */}
-                <ReservationForm />
+                <ReservationForm  />
 
                 {/* Detalhes da Reserva */}
                 <ReservationDetailCard/>

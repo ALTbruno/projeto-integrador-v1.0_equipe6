@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import DatePicker from 'react-datepicker';
 import api from '../../services/index';
@@ -15,6 +15,7 @@ const PaginaProdutos = () => {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [largeWidth, setLargeWidth] = useState(false);
+    const navegar = useNavigate()
     const { id } = useParams();
     const [produtos, setProdutos] = useState({  
         "id": null,
@@ -207,7 +208,7 @@ const PaginaProdutos = () => {
           />
           <div className="content-calendar">
             <h3>Adicione as datas da sua viagem para obter preço exatos</h3>
-            <button>Iniciar reserva</button>
+            <Link className="btn border-3 w-100 p-2 text-light fw-bold" style={{ backgroundColor: '#1DBEB4', border: '#1DBEB4' }} to={`/produto/${id}/reserva`}>Iniciar reserva</Link>
           </div>
         </div>
       </section>
