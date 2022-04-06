@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/api/categories/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/api/cities/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/api/products/**").permitAll()
-				.antMatchers("/api/reservations/book").hasRole("USER")
+				.antMatchers("/api/reservations/book").hasAuthority("CUSTOMER")
 //				.antMatchers("api/categories/add").hasRole("ROLE_ADMIN")
 //				.antMatchers("/api/users/id=**").hasRole("ADMIN")
 //				.anyRequest().hasAuthority("ADMIN")

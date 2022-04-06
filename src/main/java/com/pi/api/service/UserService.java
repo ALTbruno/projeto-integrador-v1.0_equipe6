@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -24,9 +23,6 @@ public class UserService implements UserDetailsService {
 	@Autowired private AdminRepository adminRepository;
 
 	@Autowired private CustomerRepository customerRepository;
-
-//	@Autowired
-//	private PasswordEncoder passwordEncoder;
 
 	public boolean emailJaCadastrado(String email) {
 		return adminRepository.existsByEmail(email) || customerRepository.existsByEmail(email);
@@ -44,11 +40,10 @@ public class UserService implements UserDetailsService {
 	}
 
 	public Optional<User> findByEmail(String email) {
-		Optional<User> customer = customerRepository.findByEmail(email);
 		Optional<User> admin = adminRepository.findByEmail(email);
-		if (emailJaCadastrado(customer.get().getEmail()))
-			return customer;
-		return admin;
+		Optional<User> customer = customerRepository.findByEmail(email);
+		User user = admin.orElseGet(customer::get);
+		return Optional.of(user);
 	}
 
 
@@ -65,6 +60,6 @@ public class UserService implements UserDetailsService {
 		return new org.springframework.security.core.userdetails.User(
 				email,
 				user.getPassword(),
-				Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
+				Collections.singletonList(new SimpleGrantedAuthority(userRes.get().getRole().toString())));
 	}
 }
