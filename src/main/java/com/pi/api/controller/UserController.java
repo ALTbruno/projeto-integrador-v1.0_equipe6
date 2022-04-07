@@ -61,7 +61,7 @@ public class UserController {
 
 		admin.setPassword(passwordEncoder.encode(admin.getPassword()));
 
-		admin.setRole(Role.ADMIM);
+		admin.setRole(Role.ADMIN);
 
 		admin = (Admin) userService.registrar(admin);
 

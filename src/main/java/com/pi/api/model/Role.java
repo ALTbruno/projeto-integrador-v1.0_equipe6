@@ -5,6 +5,6 @@ public enum Role {
 	USER,
 	CUSTOMER,
 	PARTNER,
-	ADMIM
+	ADMIN
 
 }
