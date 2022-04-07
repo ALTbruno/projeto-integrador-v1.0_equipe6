@@ -135,23 +135,23 @@ const RegisterForm = () => {
                         <section className="nome-sobrenome">
                             <div className="input-box name">
                                 <label htmlFor="Nome" >Nome</label>
-                                <input type="text" id="Nome" name="nome"/>
+                                <input onChange={(e) => fillUserForRegister(e)} type="text" id="Nome" name="firstName"/>
                                 <span className="error-message d-flex justify-content-end">Este campo é obrigatorio</span>
                             </div>
                             <div className="input-box lastname">
                                 <label htmlFor="Sobrenome" >Sobrenome</label>
-                                <input type="text" id="Sobrenome" name="sobrenome"/>
+                                <input type="text" id="Sobrenome" onChange={(e) => fillUserForRegister(e)} name="lastName"/>
                                 <span className="error-message d-flex justify-content-end">Este campo é obrigatorio</span>
                             </div>
                         </section>
                         <div className="input-box email" >
                             <label htmlFor="Email" >Email</label>
-                            <input type="email" id="Email" name="email"/>
+                            <input onChange={(e) => fillUserForRegister(e)} type="email" id="Email" name="email"/>
                             <span className="error-message d-flex justify-content-end">Este campo é obrigatorio</span>
                         </div>
                         <div className="input-box password">
                             <label htmlFor="password" >Senha</label>
-                            <input id="password" type="password" name="senha"/>
+                            <input onChange={(e) => fillUserForRegister(e)} id="password" type="password" name="password"/>
                             <span className="error-message d-flex justify-content-end">Este campo é obrigatorio</span>
                             <a onClick={togleVisibilityPassword}>
                                 <img id="visible" src={visible} alt="password-visible" />
