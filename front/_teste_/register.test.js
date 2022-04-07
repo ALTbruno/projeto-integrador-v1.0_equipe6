@@ -20,13 +20,6 @@ describe("Teste na Pagina de registro", () => {
         const inputConfirmarSenha = screen.getByLabelText('Confirmar Senha', { selector: 'input' })
         const button = screen.getByRole('button', { name: 'Criar conta' })
 
-        /*         fireEvent.change(inputName, { 'target': { 'value': 'carlos' } })
-                fireEvent.change(inputSobrenome, { 'target': { 'value': 'silva' } })
-                fireEvent.change(inputEmail, { 'target': { 'value': 'carlos@hotmail.com' } })
-                fireEvent.change(inputSenha, { 'target': { 'value': '123456' } })
-                fireEvent.change(inputConfirmarSenha, { 'target': { 'value': '123456' } })
-        
-                fireEvent.click(button); */
         user.type(inputName, 'carlos');
         user.type(inputSobrenome, 'silva');
         user.type(inputEmail, 'carlos@hotmail.com')

@@ -14,7 +14,8 @@ import SearchCity from '../src/pages/BuscaHoteisCity/index'
 import SearchCategory from '../src/components/resultSearchByCategory/index';
 import ResultByCategory from '../src/components/resultSearchByCategory/index';
 import ResultByCity from '../src/components/resultSearchByCitys/index';
-import Search from '../src/components/search/index'
+import Search from '../src/components/search/index';
+import Map from '../src/components/locationMap/Map'
 
 describe("Renderizar todos as paginas com seus relativos componentes", () => {
     test('Renderizar a Pagina de Registro', () => {
@@ -47,7 +48,7 @@ describe("Renderizar todos as paginas com seus relativos componentes", () => {
     });
     test('Renderizar a página Categorias', () => {
         render(
-            <SearchCategory />, {wrapper: ResultByCategory}
+            <ResultByCategory />, {wrapper: Map}
         );
     });
 
