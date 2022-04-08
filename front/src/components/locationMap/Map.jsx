@@ -57,8 +57,8 @@ const Map = () => {
   };
 
   const center = {
-  lat: produtos.latitude, 
-  lng: produtos.longitude
+  lat: -23.553540,
+  lng: -46.681952
   };  
 
     const { isLoaded } = useJsApiLoader({

@@ -123,9 +123,7 @@ const PaginaProdutos = () => {
 
             {/* Bloco de Endereço */}
             <div className="p-1 d-flex align-items-center" style={{ backgroundColor: "#bfbfbf" }}>
-                <p>Cidade</p>
                 <div className="ms-auto me-5 d-flex align-items-center">
-                    <Link to={`/produto/${id}/reserva`}>reserva</Link>
                     <StarRating />
                     <Classification />
                 </div>
@@ -162,7 +160,7 @@ const PaginaProdutos = () => {
 
             {/* Bloco de Descrição */}
             <div className="p-3" >
-                <div className="p-1" style={{ backgroundColor: "#bfbfbf" }}>
+                <div className="p-1 rounded-3" style={{ backgroundColor: "#bfbfbf" }}>
                     <h2 className="ms-3" >Descrição</h2>
                 </div>
                 <div className="p-1">
@@ -171,18 +169,17 @@ const PaginaProdutos = () => {
             </div>
 
             {/* Bloco de Caracteristicas do Produto */}
-            <div className="p-3">
-                <div className="p-1" style={{ backgroundColor: "#bfbfbf" }}>
+            <div className="p-3 rounded-3">
+                <div className="p-1 rounded-3" style={{ backgroundColor: "#bfbfbf" }}>
                     <h2 className="ms-3" style={{ backgroundColor: "#bfbfbf" }}>Caracteristicas</h2>
                 </div>
+                <div className="my-3 d-flex justify-content-around">
                 {produtos.characteristics.map(characteristic => (
-                    <div className="p-1 d-flex" key={characteristic.id}>
-                        <div className="p-1">
+                    <div className="p-1 d-flex flex-row" key={characteristic.id}>
                             <p>{characteristic.name}</p>
-                        </div>
                     </div>
                 ))}
-
+                </div>
             </div>
 
             {/* Calendario */}
@@ -216,16 +213,16 @@ const PaginaProdutos = () => {
             {/* Mapa */}
             
             <div className="mb-2 p-3">
-                <div className=" my-3 p-1" style={{ backgroundColor: "#bfbfbf" }}>
-                    <h2 className="ms-3" style={{ backgroundColor: "#bfbfbf" }}>Onde você vai estar</h2>
+                <div className=" my-3 p-1 rounded-3" style={{ backgroundColor: "#bfbfbf" }}>
+                    <h2 className="ms-3 " style={{ backgroundColor: "#bfbfbf" }}>Onde você vai estar</h2>
                 </div>
                 <Map/>
             </div>
 
             {/* Bloco Politicas do Produto */}
             <div className="p-3">
-                <div className="p-1" style={{ backgroundColor: "#bfbfbf" }}>    
-                    <h2 className="ms-3" style={{ backgroundColor: "#bfbfbf" }}>Bloco Politicas do Produto</h2>
+                <div className="p-1 rounded-3" style={{ backgroundColor: "#bfbfbf" }}>    
+                    <h2 className="ms-3 " style={{ backgroundColor: "#bfbfbf" }}>Bloco Politicas do Produto</h2>
                 </div>
                 <div className="p-1">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam adipisci modi blanditiis harum velit repellat et nisi qui delectus! Earum culpa ex natus non laudantium repellat voluptatibus, incidunt amet quibusdam!</p>
