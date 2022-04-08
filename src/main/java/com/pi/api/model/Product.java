@@ -7,6 +7,7 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Set;
@@ -23,13 +24,11 @@ public class Product {
 	@Size(max = 255)
 	private String name;
 
-	@NotBlank
-	@Size(max = 20)
-	private String latitude;
+	@NotNull
+	private double latitude;
 
-	@NotBlank
-	@Size(max = 20)
-	private String longitude;
+	@NotNull
+	private double longitude;
 
 	private double score;
 
@@ -77,7 +76,7 @@ public class Product {
 	public Product() {
 	}
 
-	public Product(String name, String latitude, String longitude, double score, String description, String rules, String healthAndSafety, String cancellationPolicy, Category category, City city) {
+	public Product(String name, double latitude, double longitude, double score, String description, String rules, String healthAndSafety, String cancellationPolicy, Category category, City city) {
 		this.name = name;
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -90,28 +89,12 @@ public class Product {
 		this.city = city;
 	}
 
-	public String getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
-	}
-
-	public String getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(String longitude) {
-		this.longitude = longitude;
+	public Long getId() {
+		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Long getId() {
-		return id;
 	}
 
 	public String getName() {
@@ -122,12 +105,60 @@ public class Product {
 		this.name = name;
 	}
 
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+	public double getScore() {
+		return score;
+	}
+
+	public void setScore(double score) {
+		this.score = score;
+	}
+
 	public String getDescription() {
 		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getRules() {
+		return rules;
+	}
+
+	public void setRules(String rules) {
+		this.rules = rules;
+	}
+
+	public String getHealthAndSafety() {
+		return healthAndSafety;
+	}
+
+	public void setHealthAndSafety(String healthAndSafety) {
+		this.healthAndSafety = healthAndSafety;
+	}
+
+	public String getCancellationPolicy() {
+		return cancellationPolicy;
+	}
+
+	public void setCancellationPolicy(String cancellationPolicy) {
+		this.cancellationPolicy = cancellationPolicy;
 	}
 
 	public Category getCategory() {
@@ -160,37 +191,5 @@ public class Product {
 
 	public void setCharacteristics(Set<Characteristic> characteristics) {
 		this.characteristics = characteristics;
-	}
-
-	public double getScore() {
-		return score;
-	}
-
-	public void setScore(double score) {
-		this.score = score;
-	}
-
-	public String getRules() {
-		return rules;
-	}
-
-	public void setRules(String rules) {
-		this.rules = rules;
-	}
-
-	public String getHealthAndSafety() {
-		return healthAndSafety;
-	}
-
-	public void setHealthAndSafety(String healthAndSafety) {
-		this.healthAndSafety = healthAndSafety;
-	}
-
-	public String getCancellationPolicy() {
-		return cancellationPolicy;
-	}
-
-	public void setCancellationPolicy(String cancellationPolicy) {
-		this.cancellationPolicy = cancellationPolicy;
 	}
 }
