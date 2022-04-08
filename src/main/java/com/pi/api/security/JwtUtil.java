@@ -18,7 +18,7 @@ import java.util.Optional;
 @Component
 public class JwtUtil {
 
-	@Value("jwtSecretKey}")
+	@Value("${jwtSecretKey}")
 	private String secret;
 
 	@Value("${jwtExpirationInMs}")

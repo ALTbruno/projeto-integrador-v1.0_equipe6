@@ -24,16 +24,30 @@ public class Product {
 	private String name;
 
 	@NotBlank
+	@Size(max = 20)
+	private String latitude;
+
+	@NotBlank
+	@Size(max = 20)
+	private String longitude;
+
+	private double score;
+
+	@NotBlank
 	@Size(max = 1000)
 	private String description;
 
-//	@ManyToMany
-//	@Fetch(FetchMode.JOIN)
-//	@JoinTable(name = "PRODUCT_UNAVAILABLEDATES",
-//			joinColumns = @JoinColumn(name = "product_id"),
-//			inverseJoinColumns = @JoinColumn(name = "unavailabledate_id"))
-//	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-//	private UnavailableDate date;
+	@NotBlank
+	@Size(max = 1000)
+	private String rules;
+
+	@NotBlank
+	@Size(max = 1000)
+	private String healthAndSafety;
+
+	@NotBlank
+	@Size(max = 1000)
+	private String cancellationPolicy;
 
 	@ManyToOne
 	@JoinColumn(name = "id_category")
@@ -59,36 +73,21 @@ public class Product {
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Set<Characteristic> characteristics;
 
-	@NotBlank
-	@Size(max = 1000)
-	private String latitude;
-
-	@NotBlank
-	@Size(max = 1000)
-	private String longitude;
-
-
-
 
 	public Product() {
 	}
 
-//	public Product(String name, String description, Category category, City city, Set<LocalDate> unavailableDates) {
-//		this.name = name;
-//		this.description = description;
-//		this.category = category;
-//		this.city = city;
-//		this.unavailableDates = unavailableDates;
-//	}
-
-
-	public Product(String name, String description, Category category, City city, String latitude, String longitude) {
+	public Product(String name, String latitude, String longitude, double score, String description, String rules, String healthAndSafety, String cancellationPolicy, Category category, City city) {
 		this.name = name;
-		this.description = description;
-		this.category = category;
-		this.city = city;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.score = score;
+		this.description = description;
+		this.rules = rules;
+		this.healthAndSafety = healthAndSafety;
+		this.cancellationPolicy = cancellationPolicy;
+		this.category = category;
+		this.city = city;
 	}
 
 	public String getLatitude() {
@@ -162,12 +161,36 @@ public class Product {
 	public void setCharacteristics(Set<Characteristic> characteristics) {
 		this.characteristics = characteristics;
 	}
-//
-//	public UnavailableDate getUnavailableDate() {
-//		return date;
-//	}
-//
-//	public void setUnavailableDates(UnavailableDate date) {
-//		this.date = date;
-//	}
+
+	public double getScore() {
+		return score;
+	}
+
+	public void setScore(double score) {
+		this.score = score;
+	}
+
+	public String getRules() {
+		return rules;
+	}
+
+	public void setRules(String rules) {
+		this.rules = rules;
+	}
+
+	public String getHealthAndSafety() {
+		return healthAndSafety;
+	}
+
+	public void setHealthAndSafety(String healthAndSafety) {
+		this.healthAndSafety = healthAndSafety;
+	}
+
+	public String getCancellationPolicy() {
+		return cancellationPolicy;
+	}
+
+	public void setCancellationPolicy(String cancellationPolicy) {
+		this.cancellationPolicy = cancellationPolicy;
+	}
 }
