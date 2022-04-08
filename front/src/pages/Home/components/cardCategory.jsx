@@ -66,7 +66,6 @@ export default function CardCategory() {
             {categories.map((item, index) => (
               <Carousel.Item key={index}>
                 {item.map(category => (
-                  <>
                   <div onClick={() => navigate(`/category/${category.title}`)} className="card-category" key={category.title} >
                     <img src={category.imageUrl} alt={category.imageUrl} srcSet="" />
                     <section className='contents-category'>
@@ -74,7 +73,6 @@ export default function CardCategory() {
                       <p>{category.totalProducts}</p>
                     </section>
                   </div>
-                  </>
                 ))}
               </Carousel.Item>
             ))}

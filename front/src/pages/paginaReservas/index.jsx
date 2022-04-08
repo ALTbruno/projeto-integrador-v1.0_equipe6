@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 
 const PaginaReserva = () => {
 
-    const [produtos, setProdutos] = useState([{
+    const [produtos, setProdutos] = useState({  
         "id": null,
         "name": "",
         "description": "",
@@ -19,8 +19,47 @@ const PaginaReserva = () => {
             "description": "",
             "imageUrl": "",
             "totalProducts": null
-        }
-    }]);
+        },
+        "city": {
+            "id": null,
+            "name": "",
+            "country": ""
+        },
+        "images": [
+            {
+                "id": null,
+                "title": "",
+                "url": ""
+            },
+            {
+                "id": null,
+                "title": "",
+                "url": ""
+            },
+            {
+                "id": null,
+                "title": "",
+                "url": ""
+            },
+            {
+                "id": null,
+                "title": "",
+                "url": ""
+            },
+            {
+                "id": null,
+                "title": "",
+                "url": ""
+            }
+        ],
+        "characteristics": [
+            {
+                "id": null,
+                "name": "",
+                "icon": ""
+            }
+        ]
+    });
     
     const { id } = useParams();
 
@@ -36,8 +75,8 @@ const PaginaReserva = () => {
             {/* Bloco de Titulo */}
             <div className="p-1 d-flex align-items-center" style={{ backgroundColor: "#545776" }}>
                 <div>
-                    <h6 className="ms-5 mt-2 mb-0 text-light" >Titulo</h6>
-                    <h2 className="ms-5 my-0 fw-bold text-light">Nome</h2>
+                    <h6 className="ms-5 mt-2 mb-0 text-light" >{produtos.category.title}</h6>
+                    <h2 className="ms-5 my-0 fw-bold text-light">{produtos.name}</h2>
                 </div>
                 <div className="ms-auto me-5 text-light">
                     <a href={`/produto/${id}`}>voltar</a>
