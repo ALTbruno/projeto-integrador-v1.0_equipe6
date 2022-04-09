@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
-	boolean existsByCheckinDateGreaterThanEqualAndCheckinDateLessThanEqualAndProductId (LocalDate checkinDate, LocalDate checkin, Long id);
+	boolean existsByCheckoutDateBetweenAndProductId (LocalDate checkinDate, LocalDate checkoutDate, Long id);
 
 	List<Reservation> findByProductId(Long id);
 

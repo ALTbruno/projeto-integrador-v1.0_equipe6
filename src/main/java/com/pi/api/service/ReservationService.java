@@ -30,7 +30,7 @@ public class ReservationService {
 
 		Long productId = reservation.getProduct().getId();
 
-		if (reservationRepository.existsByCheckinDateGreaterThanEqualAndCheckinDateLessThanEqualAndProductId(checkinDate, checkoutDate, productId)) {
+		if (reservationRepository.existsByCheckoutDateBetweenAndProductId (checkinDate, checkoutDate, productId)) {
 			throw new Exception("Datas indisponíveis");
 		}
 
