@@ -16,4 +16,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
 	Page<Product> findByCityNameContainingIgnoreCase(String cityName, Pageable pageable);
 
+	Long countProductByCategoryId(Long categoryId);
 }
