@@ -3,6 +3,8 @@ package com.pi.api.service;
 import com.pi.api.model.Product;
 import com.pi.api.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,20 +32,20 @@ public class ProductService {
         return productRepository.findById(id);
     }
 
-    public List<Product> listar() {
-        return productRepository.findAll();
+    public Page<Product> listar(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 
     public void excluir(Long id) {
         productRepository.deleteById(id);
     }
 
-    public List<Product> listarPorCategoria(String categoryTitle) {
-        return productRepository.findByCategoryTitleContainingIgnoreCase(categoryTitle);
+    public Page<Product> listarPorCategoria(String categoryTitle, Pageable pageable) {
+        return productRepository.findByCategoryTitleContainingIgnoreCase(categoryTitle, pageable);
     }
 
-    public List<Product> listarPorCidade(String cityName) {
-        return productRepository.findByCityNameContainingIgnoreCase(cityName);
+    public Page<Product> listarPorCidade(String cityName, Pageable pageable) {
+        return productRepository.findByCityNameContainingIgnoreCase(cityName, pageable);
     }
 
     public Long contarProdutosPorCategoria(Long id) {

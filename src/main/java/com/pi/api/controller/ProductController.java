@@ -3,6 +3,8 @@ package com.pi.api.controller;
 import com.pi.api.model.Product;
 import com.pi.api.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,8 +36,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Iterable<Product>> listar() {
-        return ResponseEntity.ok(productService.listar());
+    public ResponseEntity<Page<Product>> listar(Pageable pageable) {
+        return ResponseEntity.ok(productService.listar(pageable));
     }
 
     @PutMapping("/edit/{id}")
@@ -61,13 +63,13 @@ public class ProductController {
     }
 
     @GetMapping("/category={categoryTitle}")
-    public ResponseEntity<List<Product>> buscarPorCategoria(@PathVariable String categoryTitle) {
-        return ResponseEntity.ok(productService.listarPorCategoria(categoryTitle));
+    public ResponseEntity<Page<Product>> buscarPorCategoria(@PathVariable String categoryTitle, Pageable pageable) {
+        return ResponseEntity.ok(productService.listarPorCategoria(categoryTitle, pageable));
     }
 
     @GetMapping("/city={cityName}")
-    public ResponseEntity<List<Product>> buscarPorCidade(@PathVariable String cityName) {
-        return ResponseEntity.ok(productService.listarPorCidade(cityName));
+    public ResponseEntity<Page<Product>> buscarPorCidade(@PathVariable String cityName, Pageable pageable) {
+        return ResponseEntity.ok(productService.listarPorCidade(cityName, pageable));
     }
 
 }

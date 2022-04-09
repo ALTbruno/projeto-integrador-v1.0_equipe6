@@ -1,7 +1,10 @@
 package com.pi.api.repository;
 
 import com.pi.api.model.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -9,9 +12,8 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-	List<Product> findByCategoryTitleContainingIgnoreCase(String categoryTitle);
+	Page<Product> findByCategoryTitleContainingIgnoreCase(String categoryTitle, Pageable pageable);
 
-	List<Product> findByCityNameContainingIgnoreCase(String cityName);
+	Page<Product> findByCityNameContainingIgnoreCase(String cityName, Pageable pageable);
 
-	Long countProductByCategoryId(Long categoryId);
 }
