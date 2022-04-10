@@ -40,8 +40,8 @@ const Map = () => {
             "icon": ""
         }
     ],
-    "latitude": "",
-    "longitude": ""
+    "latitude": null,
+    "longitude": null
   }]);
 
 
@@ -52,14 +52,15 @@ const Map = () => {
   }, []);
 
   const containerStyle = {
-    width: '100%',
-    height: '100vh'
+    width: '1139px',
+    height: '570px'
   };
 
   const center = {
-  lat: -23.553540,
-  lng: -46.681952
-  };  
+  lat: produtos.latitude,
+  lng: produtos.longitude
+  }; 
+  console.log(produtos.longitude, produtos.latitude) 
 
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
@@ -67,9 +68,9 @@ const Map = () => {
       })
     
       return (
-        <div className='' style={{width: '100%', heigth: '100vh'}}>
+        <div>
           {isLoaded ? (
-            <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={15}>
+            <GoogleMap mapContainerClassName='rounded-3' mapContainerStyle={containerStyle} center={center} zoom={15}>
               <Marker position={center}/>
             </GoogleMap>
           ) : <></>}

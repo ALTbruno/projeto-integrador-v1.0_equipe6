@@ -7,6 +7,7 @@ import Classification from "../classification";
 import FavoriteHeart from "../favoriteHeart";
 import { Link } from 'react-router-dom';
 import React from 'react'
+import LocationMapModal from "../locationMapModal";
 
 
 
@@ -41,7 +42,22 @@ const RecomendationList = () => {
                 "id": null,
                 "name": "icon",
                 "icon": ""
-            }
+            },
+            {
+                "id": null,
+                "name": "icon",
+                "icon": ""
+            },
+            {
+                "id": null,
+                "name": "icon",
+                "icon": ""
+            },
+            {
+                "id": null,
+                "name": "icon",
+                "icon": ""
+            },
         ]
     }]);
     
@@ -62,7 +78,7 @@ const RecomendationList = () => {
                         <Card key={item.id} value={item.name} className="shadow rounded m-3 p-0 d-flex flex-md-row justify-content-md-center " style={{ maxWidth: '40rem' }}>
 
                             <Card.Body className="m-0 p-0 d-flex position-relative" style={{ width: "640px", height: "300px" }}>
-                                <Card.Img className="w-100" style={{ objectFit: "cover" }} src={item.images[0].url ? item.images[0].url : ''} />
+                                <Card.Img className="mw-100" style={{ objectFit: "cover" }} src={item.images[0].url ? item.images[0].url : ''} />
                                 <FavoriteHeart />
                             </Card.Body>
 
@@ -82,10 +98,14 @@ const RecomendationList = () => {
                                 <Card.Text className="mb-0 ">
                                     <MdRoom className="me-1" />
                                     {item.city.name + " . "}
-                                    <Card.Link className="text-decoration-none fw-bold" style={{ color: '#1DBEB4' }}>Mostrar no Mapa</Card.Link>
+                                    <LocationMapModal/>
                                 </Card.Text>
-                                <MdWifi className="me-1" />
-                                <MdPool className="me-1" />
+                                {item.characteristics.map((c) => {
+
+                                    return (
+                                        <Card.Img key={c.id} className="mx-1" src={c.icon} style={{width: '15px'}}/>
+                                    )
+                                })}
                                 <Card.Text className="mt-2 mt-sm-3" style={{ fontSize: '10px' }}>{item.description}</Card.Text>
                                 <Card.Link className="btn mt-sm-4 text-decoration-none text-light fw-bold w-100" style={{ backgroundColor: '#1DBEB4', border: '#1DBEB4' }} href={`/produto/${item.id}`} >Ver Mais</Card.Link>
 

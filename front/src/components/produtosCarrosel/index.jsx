@@ -72,7 +72,7 @@ const ProdutosCarrosel = () => {
 
     return (
         <>
-            <div className="p-3 ">
+            <div className="p-3 " style={{opacity: '2'}}>
                 <img src={imagem !== null ? imagem : produtos.images[0].url} alt="" className="src img-fluid rouded-3" />
             </div>
             <div className="mx-3 mb-3 d-flex justify-content-center">

@@ -176,7 +176,8 @@ const PaginaProdutos = () => {
                 <div className="my-3 d-flex justify-content-around">
                 {produtos.characteristics.map(characteristic => (
                     <div className="p-1 d-flex flex-row" key={characteristic.id}>
-                            <p>{characteristic.name}</p>
+                        <img className="me-1" src={characteristic.icon} alt={characteristic.name} style={{width: '20px'}}/>
+                        <p className="ms-1">{characteristic.name}</p>
                     </div>
                 ))}
                 </div>
@@ -216,7 +217,9 @@ const PaginaProdutos = () => {
                 <div className=" my-3 p-1 rounded-3" style={{ backgroundColor: "#bfbfbf" }}>
                     <h2 className="ms-3 " style={{ backgroundColor: "#bfbfbf" }}>Onde você vai estar</h2>
                 </div>
-                <Map/>
+                <div className="d-flex flex-column align-items-center">
+                    <Map/>
+                </div>
             </div>
 
             {/* Bloco Politicas do Produto */}
