@@ -11,7 +11,7 @@ export default function ResultByCity() {
 
   useEffect(() => {
     api.get(`products/city=${city}`).then(response => {
-      setHoteis(response.data);
+      setHoteis(response.data.content);
     })
   }, [city])
 

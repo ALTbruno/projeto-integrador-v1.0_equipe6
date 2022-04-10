@@ -9,7 +9,7 @@ export default function ResultByCategory() {
 
   useEffect(() => {
     api.get(`/products/category=${category}`).then(response => {
-      setHoteis(response.data);
+      setHoteis(response.data.content);
     })
   }, [category])
 
