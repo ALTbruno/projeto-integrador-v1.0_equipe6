@@ -6,12 +6,12 @@ import App from './App';
 
 
 
-if(process.env.NODE_ENV==='prod') {
+/* if(process.env.NODE_ENV==='prod') {
   import('../src/mocks').then(({ setupMocks }) => {
     setupMocks()
   })
   
-}
+} */
 
 /* if (process.env.NODE_ENV==='development') {
   const { server } = require('../src/mocks')
