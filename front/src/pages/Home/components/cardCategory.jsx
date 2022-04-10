@@ -32,7 +32,7 @@ export default function CardCategory() {
   useEffect(() => {
     if (categories.length === 0) {
       api.get('/categories').then(response => {
-        separar(response.data.slice(0, 6), 3);
+        separar(response.data, 3);
       })
     }
   }, [categories])
