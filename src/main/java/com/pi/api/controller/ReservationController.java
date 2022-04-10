@@ -22,6 +22,17 @@ public class ReservationController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(reservationService.reservar(reservation));
 	}
 
+	@PutMapping("/{reservationId}/rate")
+	public ResponseEntity<Reservation> avaliar(@RequestBody Reservation reservation, @PathVariable Long reservationId) throws Exception {
+
+		if (reservationService.idExiste(reservationId)) {
+			reservation.setId(reservationId);
+			return ResponseEntity.ok(reservationService.avaliar(reservation));
+		}
+
+		return ResponseEntity.badRequest().build();
+	}
+
 	@GetMapping("/productId={id}")
 	public ResponseEntity<List<Reservation>> listarReservasPorProduto(@PathVariable Long id) {
 		return ResponseEntity.ok(reservationService.listarPorProduto(id));

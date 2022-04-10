@@ -26,6 +26,8 @@ public class Reservation {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate checkoutDate;
 
+	private Double score;
+
 	@ManyToOne
 	@JoinColumn(name = "id_customer")
 	private Customer customer;
@@ -38,10 +40,11 @@ public class Reservation {
 	public Reservation() {
 	}
 
-	public Reservation(Time checkinTime, LocalDate checkinDate, LocalDate checkoutDate, Customer customer, Product product) {
+	public Reservation(Time checkinTime, LocalDate checkinDate, LocalDate checkoutDate, Double score, Customer customer, Product product) {
 		this.checkinTime = checkinTime;
 		this.checkinDate = checkinDate;
 		this.checkoutDate = checkoutDate;
+		this.score = score;
 		this.customer = customer;
 		this.product = product;
 	}
@@ -92,5 +95,13 @@ public class Reservation {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	public Double getScore() {
+		return score;
+	}
+
+	public void setScore(Double score) {
+		this.score = score;
 	}
 }
