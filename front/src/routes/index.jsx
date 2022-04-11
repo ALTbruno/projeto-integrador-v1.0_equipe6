@@ -11,6 +11,7 @@ import RegisterPage from '../pages/Register';
 import PaginaProdutos from '../pages/paginaProdutos';
 import PaginaReserva from '../pages/paginaReservas';
 import React from 'react';
+import CriacaoProdutos from '../pages/PaginaCriacaoProdutos';
 
 const RouteList = () => (
     <BrowserRouter>
@@ -24,6 +25,7 @@ const RouteList = () => (
                 <Route path='/register' element={<RegisterPage />} />
                 <Route path='/produto/:id' element={<PaginaProdutos />} />
                 <Route path='/produto/:id/reserva' element={<PaginaReserva />} />
+                <Route path='/criacaoProdutos' element={<CriacaoProdutos />} />
             </Routes>
             <Footer />
             <ToastContainer />
