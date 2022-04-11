@@ -59,8 +59,7 @@ const Map = () => {
   const center = {
   lat: produtos.latitude,
   lng: produtos.longitude
-  }; 
-  console.log(produtos.longitude, produtos.latitude) 
+  };  
 
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',

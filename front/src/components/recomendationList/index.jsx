@@ -114,7 +114,10 @@ const RecomendationList = () => {
                                         <Card.Img key={c.id} className="mx-1" src={c.icon} style={{width: '15px'}}/>
                                     )
                                 })}
-                                <Card.Text className="mt-2 mt-sm-3" style={{ fontSize: '10px' }}>{item.description}</Card.Text>
+                                <Card.Text className="mt-2 mt-sm-3" style={{ fontSize: '10px' }}>
+                                    {item.description.substring(0, 100)}
+                                    <a className="ms-1" href={`/produto/${item.id}`} style={{color: '#1DBEB4'}}>mais...</a>
+                                </Card.Text>
                                 <Card.Link className="btn mt-sm-4 text-decoration-none text-light fw-bold w-100" style={{ backgroundColor: '#1DBEB4', border: '#1DBEB4' }} onClick={() => navigate(`/produto/${item.id}`)} >Ver Mais</Card.Link>
 
                             </Card.Body>
