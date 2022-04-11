@@ -55,6 +55,14 @@ public class UserController {
 	@PostMapping("/admin/register")
 	public Map<String, Object> registerHandler(@RequestBody Admin admin) throws Exception {
 
+		String email = admin.getEmail().toLowerCase();
+
+		String emailDomain = "@digitalbooking.com";
+
+		if (!email.endsWith(emailDomain)) {
+			throw new Exception("É necessário utilizar e-mail corporativo para realizar essa ação");
+		}
+
 		if (admin.getPassword().length() < 8) {
 			throw new Exception("A senha deve ter no mínimo 8 caracteres");
 		}
@@ -65,7 +73,7 @@ public class UserController {
 
 		admin = (Admin) userService.registrar(admin);
 
-		String token = jwtUtil.generateToken(admin.getEmail());
+		String token = jwtUtil.generateToken(email);
 
 		return Collections.singletonMap("accessToken", token);
 	}
