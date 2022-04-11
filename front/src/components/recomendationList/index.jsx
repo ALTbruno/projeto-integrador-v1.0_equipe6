@@ -81,9 +81,9 @@ const RecomendationList = () => {
             <section className="">
                 <h3 className="my-3 ms-5 fw-bold ">Recomendações</h3>
                 <section className="justify-content-center d-flex flex-wrap">
-                    {produtos.map((item) => (
+                    {produtos.map((item, i) => (
 
-                        <Card key={item.id} value={item.name} className="shadow rounded m-3 p-0 d-flex flex-md-row justify-content-md-center " style={{ maxWidth: '40rem' }}>
+                        <Card item={item} key={item.id} className="shadow rounded m-3 p-0 d-flex flex-md-row justify-content-md-center " style={{ maxWidth: '40rem' }}>
 
                             <Card.Body className="m-0 p-0 d-flex position-relative" style={{ width: "640px", height: "300px" }}>
                                 <Card.Img className="w-100" style={{ objectFit: "cover" }} src={getCoverImage(item.images, item.name)} />
@@ -108,10 +108,10 @@ const RecomendationList = () => {
                                     {item.city.name + " . "}
                                     <LocationMapModal/>
                                 </Card.Text>
-                                {item.characteristics.map((c) => {
+                                {item.characteristics.map((c, index) => {
 
                                     return (
-                                        <Card.Img key={c.id} className="mx-1" src={c.icon} style={{width: '15px'}}/>
+                                        <Card.Img key={index} className="mx-1" src={c.icon} style={{width: '15px'}}/>
                                     )
                                 })}
                                 <Card.Text className="mt-2 mt-sm-3" style={{ fontSize: '10px' }}>
