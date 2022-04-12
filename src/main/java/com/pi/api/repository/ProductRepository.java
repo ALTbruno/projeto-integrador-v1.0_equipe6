@@ -16,6 +16,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
 	Long countProductByCategoryId(Long categoryId);
 
-	@Query(value = "SELECT * FROM products INNER JOIN cities ON products.id_city = cities.id AND cities.name LIKE %?1% WHERE products.id NOT IN (SELECT reservations.id_product FROM reservations WHERE checkout_date BETWEEN ?2 AND ?3)", nativeQuery = true)
+	@Query(value = "SELECT * FROM products INNER JOIN cities ON products.id_city = cities.id AND cities.name LIKE %?1% WHERE products.id NOT IN (SELECT reservations.id_product FROM reservations WHERE (checkin_date BETWEEN ?2 AND ?3) OR (checkout_date BETWEEN ?2 AND ?3))", nativeQuery = true)
 	Page<Product> buscarPorCidadeEDatasDisponiveis(String cityName, String checkinDate, String checkoutDate, Pageable pageable);
 }
