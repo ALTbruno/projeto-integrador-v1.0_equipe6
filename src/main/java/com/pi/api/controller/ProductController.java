@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*", allowedHeaders = "")
@@ -72,4 +71,8 @@ public class ProductController {
         return ResponseEntity.ok(productService.listarPorCidade(cityName, pageable));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<Page<Product>> listarPorCidadeEDatasDisponiveis(@RequestParam String city, @RequestParam String checkin, @RequestParam String checkout, Pageable pageable) {
+        return ResponseEntity.ok(productService.listarPorCidadeEDatasDisponiveis(city, checkin, checkout, pageable));
+    }
 }
