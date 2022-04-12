@@ -40,8 +40,8 @@ const Map = () => {
             "icon": ""
         }
     ],
-    "latitude": null,
-    "longitude": null
+    "latitude": 0,
+    "longitude": 0
   }]);
 
 
