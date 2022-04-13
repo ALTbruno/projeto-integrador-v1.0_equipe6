@@ -1,8 +1,9 @@
 import React from "react";
-import { Form, FormGroup, FormLabel, FormControl, FormText, Button, ButtonGroup } from "react-bootstrap";
-import { MdRoom, MdWifi, MdPool } from "react-icons/md";
+import { Form, FormGroup, FormLabel, FormControl, FormText, Button} from "react-bootstrap";
+
 
 const CriacaoProdutos = () => {
+
 
     return (
         <>
@@ -86,16 +87,14 @@ const CriacaoProdutos = () => {
                                 <FormControl className="shadow" as="textarea" rows={7}/>
                             </div>
                             <div className="mx-2 w-100">
-                                <FormText>Politicas de Cancelamentoa</FormText>
+                                <FormText>Politicas de Cancelamento</FormText>
                                 <FormControl className="shadow" as="textarea" rows={7}/>
                             </div>
                         </div>
                     </FormGroup>
                     
-                        <Button className="fw-bold" style={{backgroundColor: '#1DBEB4', border: '#1DBEB4'}}>Criar</Button>
+                        <Button className="mt-5 fw-bold" style={{backgroundColor: '#1DBEB4', border: '#1DBEB4'}}>Criar</Button>
                        
-                    
-                        
                 </Form>
             </div>
         </>

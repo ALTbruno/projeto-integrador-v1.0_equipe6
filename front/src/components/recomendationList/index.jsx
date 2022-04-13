@@ -105,13 +105,13 @@ const RecomendationList = () => {
 
                                 <Card.Text className="mb-0 ">
                                     <MdRoom className="me-1" />
-                                    {item.city.name + " . "}
+                                    {item.city.name}
                                     <LocationMapModal/>
                                 </Card.Text>
                                 {item.characteristics.map((c, index) => {
 
                                     return (
-                                        <Card.Img key={index} className="mx-1" src={c.icon} style={{width: '15px'}}/>
+                                        <Card.Img key={index} className="mx-1" src={c.icon} alt={c.name} style={{width: '15px'}}/>
                                     )
                                 })}
                                 <Card.Text className="mt-2 mt-sm-3" style={{ fontSize: '10px' }}>
