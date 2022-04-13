@@ -23,7 +23,13 @@ const PaginaProdutos = () => {
     const [produtos, setProdutos] = useState({
         "id": null,
         "name": "",
+        "latitude": 0,
+        "longitude": 0,
+        "score": 0.0,
         "description": "",
+        "rules": "",
+        "healthAndSafety": "",
+        "cancellationPolicy": "",
         "category": {
             "id": null,
             "title": "",
@@ -147,9 +153,13 @@ const PaginaProdutos = () => {
             </div>
 
             {/* Bloco de Endereço */}
-            <div className="p-1 d-flex align-items-center" style={{ backgroundColor: "#bfbfbf" }}>
-                <div className="ms-auto me-5 d-flex align-items-center">
+            <div className="p-1 d-flex align-items-around" style={{ backgroundColor: "#bfbfbf" }}>
+                <div className="mx-5 d-flex align-items-center">
+                    
                     <StarRating />
+                    
+                </div>
+                <div className="ms-auto mx-5 d-flex align-items-center">
                     <Classification />
                 </div>
             </div>
@@ -188,7 +198,7 @@ const PaginaProdutos = () => {
                 <div className="p-1 rounded-3" style={{ backgroundColor: "#bfbfbf" }}>
                     <h2 className="ms-3" >Descrição</h2>
                 </div>
-                <div className="p-1">
+                <div className="ms-5 p-1">
                     <p>{produtos.description}</p>
                 </div>
             </div>
@@ -253,8 +263,21 @@ const PaginaProdutos = () => {
                 <div className="p-1 rounded-3" style={{ backgroundColor: "#bfbfbf" }}>
                     <h2 className="ms-3 " style={{ backgroundColor: "#bfbfbf" }}>Bloco Politicas do Produto</h2>
                 </div>
-                <div className="p-1">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam adipisci modi blanditiis harum velit repellat et nisi qui delectus! Earum culpa ex natus non laudantium repellat voluptatibus, incidunt amet quibusdam!</p>
+                <div className="p-4 d-flex justify-content-between">
+                    <div>
+                        <h5>Regras da Casa</h5>
+                        <p>{produtos.rules}</p>
+                    </div>
+
+                    <div>
+                        <h5>Saúde e Segurança</h5>
+                        <p> {produtos.healthAndSafety} </p>
+                    </div>
+
+                    <div>
+                        <h5>Politicas de Cancelamento</h5>
+                        <p> {produtos.cancellationPolicy} </p>
+                    </div>
                 </div>
             </div>
         </>
