@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Form, FormGroup, FormLabel, FormControl, FormText, Button} from "react-bootstrap";
+import api from "../../services";
 
 
 const CriacaoProdutos = () => {
+
+    const [protudoNovo, setProdutoNovo] = useState({
+        "name": "",
+    })
+
+    useEffect(() => {
+        api.post
+    })
 
 
     return (
@@ -20,7 +29,7 @@ const CriacaoProdutos = () => {
                     <div className="d-flex">
                         <FormGroup className="me-2 p-1 w-100">
                             <FormLabel>Nome do Produto</FormLabel>
-                            <FormControl className="shadow" type="text" placeholder="Digite o Nome do Produto"/>
+                            <FormControl className="shadow" type="text" placeholder="Digite o Nome do Produto" onChange={setProdutoNovo()}/>
                         </FormGroup>
 
                         <FormGroup className=" p-1 w-50 ">
