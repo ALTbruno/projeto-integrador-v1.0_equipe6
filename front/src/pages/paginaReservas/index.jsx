@@ -1,15 +1,12 @@
 import api from '../../services/index';
-import { ReservationDetailCard } from '../../components/reservationDetailCard';
 import React, { useState, useEffect } from 'react';
 import { ReservationForm } from "../../components/reservationForm";
+import { useParams, useNavigate } from 'react-router-dom';
 import './calendar.scss';
-import { useParams } from 'react-router-dom';
-
-
 
 const PaginaReserva = () => {
-
-    const [produtos, setProdutos] = useState({  
+    const navigate = useNavigate();
+    const [produtos, setProdutos] = useState({
         "id": null,
         "name": "",
         "description": "",
@@ -60,12 +57,13 @@ const PaginaReserva = () => {
             }
         ]
     });
-    
     const { id } = useParams();
+
 
     useEffect(() => {
         api.get(`/products/${id}`).then(response => {
             setProdutos(response.data);
+            console.log(id)
         })
     }, [id]);
 
@@ -86,11 +84,7 @@ const PaginaReserva = () => {
             <div className="mt-5 d-lg-flex justify-content-center">
 
                 {/* Formulario */}
-                <ReservationForm  />
-
-                {/* Detalhes da Reserva */}
-                <ReservationDetailCard/>
-
+                <ReservationForm product={produtos} />
             </div>
 
             {/* Bloco Politicas do Produto */}

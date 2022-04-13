@@ -1,7 +1,9 @@
-import { useParams, Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
 import DatePicker from 'react-datepicker';
 import api from '../../services/index';
+import { Context } from "../../context/context";
+import { toast } from 'react-toastify';
 import StarRating from "../../components/avaliationStars";
 import Classification from "../../components/classification";
 import ProdutosModal from "../../components/predutosModal";
@@ -12,10 +14,11 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 
 const PaginaProdutos = () => {
+    const { logado } = useContext(Context);
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [largeWidth, setLargeWidth] = useState(false);
-    const navegar = useNavigate()
+    const navigate = useNavigate()
     const { id } = useParams();
     const [produtos, setProdutos] = useState({
         "id": null,
@@ -71,7 +74,6 @@ const PaginaProdutos = () => {
         "longitude": 0,
     });
 
-
     useEffect(() => {
         api.get(`/products/${id}`).then(response => {
             setProdutos(response.data);
@@ -92,7 +94,27 @@ const PaginaProdutos = () => {
 
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+    
+    const userLogged = () => {
+        if (!logado) {
+            notifyErrorReservaLogin()
+            navigate('/login')
+        } else {
+            navigate(`/produto/${id}/reserva`)
+        }
+    }
 
+    const notifyErrorReservaLogin = () => toast.error('Para fazer uma reserva você precisa estar logado', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+    
+    // calendar
     const days = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
     const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
     const locale = {
@@ -106,7 +128,7 @@ const PaginaProdutos = () => {
     };
 
     const setValuesDate = (dates) => {
-        const [start, end] = dates;
+        let [start, end] = dates;
         setStartDate(start);
         setEndDate(end);
     };
@@ -120,7 +142,7 @@ const PaginaProdutos = () => {
                     <h2 className="ms-5 my-0 fw-bold text-light">{produtos.name}</h2>
                 </div>
                 <div className="ms-auto me-5 text-light">
-                    <a href="/">voltar</a>
+                    <Link to={-1}>voltar</Link>
                 </div>
             </div>
 
@@ -209,7 +231,8 @@ const PaginaProdutos = () => {
                     />
                     <div className="content-calendar">
                         <h3>Adicione as datas da sua viagem para obter preço exatos</h3>
-                        <Link className="btn border-3 w-100 p-2 text-light fw-bold" style={{ backgroundColor: '#1DBEB4', border: '#1DBEB4' }} to={`/produto/${id}/reserva`}>Iniciar reserva</Link>
+                        <button className="btn border-3 w-100 p-2 text-light fw-bold" style={{ backgroundColor: '#1DBEB4', border: '#1DBEB4' }} onClick={() => userLogged()}>
+                        Iniciar reserva</button>
                     </div>
                 </div>
             </section>

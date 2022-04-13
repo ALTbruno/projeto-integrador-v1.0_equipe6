@@ -1,13 +1,38 @@
-import React ,{ useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { Form, FormGroup, FormControl, FormLabel, Card } from "react-bootstrap";
 import { AiOutlineCheckCircle } from "react-icons/ai";
+import { ReservationDetailCard } from '../../components/reservationDetailCard';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export const ReservationForm = (props) => {
+export const ReservationForm = ({ product }) => {
+    const [user, setUser] = useState({});
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
+    const [checkTime, setCheckTime] = useState(null);
     const [largeWidth, setLargeWidth] = useState(false);
+    const [reservation, setReservation] = useState({
+        "checkinTime": checkTime,
+        "checkinDate": startDate,
+        "checkoutDate": endDate,
+        "customer": user,
+        "product": product
+    });
+    
+
+    useEffect(() => {
+        setUser(JSON.parse(localStorage.getItem('user')));
+    }, [])
+
+    useEffect(() => {
+        setReservation({
+            "checkinTime": checkTime,
+            "checkinDate": startDate,
+            "checkoutDate": endDate,
+            "customer": user,
+            "product": product
+        });
+    }, [checkTime, startDate, endDate, user, product])
 
     useEffect(() => {
         window.innerWidth > 559 ? setLargeWidth(true) : setLargeWidth(false);
@@ -62,25 +87,26 @@ export const ReservationForm = (props) => {
         setStartDate(start);
         setEndDate(end);
     };
+    console.log(new Date(2022 , 2 , 1))
 
     return (
         <>
             <div className="w-xl-50 mx-sm-3">
-                    <h5>Complete seus Dados</h5>
-                    <Form className="card mb-5 p-4 d-flex flex-lg-row justify-content-lg-around w-100">
-                        <FormGroup className="mx-2 w-100">
-                            <FormLabel className="mb-0"> Nome</FormLabel>
-                            <FormControl type="text" placeholder="Digite seu nome"/>
+                <h5>Complete seus Dados</h5>
+                <Form className="card mb-5 p-4 d-flex flex-lg-row justify-content-lg-around w-100">
+                    <FormGroup className="mx-2 w-100">
+                        <FormLabel className="mb-0">Nome</FormLabel>
+                        <FormControl name='firstName' readOnly={true} disabled value={user.firstName || ''} type="text" placeholder="Digite seu nome" />
 
                         <FormLabel className="mb-0 mt-4">E-mail</FormLabel>
-                        <FormControl type="email" placeholder="name@example.com" />
+                        <FormControl disabled name='email' readOnly={true} value={user.email || ''} type="email" placeholder="name@example.com" />
                     </FormGroup>
                     <FormGroup className="mx-2 w-100">
                         <FormLabel className="mb-0">Sobrenome</FormLabel>
-                        <FormControl type="text" placeholder="Digite seu sobrenome" />
+                        <FormControl disabled name='lastName' readOnly={true} value={user.lastName || ''} type="text" placeholder="Digite seu sobrenome" />
 
                         <FormLabel className="mb-0 mt-4">Cidade</FormLabel>
-                        <FormControl type="text" placeholder="Digite sua cidade" />
+                        <FormControl type="text" name='city' placeholder="Digite sua cidade" />
                     </FormGroup>
                 </Form>
 
@@ -93,15 +119,13 @@ export const ReservationForm = (props) => {
                             id="calendar"
                             locale={locale}
                             formatWeekDay={(locale) => locale[0]}
-                            placeholder={true}
                             selected={startDate}
                             onChange={setValuesDate}
-                            setOpen={true}
-                            shouldCloseOnSelect={false}
                             startDate={startDate}
                             endDate={endDate}
-                            minDate={new Date() - 2}
-                            dateFormat="dd/MM/yyyy"
+                            minDate={new Date()}
+                            // excludeDates={[new Date() - 2, new Date() - 1]}
+                            dateFormat="yyyy/MM/dd"
                             selectsRange={true}
                             monthsShown={largeWidth ? 2 : 1}
                         />
@@ -115,26 +139,26 @@ export const ReservationForm = (props) => {
                     <Card.Body className="d-xl-flex">
                         <FormGroup className="me-2 mb-sm-3 w-100">
                             <FormLabel className="w-100">Hora prevista de chegada</FormLabel>
-                            <Form.Select className="">
-                                <option>Selecione um horário</option>
-                                <option value="1">07:00</option>
-                                <option value="1">07:15</option>
-                                <option value="1">07:30</option>
-                                <option value="1">07:45</option>
-                                <option value="1">08:00</option>
-                                <option value="1">08:15</option>
+                            <Form.Select onChange={(e) => setCheckTime(e.target.value)} >
+                                <option disabled>Selecione um horário</option>
+                                <option value="07:00">07:00</option>
+                                <option value="07:15">07:15</option>
+                                <option value="07:30">07:30</option>
+                                <option value="07:45">07:45</option>
+                                <option value="08:00">08:00</option>
+                                <option value="08:15">08:15</option>
                             </Form.Select>
                         </FormGroup>
                         <FormGroup className="ms-2 w-100">
                             <FormLabel className="w-100">Hora prevista de Saída</FormLabel>
-                            <Form.Select className="">
-                                <option>Selecione um horário</option>
-                                <option value="1">07:00</option>
-                                <option value="1">07:15</option>
-                                <option value="1">07:30</option>
-                                <option value="1">07:45</option>
-                                <option value="1">08:00</option>
-                                <option value="1">08:15</option>
+                            <Form.Select >
+                                <option disabled>Selecione um horário</option>
+                                <option value="07:00">07:00</option>
+                                <option value="07:15">07:15</option>
+                                <option value="07:30">07:30</option>
+                                <option value="07:45">07:45</option>
+                                <option value="08:00">08:00</option>
+                                <option value="08:15">08:15</option>
                             </Form.Select>
                         </FormGroup>
                     </Card.Body>
@@ -142,6 +166,9 @@ export const ReservationForm = (props) => {
                 </Card>
 
             </div>
+            {/* Detalhes da Reserva */}
+            <ReservationDetailCard reservation={reservation} />
+
         </>
     )
 }
