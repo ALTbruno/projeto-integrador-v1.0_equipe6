@@ -2,6 +2,7 @@ package com.pi.api.service;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,12 +30,12 @@ public class S3Service {
 		return convertedFile;
 	}
 
-	public String uploadFileTos3bucket(String directory, String fileName, File file) {
+	public void uploadFileTos3bucket(String directory, String fileName, File file) {
 		try {
-			s3client.putObject(new PutObjectRequest(bucketName, directory + fileName, file));
+			s3client.putObject(new PutObjectRequest(bucketName, directory + fileName, file)
+					.withCannedAcl(CannedAccessControlList.PublicRead));
 		}catch(AmazonServiceException e) {
-			return "uploadFileTos3bucket().Uploading failed :" + e.getMessage();
+			e.getMessage();
 		}
-		return "Uploading Successfull -> ";
 	}
 }
