@@ -19,35 +19,11 @@ import java.time.format.DateTimeFormatter;
 @RequestMapping("/api/characteristics")
 public class CharacteristicController {
 
-	@Value("${endpointUrl}")
-	private String endpointUrl;
-
-	@Value("${bucketName}")
-	private String bucketName;
-
-	@Value("${mainDirectory}")
-	private String mainDirectory;
-
 	@Autowired
 	private CharacteristicService characteristicService;
 
-	@Autowired
-	private S3Service s3Service;
-
 	@PostMapping("/add")
 	public ResponseEntity<Characteristic> criar(@ModelAttribute Characteristic characteristic, @RequestPart MultipartFile iconFile) throws IOException {
-
-		String directory = mainDirectory + "images/" + "characteristics/";
-
-		File file = s3Service.convertMultiPartToFile(iconFile);
-		String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss-ms"));
-		String fileName = dateTime + "_" + iconFile.getOriginalFilename();
-		s3Service.uploadFileTos3bucket(directory, fileName, file);
-		String fileUrl = "https://" + bucketName + "." + endpointUrl + "/" + directory + fileName;
-		file.delete();
-
-		characteristic.setIcon(fileUrl);
-
-		return ResponseEntity.status(HttpStatus.CREATED).body(characteristicService.criar(characteristic));
+		return ResponseEntity.status(HttpStatus.CREATED).body(characteristicService.criar(characteristic, iconFile));
 	}
 }

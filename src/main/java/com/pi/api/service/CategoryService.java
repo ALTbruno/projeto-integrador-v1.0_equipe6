@@ -4,8 +4,11 @@ import com.pi.api.model.Category;
 import com.pi.api.repository.CategoryRepository;
 import com.pi.api.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +21,16 @@ public class CategoryService {
 	@Autowired
 	private ProductRepository productRepository;
 
-	public Category salvar(Category category) {
+	@Autowired
+	private S3Service s3Service;
+
+	@Value("${mainDirectory}")
+	private String mainDirectory;
+
+	public Category salvar(Category category, MultipartFile imageFile) throws IOException {
+		String directory = mainDirectory + "images/" + "categories/";
+		String url = s3Service.uploadFileTos3bucket(directory, imageFile);
+		category.setImageUrl(url);
 		return categoryRepository.save(category);
 	}
 

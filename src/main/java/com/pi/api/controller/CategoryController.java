@@ -38,19 +38,7 @@ public class CategoryController {
 
     @PostMapping("/add")
     public ResponseEntity<Category> cadastrar(@ModelAttribute Category category, @RequestPart MultipartFile imageFile) throws IOException {
-
-        String directory = mainDirectory + "images/" + "categories/";
-
-        File file = s3Service.convertMultiPartToFile(imageFile);
-        String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss-ms"));
-        String fileName = dateTime + "_" + imageFile.getOriginalFilename();
-        s3Service.uploadFileTos3bucket(directory, fileName, file);
-        String fileUrl = "https://" + bucketName + "." + endpointUrl + "/" + directory + fileName;
-        file.delete();
-
-        category.setImageUrl(fileUrl);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.salvar(category));
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.salvar(category, imageFile));
     }
 
     @GetMapping("/{id}")
