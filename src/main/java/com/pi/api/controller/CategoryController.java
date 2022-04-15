@@ -2,11 +2,18 @@ package com.pi.api.controller;
 
 import com.pi.api.model.Category;
 import com.pi.api.service.CategoryService;
+import com.pi.api.service.S3Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -14,11 +21,35 @@ import java.util.Optional;
 @RequestMapping("/api/categories")
 public class CategoryController {
 
+    @Value("${endpointUrl}")
+    private String endpointUrl;
+
+    @Value("${bucketName}")
+    private String bucketName;
+
+    @Value("${mainDirectory}")
+    private String mainDirectory;
+
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private S3Service s3Service;
+
     @PostMapping("/add")
-    public ResponseEntity<Category> cadastrar(@RequestBody Category category) {
+    public ResponseEntity<Category> cadastrar(@ModelAttribute Category category, @RequestPart MultipartFile imageFile) throws IOException {
+
+        String directory = mainDirectory + "images/" + "categories/";
+
+        File file = s3Service.convertMultiPartToFile(imageFile);
+        String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss-ms"));
+        String fileName = dateTime + "_" + imageFile.getOriginalFilename();
+        s3Service.uploadFileTos3bucket(directory, fileName, file);
+        String fileUrl = "https://" + bucketName + "." + endpointUrl + "/" + directory + fileName;
+        file.delete();
+
+        category.setImageUrl(fileUrl);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.salvar(category));
     }
 
