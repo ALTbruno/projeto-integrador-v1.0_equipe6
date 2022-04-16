@@ -1,20 +1,43 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import Pagination from '../pagination';
+import { useParams, useSearchParams } from 'react-router-dom';
 import CardResult from '../cardResult/cardResult';
 import api from '../../services/index';
 import './index.scss';
 
 export default function ResultByCity() {
   const [hoteis, setHoteis] = useState([]);
+  const hoteisPage = {
+    content: hoteis,
+    last: false,
+    totalPages: '...',
+    totalElements: 0,
+    size: 12,
+    number: 0,
+    first: true,
+    numberOfElements: 0,
+    empty: false,
+  };
+  const [pageNumber, setPageNumber] = useState(0);
+  const [page, setPage] = useState(hoteisPage);
+  const [searchParams, setSearchParams] = useSearchParams();
   const { city } = useParams();
+  let checkin = searchParams.get('checkin');
+  let checkout = searchParams.get('checkout');
 
 
   useEffect(() => {
-    api.get(`products/city=${city}`).then(response => {
+    api.get(`products/search?city=${city}&checkin=${checkin}&checkout=${checkout}&size=1&page=${pageNumber}`).then(response => {
+      setPage(response.data);
       setHoteis(response.data.content);
+    }).catch((error) => {
+      console.log(error)
     })
-  }, [city])
+  }, [city, checkin, checkout, pageNumber])
 
+  const handlePageChange = (newNumber) => {
+    setPageNumber(newNumber);
+  };
   return (
     <>
       <section className='container-results' >
@@ -25,8 +48,9 @@ export default function ResultByCity() {
           {hoteis.length > 0 ?
             hoteis.map(hotel => (
               <CardResult key={hotel.id} item={hotel} />
-            )) : <p>Ops sem hoteis nesta região</p>}
+              )) : <p>Ops sem hoteis nesta região</p>}
         </div>
+              <Pagination page={page} onChange={handlePageChange} />
       </section>
     </>
   )

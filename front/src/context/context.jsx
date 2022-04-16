@@ -12,7 +12,7 @@ function Auth({ children }) {
         const user = localStorage.getItem('user');
         const token = localStorage.getItem('token');
         if (user) {
-            api.defaults.headers.Authorization = `Bearer ${token}`;
+            api.defaults.headers.common['Authorization'] = `Bearer ${token.replace(/['"]+/g, '')}`; 
             setLogado(true);
         }
         setLoading(false);
@@ -27,7 +27,7 @@ function Auth({ children }) {
     const handleLogin = (token, user) =>{
         localStorage.setItem('token', JSON.stringify(token));
         localStorage.setItem('user', JSON.stringify(user));
-        api.defaults.headers.Authorization = `Bearer ${token}`;
+        api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         setLogado(true);
     }
 
