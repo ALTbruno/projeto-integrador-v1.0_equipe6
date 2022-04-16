@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import api from '../../services';
 import DatePicker from 'react-datepicker';
 import { Form, FormGroup, FormControl, FormLabel, Card } from "react-bootstrap";
 import { AiOutlineCheckCircle } from "react-icons/ai";
@@ -9,6 +10,7 @@ export const ReservationForm = ({ product }) => {
     const [user, setUser] = useState({});
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
+    const [resevations, setResevations] = useState([])
     const [checkTime, setCheckTime] = useState(null);
     const [largeWidth, setLargeWidth] = useState(false);
     const [reservation, setReservation] = useState({
@@ -23,6 +25,12 @@ export const ReservationForm = ({ product }) => {
     useEffect(() => {
         setUser(JSON.parse(localStorage.getItem('user')));
     }, [])
+    
+    useEffect(() => {
+        api.get(`/reservations/productId=${product.id}`).then(response => {
+            setResevations(response.data);
+        })
+    },[product])
 
     useEffect(() => {
         setReservation({
@@ -87,8 +95,30 @@ export const ReservationForm = ({ product }) => {
         setStartDate(start);
         setEndDate(end);
     };
-    console.log(new Date(2022 , 2 , 1))
-
+    // exemplo para lembrar de como colocar uma data no excludeDates
+    // console.log(new Date(2022 , 2 , 1))
+    const generateNewDate = (date) => {
+        let day;
+        let month;
+        let year;
+        day = new Date(date).getUTCDate();
+        month = new Date(date).getUTCMonth();
+        year = new Date(date).getUTCFullYear();
+        return new Date(year, month, day);
+    }
+    const generateExcludeDatesInterval = () => {
+        let dates = [{
+            start: new Date(),
+            end: new Date()
+        }];
+        resevations.map(reserva => {
+            dates.push({
+                start: generateNewDate(reserva.checkinDate),
+                end: generateNewDate(reserva.checkoutDate)
+            })
+        })
+        return dates;    
+    }
     return (
         <>
             <div className="w-xl-50 mx-sm-3">
@@ -124,7 +154,7 @@ export const ReservationForm = ({ product }) => {
                             startDate={startDate}
                             endDate={endDate}
                             minDate={new Date()}
-                            // excludeDates={[new Date() - 2, new Date() - 1]}
+                            excludeDateIntervals={generateExcludeDatesInterval()}
                             dateFormat="yyyy/MM/dd"
                             selectsRange={true}
                             monthsShown={largeWidth ? 2 : 1}

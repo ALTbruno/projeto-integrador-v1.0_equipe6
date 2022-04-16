@@ -18,6 +18,7 @@ const PaginaProdutos = () => {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [largeWidth, setLargeWidth] = useState(false);
+    const [resevations, setResevations] = useState([])
     const navigate = useNavigate()
     const { id } = useParams();
     const [produtos, setProdutos] = useState({
@@ -84,6 +85,9 @@ const PaginaProdutos = () => {
         api.get(`/products/${id}`).then(response => {
             setProdutos(response.data);
         })
+        api.get(`/reservations/productId=${id}`).then(response => {
+            setResevations(response.data);
+        })
     }, [id]);
 
     useEffect(() => {
@@ -100,7 +104,7 @@ const PaginaProdutos = () => {
 
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-    
+
     const userLogged = () => {
         if (!logado) {
             notifyErrorReservaLogin()
@@ -119,7 +123,7 @@ const PaginaProdutos = () => {
         draggable: true,
         progress: undefined,
     });
-    
+
     // calendar
     const days = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
     const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
@@ -139,6 +143,28 @@ const PaginaProdutos = () => {
         setEndDate(end);
     };
 
+    const generateNewDate = (date) => {
+        let day;
+        let month;
+        let year;
+        day = new Date(date).getUTCDate();
+        month = new Date(date).getUTCMonth();
+        year = new Date(date).getUTCFullYear();
+        return new Date(year, month, day);
+    }
+    const generateExcludeDatesInterval = () => {
+        let dates = [{
+            start: new Date(),
+            end: new Date()
+        }];
+        resevations.map(reserva => {
+            dates.push({
+                start: generateNewDate(reserva.checkinDate),
+                end: generateNewDate(reserva.checkoutDate)
+            })
+        })
+        return dates;    
+    }
     return (
         <>
             {/* Bloco de Titulo */}
@@ -155,9 +181,9 @@ const PaginaProdutos = () => {
             {/* Bloco de Endereço */}
             <div className="p-1 d-flex align-items-around" style={{ backgroundColor: "#bfbfbf" }}>
                 <div className="mx-5 d-flex align-items-center">
-                    
+
                     <StarRating />
-                    
+
                 </div>
                 <div className="ms-auto mx-5 d-flex align-items-center">
                     <Classification />
@@ -227,11 +253,10 @@ const PaginaProdutos = () => {
                         id="calendar"
                         locale={locale}
                         formatWeekDay={(locale) => locale[0]}
-                        placeholder={true}
                         selected={startDate}
                         onChange={setValuesDate}
-                        setOpen={true}
                         shouldCloseOnSelect={false}
+                        excludeDateIntervals={generateExcludeDatesInterval()}
                         startDate={startDate}
                         endDate={endDate}
                         minDate={new Date() - 2}
@@ -242,7 +267,7 @@ const PaginaProdutos = () => {
                     <div className="content-calendar">
                         <h3>Adicione as datas da sua viagem para obter preço exatos</h3>
                         <button className="btn border-3 w-100 p-2 text-light fw-bold" style={{ backgroundColor: '#1DBEB4', border: '#1DBEB4' }} onClick={() => userLogged()}>
-                        Iniciar reserva</button>
+                            Iniciar reserva</button>
                     </div>
                 </div>
             </section>
