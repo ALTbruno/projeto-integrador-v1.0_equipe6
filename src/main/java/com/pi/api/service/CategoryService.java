@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +29,10 @@ public class CategoryService {
 	private String mainDirectory;
 
 	public Category salvar(Category category, MultipartFile imageFile) throws IOException {
+
+		List<String> allowedFileTypes = Arrays.asList(".jpeg", ".jpg", ".png");
+		if (allowedFileTypes.stream().noneMatch(type -> imageFile.getOriginalFilename().toLowerCase().endsWith(type))) throw new IOException("A imagem deve ser do formato JPEG, JPG ou PNG");
+
 		String directory = mainDirectory + "images/" + "categories/";
 		String url = s3Service.uploadFileTos3bucket(directory, imageFile);
 		category.setImageUrl(url);

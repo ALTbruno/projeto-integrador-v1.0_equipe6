@@ -22,6 +22,9 @@ public class CharacteristicService {
 	private String mainDirectory;
 
 	public Characteristic criar(Characteristic characteristic, MultipartFile iconFile) throws IOException {
+
+		if (!iconFile.getOriginalFilename().toLowerCase().endsWith(".svg")) throw new IOException("O ícone deve ser do tipo SVG");
+
 		String directory = mainDirectory + "images/" + "characteristics/";
 		String url = s3Service.uploadFileTos3bucket(directory, iconFile);
 		characteristic.setIcon(url);
