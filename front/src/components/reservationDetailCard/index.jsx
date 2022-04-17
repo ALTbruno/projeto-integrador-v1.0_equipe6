@@ -1,11 +1,12 @@
-import { Card, CardImg } from "react-bootstrap";
+import { Card, CardImg, Form } from "react-bootstrap";
 import StarRating from "../../components/avaliationStars";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../services";
 
-export const ReservationDetailCard = () => {
-
+export const ReservationDetailCard = ({reservation}) => {
+    const { id } = useParams();
+    const [reserva, setReserva] = useState(reservation);
     const [produtos, setProdutos] = useState({  
         "id": null,
         "name": "",
@@ -57,14 +58,54 @@ export const ReservationDetailCard = () => {
             }
         ]
     });
+    const setDateForPost = (date) => {
+        if (date !== null) {
+            let day = date.getDate().toString().length === 1 ? `0${date.getDate()}` : date.getDate();
+            let month = date.getMonth().toString().length === 1 ? `0${date.getMonth() +1}` : date.getMonth() +1;
+            let year = date.getFullYear();
+            return year + '-' + month + '-' + day;
+        }
+    }
+    const setCheckintimeForPost = (checkIn) => {
+        if (checkIn !== null) {
+            let check = checkIn + ':00'
+            return check.toString();
+        }
+    }
+    const initialReservation = {
+        "checkinTime": setCheckintimeForPost(reserva.checkinTime),
+        "checkinDate": setDateForPost(reserva.checkinDate),
+        "checkoutDate": setDateForPost(reserva.checkoutDate),
+        "customer": reserva.customer,
+        "product": reserva.product
+    }
     
-    const { id } = useParams();
+    useEffect(() => {
+        setReserva(reservation);
+    },[reservation])
 
     useEffect(() => {
         api.get(`/products/${id}`).then(response => {
             setProdutos(response.data);
         })
     }, [id]);
+
+
+    const generateDate = (date) => {
+        let day = date.getDate().toString().length === 1 ? `0${date.getDate()}` : date.getDate();
+        let month = date.getMonth().toString().length === 1 ? `0${date.getMonth() +1}` : date.getMonth() +1;
+        let year = date.getFullYear();
+        return day + '/' + month + '/' + year;
+    }
+
+    const postReserva = (e) => {
+        e.preventDefault();
+        api.post('reservations/book', initialReservation).then(response => {
+            console.log(response.data);
+        }).catch(error => {
+            console.log(error);
+        })
+    }
 
     return (
         <>
@@ -80,12 +121,12 @@ export const ReservationDetailCard = () => {
                     <Card.Title className="fw-bold">{produtos.name}</Card.Title>
                     <StarRating/>
                 </Card.Body>
-                <Card.Body>
+                <Form onSubmit={(e) => postReserva(e)}>
                     <Card.Subtitle className="">{produtos.city.name}</Card.Subtitle>
-                    <Card.Text className="my-2">Check-in </Card.Text>
-                    <Card.Text className="">Check-out </Card.Text>
-                    <Card.Link className="mt-4 border btn w-100 decoration-none" style={{ backgroundColor: '#1DBEB4', border: '#1DBEB4' }}>Confirmar Reserva</Card.Link>
-                </Card.Body>
+                    <Card.Text className="my-2">{`Check-in: ${reserva.checkinDate ? generateDate(reserva.checkinDate) : '__/__/__'}`}</Card.Text>
+                    <Card.Text className="">{`Check-out: ${reserva.checkoutDate ? generateDate(reserva.checkoutDate) : '__/__/__'}`}</Card.Text>
+                    <button className="mt-4 border btn w-100 decoration-none" style={{ backgroundColor: '#1DBEB4', border: '#1DBEB4' }}>Confirmar Reserva</button>
+                </Form>
             </Card>
         </>
     )

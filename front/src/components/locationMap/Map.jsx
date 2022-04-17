@@ -8,48 +8,13 @@ import React from 'react';
   
 
 
-const Map = () => {
+const Map = ({product}) => {
 
-  const [produtos, setProdutos] = useState([{
-    "id": null,
-    "name": "",
-    "description": "",
-    "category": {
-        "id": null,
-        "title": "",
-        "description": "",
-        "imageUrl": "",
-        "totalProducts": null
-    },
-    "city": {
-        "id": null,
-        "name": "",
-        "country": ""
-    },
-    "images": [
-        {
-            "id": null,
-            "title": "",
-            "url": ""
-        }
-    ],
-    "characteristics": [
-        {
-            "id": null,
-            "name": "icon",
-            "icon": ""
-        }
-    ],
-    "latitude": 0,
-    "longitude": 0
-  }]);
-
+  const [produtos, setProdutos] = useState(product);
 
   useEffect(() => {
-      api.get(`/products/`).then(response => {
-          setProdutos(response.data);
-      })
-  }, []);
+    setProdutos(product)
+  }, [product])
 
   const containerStyle = {
     width: '1139px',

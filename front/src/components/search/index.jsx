@@ -1,6 +1,6 @@
-import React, { useLayoutEffect, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams, createSearchParams } from "react-router-dom";
 import api from '../../services/index.js';
 import calendar from "../../assets/icons/calendar.svg";
 import menuLocalizador from "../../assets/icons/icon-menu-localizador.svg";
@@ -8,7 +8,6 @@ import localizador from "../../assets/icons/localizador.svg";
 import "react-datepicker/dist/react-datepicker.css";
 import "./calendar.scss";
 import "./index.scss";
-import { useCallback } from "react";
 
 export default function Search() {
   const [startDate, setStartDate] = useState(null);
@@ -19,11 +18,12 @@ export default function Search() {
   const days = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado",];
   const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
   const navigate = useNavigate();
-  
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [largeWidth, setLargeWidth] = useState(false)
-  
+
   useEffect(() => {
-    window.innerWidth > 1207 ? setLargeWidth(true) : setLargeWidth(false)  
+    window.innerWidth > 1207 ? setLargeWidth(true) : setLargeWidth(false)
     const handleResize = () => {
       if (window.innerWidth > 1207) {
         setLargeWidth(true)
@@ -105,10 +105,26 @@ export default function Search() {
     document.getElementById("input-destino").value = e.target.attributes.value.value;
     close()
   };
+  const generateDate = (date) => {
+    if (date !== null) {
+      let day = date.getDate().toString().length === 1 ? `0${date.getDate()}` : date.getDate();
+      let month = date.getMonth().toString().length === 1 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
+      let year = date.getFullYear();
+      return year + '/' + month + '/' + day;
+    }
+  }
 
   const searchByCitys = (e) => {
     e.preventDefault();
-    navigate(`/search/${cityForSearch}`)
+    let checkin = generateDate(startDate);
+    let checkout = generateDate(endDate);
+    navigate({
+      pathname: `/search/${cityForSearch}`,
+      search: `${createSearchParams({
+        checkin: checkin,
+        checkout: checkout,
+      })}`
+    })
   }
 
   return (

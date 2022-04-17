@@ -27,16 +27,6 @@ const LoginForm = () => {
         progress: undefined,
     });
 
-    const notifyErrorReservaLogin = () => toast.error('Para fazer uma reserva você precisa estar logado', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-    });
-
 
     /** Salva os dados fornecidos pelo usuario */
     const fillLogin = (event) => {
