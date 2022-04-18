@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../../services';
 import DatePicker from 'react-datepicker';
 import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 import { Form, FormGroup, FormControl, FormLabel, Card } from "react-bootstrap";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { ReservationDetailCard } from '../../components/reservationDetailCard';
@@ -21,6 +22,7 @@ export const ReservationForm = ({ product }) => {
         "customer": user,
         "product": product
     });
+    const { id } = useParams();
 
 
     useEffect(() => {
@@ -28,7 +30,8 @@ export const ReservationForm = ({ product }) => {
     }, [])
 
     useEffect(() => {
-        api.get(`/reservations/productId=${product.id}`).then(response => {
+        console.log("chamou")
+        api.get(`/reservations/productId=${id}`).then(response => {
             setResevations(response.data);
         })
     }, [product])
@@ -182,12 +185,12 @@ export const ReservationForm = ({ product }) => {
                     <Card.Body className="d-xl-flex">
                         <FormGroup className="me-2 mb-sm-3 w-100">
                             <FormLabel className="w-100">Hora prevista de chegada</FormLabel>
-                            <Form.Select id="checkTime" onChange={(e) => {
+                            <Form.Select defaultValue={'DEFAULT'} id="checkTime" onChange={(e) => {
                                 e.target.classList.remove('is-invalid')
                                 setCheckTime(e.target.value)
                             }
                             } >
-                                <option value={null} disabled selected >Selecione um horário</option>
+                                <option value="DEFAULT" disabled >Selecione um horário</option>
                                 <option value="07:00">07:00</option>
                                 <option value="07:15">07:15</option>
                                 <option value="07:30">07:30</option>

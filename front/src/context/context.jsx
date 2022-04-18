@@ -14,8 +14,9 @@ function Auth({ children }) {
         if (user) {
             api.defaults.headers.common['Authorization'] = `Bearer ${token.replace(/['"]+/g, '')}`; 
             setLogado(true);
+        } else {
+            setLoading(false);
         }
-        setLoading(false);
     }, []);
     
     const handleLogout = () => {
