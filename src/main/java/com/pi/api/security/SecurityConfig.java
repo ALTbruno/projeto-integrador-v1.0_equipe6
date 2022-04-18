@@ -41,11 +41,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/api/categories/add", "/api/categories/edit/**", "/api/categories/delete/**").hasAuthority("ADMIN")
 				.antMatchers(HttpMethod.GET, "/api/cities/**").permitAll()
 				.antMatchers("/api/cities/add").hasAuthority("ADMIN")
+				.antMatchers(HttpMethod.GET, "/api/characteristics/**").permitAll()
+				.antMatchers("/api/characteristics/add").hasAuthority("ADMIN")
 				.antMatchers(HttpMethod.GET, "/api/products/**").permitAll()
 				.antMatchers("/api/products/add", "/api/products/edit/**", "/api/products/delete/**").hasAuthority("ADMIN")
 				.antMatchers("/api/reservations/book").hasAuthority("CUSTOMER")
-//				.antMatchers("/api/users/id=**").hasRole("ADMIN")
-//				.anyRequest().hasAuthority("ADMIN")
 				.and()
 				.userDetailsService(userService)
 				.exceptionHandling()
@@ -58,11 +58,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-	}
-
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
 	}
 
 	@Bean

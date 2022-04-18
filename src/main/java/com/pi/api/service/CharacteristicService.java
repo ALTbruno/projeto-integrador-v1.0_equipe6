@@ -1,5 +1,6 @@
 package com.pi.api.service;
 
+import com.pi.api.dto.CharacteristicDTO;
 import com.pi.api.model.Characteristic;
 import com.pi.api.repository.CharacteristicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +19,20 @@ public class CharacteristicService {
 	@Autowired
 	private S3Service s3Service;
 
-	@Value("${mainDirectory}")
-	private String mainDirectory;
+	@Value("${mainPath}")
+	private String mainPath;
 
-	public Characteristic criar(Characteristic characteristic, MultipartFile iconFile) throws IOException {
+	public Characteristic criar(CharacteristicDTO characteristicDTO) throws IOException {
 
-		if (!iconFile.getOriginalFilename().toLowerCase().endsWith(".svg")) throw new IOException("O ícone deve ser do tipo SVG");
+		MultipartFile image = characteristicDTO.getImage();
 
-		String directory = mainDirectory + "images/" + "characteristics/";
-		String url = s3Service.uploadFileTos3bucket(directory, iconFile);
+		if (!image.getOriginalFilename().toLowerCase().endsWith(".svg")) throw new IOException("O ícone deve ser do tipo SVG");
+
+		String fullPath = mainPath + "images/" + "characteristics/";
+		String url = s3Service.uploadFileTos3bucket(fullPath, image);
+
+		Characteristic characteristic = new Characteristic();
+		characteristic.setName(characteristicDTO.getName());
 		characteristic.setIcon(url);
 		return characteristicRepository.save(characteristic);
 	}

@@ -1,16 +1,23 @@
-package com.pi.api.model;
+package com.pi.api.dto;
 
-public class LoginRequest {
+import com.pi.api.model.User;
+
+public class LoginDTO {
 
 	private String email;
 	private String password;
 
-	public LoginRequest() {
+	public LoginDTO() {
 	}
 
-	public LoginRequest(String email, String password) {
+	public LoginDTO(String email, String password) {
 		this.email = email;
 		this.password = password;
+	}
+
+	public LoginDTO(User user) {
+		this.email = user.getEmail();
+		this.password = user.getPassword();
 	}
 
 	public String getEmail() {

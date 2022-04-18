@@ -1,5 +1,6 @@
 package com.pi.api.controller;
 
+import com.pi.api.dto.ProductDTO;
 import com.pi.api.model.Product;
 import com.pi.api.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -22,8 +22,8 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping("/add")
-    public ResponseEntity<Product> cadastrar(@ModelAttribute Product product, MultipartFile[] imageFiles) throws IOException {
-        return ResponseEntity.status(HttpStatus.CREATED).body(productService.salvar(product, imageFiles));
+    public ResponseEntity<Product> cadastrar(@ModelAttribute ProductDTO productDTO) throws IOException {
+        return ResponseEntity.status(HttpStatus.CREATED).body(productService.salvar(productDTO));
     }
 
     @GetMapping("/{id}")
@@ -42,11 +42,11 @@ public class ProductController {
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<Product> atualizar(@PathVariable Long id, @RequestBody Product product) {
+    public ResponseEntity<Product> atualizar(@PathVariable Long id, @ModelAttribute ProductDTO productDTO) throws IOException {
 
         if (productService.idExiste(id)) {
-            product.setId(id);
-            return ResponseEntity.ok(productService.atualizar(product));
+            productDTO.setId(id);
+            return ResponseEntity.ok(productService.atualizar(productDTO));
         }
 
         return ResponseEntity.badRequest().build();

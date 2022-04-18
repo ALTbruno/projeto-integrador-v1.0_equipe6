@@ -2,15 +2,13 @@ package com.pi.api.controller;
 
 import com.pi.api.model.Admin;
 import com.pi.api.security.JwtUtil;
-import com.pi.api.model.LoginRequest;
+import com.pi.api.dto.LoginDTO;
 import com.pi.api.model.Customer;
-import com.pi.api.model.Role;
 import com.pi.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -30,73 +28,30 @@ public class UserController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-
 
 	@PostMapping("/customers/register")
 	public Map<String, Object> registerHandler(@RequestBody Customer customer) throws Exception {
-
 		String email = customer.getEmail().toLowerCase();
-
-		String emailDomain = "@digitalbooking.com";
-
-		if (email.endsWith(emailDomain)) {
-			throw new Exception("É necessário utilizar e-mail pessoal para realizar essa ação");
-		}
-
-		if (customer.getPassword().length() < 8) {
-			throw new Exception("A senha deve ter no mínimo 8 caracteres");
-		}
-
-		customer.setPassword(passwordEncoder.encode(customer.getPassword()));
-
-		customer.setRole(Role.CUSTOMER);
-
-		customer = (Customer) userService.registrar(customer);
-
+		customer = (Customer) userService.registrarCliente(customer);
 		String token = jwtUtil.generateToken(email);
-
 		return Collections.singletonMap("accessToken", token);
 	}
 
 	@PostMapping("/admin/register")
 	public Map<String, Object> registerHandler(@RequestBody Admin admin) throws Exception {
-
 		String email = admin.getEmail().toLowerCase();
-
-		String emailDomain = "@digitalbooking.com";
-
-		if (!email.endsWith(emailDomain)) {
-			throw new Exception("É necessário utilizar e-mail corporativo para realizar essa ação");
-		}
-
-		if (admin.getPassword().length() < 8) {
-			throw new Exception("A senha deve ter no mínimo 8 caracteres");
-		}
-
-		admin.setPassword(passwordEncoder.encode(admin.getPassword()));
-
-		admin.setRole(Role.ADMIN);
-
-		admin = (Admin) userService.registrar(admin);
-
+		admin = (Admin) userService.registrarAdmin(admin);
 		String token = jwtUtil.generateToken(email);
-
 		return Collections.singletonMap("accessToken", token);
 	}
 
 	@PostMapping("/login")
-	public Map<String, Object> login(@RequestBody LoginRequest loginRequest){
-
+	public Map<String, Object> login(@RequestBody LoginDTO loginDTO){
 		try {
 			UsernamePasswordAuthenticationToken authInputToken =
-					new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword());
-
+					new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword());
 			authenticationManager.authenticate(authInputToken);
-
-			String token = jwtUtil.generateToken(loginRequest.getEmail());
-
+			String token = jwtUtil.generateToken(loginDTO.getEmail());
 			return Collections.singletonMap("accessToken", token);
 		}catch (AuthenticationException authExc){
 			throw new RuntimeException("Invalid Login Credentials");
