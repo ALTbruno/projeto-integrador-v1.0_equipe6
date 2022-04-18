@@ -24,8 +24,6 @@ const PaginaProdutos = () => {
     const [produtos, setProdutos] = useState({
         "id": null,
         "name": "",
-        "latitude": 0,
-        "longitude": 0,
         "score": 0.0,
         "description": "",
         "rules": "",
@@ -82,12 +80,14 @@ const PaginaProdutos = () => {
     });
 
     useEffect(() => {
-        api.get(`/products/${id}`).then(response => {
+        const get = async ()=> {
+        await api.get(`/products/${id}`).then(response => {
             setProdutos(response.data);
         })
-        api.get(`/reservations/productId=${id}`).then(response => {
+        await api.get(`/reservations/productId=${id}`).then(response => {
             setResevations(response.data);
-        })
+        })}
+        get()
     }, [id]);
 
     useEffect(() => {
@@ -121,6 +121,7 @@ const PaginaProdutos = () => {
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
+        theme: "colored",
         progress: undefined,
     });
 

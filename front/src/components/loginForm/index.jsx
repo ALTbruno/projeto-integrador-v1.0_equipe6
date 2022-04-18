@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../context/context";
 import { ToastContainer, toast } from 'react-toastify';
@@ -11,10 +11,15 @@ import React from "react";
 
 const LoginForm = () => {
     const navigate = useNavigate();
-    const { handleLogin } = useContext(Context);
+    const { handleLogin, logado } = useContext(Context);
     const [login, setLogin] = useState({
         email: '',
         password: ''
+    })
+    useEffect(() => {
+        if (logado) {
+            navigate('/');
+        }
     })
 
     const notify = () => toast.error(' Preencha os campos corretamente!', {
@@ -92,7 +97,7 @@ const LoginForm = () => {
                 let token = response.data.accessToken;
                 let user = parseJwt(token);
                 handleLogin(token, user);
-                navigate('/');
+                navigate('/', {replace: true});
             }).catch(error => {
                 toast.error("Por favor, tente novamente, suas credenciais são inválidas", {
                     position: "top-right",

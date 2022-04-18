@@ -60,7 +60,6 @@ const RecomendationList = () => {
 
 
     useEffect(() => {
-        console.log("chamou")
         api.get(`/products?size=8`).then(response => {
             setProdutos(response.data.content);
         })

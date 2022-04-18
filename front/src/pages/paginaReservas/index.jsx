@@ -63,7 +63,6 @@ const PaginaReserva = () => {
     useEffect(() => {
         api.get(`/products/${id}`).then(response => {
             setProdutos(response.data);
-            console.log(id)
         })
     }, [id]);
 
