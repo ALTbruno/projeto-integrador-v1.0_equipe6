@@ -27,7 +27,7 @@ export const ReservationForm = ({ product }) => {
 
     useEffect(() => {
         setUser(JSON.parse(localStorage.getItem('user')));
-    }, [])
+    }, [product])
 
     useEffect(() => {
         console.log("chamou")
