@@ -58,9 +58,7 @@ public class Product {
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private City city;
 
-	@OneToMany
-//	@JoinColumn(name = "product_id")
-	@Fetch(FetchMode.JOIN)
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Set<Image> images;
 

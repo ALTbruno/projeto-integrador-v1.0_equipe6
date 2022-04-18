@@ -1,5 +1,6 @@
 package com.pi.api.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
@@ -22,6 +23,10 @@ public class Image {
     @NotBlank
     @Size(max = 255)
     private String url;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	private Product product;
 
 
     public Image() {
@@ -54,5 +59,13 @@ public class Image {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 }
