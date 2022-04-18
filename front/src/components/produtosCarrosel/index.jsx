@@ -60,7 +60,6 @@ const ProdutosCarrosel = () => {
         ]
     });
     const { id } = useParams();
-    console.log(id)
 
     useEffect(() => {
         api.get(`/products/${id}`).then(response => {
@@ -68,7 +67,6 @@ const ProdutosCarrosel = () => {
         })
     }, [id]);
 
-    console.log(produtos)
 
     return (
         <>

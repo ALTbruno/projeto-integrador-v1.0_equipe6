@@ -103,9 +103,14 @@ export const ReservationDetailCard = ({ reservation, verifyTime, verifyDates }) 
         e.preventDefault();
         if (verifyTime() && verifyDates()) {
             api.post('reservations/book', initialReservation).then(response => {
-                console.log(response.data);
                 toast.success('Reserva realizada com sucesso!', {
-                    position: "center",
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
                     theme: "colored"
                 });
             }).catch(error => {

@@ -287,9 +287,9 @@ const PaginaProdutos = () => {
             {/* Bloco Politicas do Produto */}
             <div className="p-3">
                 <div className="p-1 rounded-3" style={{ backgroundColor: "#bfbfbf" }}>
-                    <h2 className="ms-3 " style={{ backgroundColor: "#bfbfbf" }}>Bloco Politicas do Produto</h2>
+                    <h2 className="ms-3 " style={{ backgroundColor: "#bfbfbf" }}>Politicas da acomodação</h2>
                 </div>
-                <div className="p-4 d-flex justify-content-between">
+                <div className="p-4 d-flex flex-column justify-content-between">
                     <div>
                         <h5>Regras da Casa</h5>
                         <p>{produtos.rules}</p>

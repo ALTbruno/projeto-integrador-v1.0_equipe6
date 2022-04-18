@@ -23,6 +23,15 @@ const RegisterForm = () => {
         draggable: true,
         progress: undefined,
     });
+    const notifyError = () => toast.error(' Email já cadastrado!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
 
     const registerConfirm = () => {
         toast.success('Você se registrou com sucesso', {
@@ -73,7 +82,7 @@ const RegisterForm = () => {
                     registerConfirm()
                     resetInputs();
                 }).catch(error => {
-                    console.log(error)
+                    notifyError()
                 })
         }
     }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import Pagination from '../pagination';
 import { useParams, useSearchParams } from 'react-router-dom';
 import CardResult from '../cardResult/cardResult';
@@ -31,7 +32,15 @@ export default function ResultByCity() {
       setPage(response.data);
       setHoteis(response.data.content);
     }).catch((error) => {
-      console.log(error)
+      toast.error('Erro ao buscar os hoteis', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     })
   }, [city, checkin, checkout, pageNumber])
 
