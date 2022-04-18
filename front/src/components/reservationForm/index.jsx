@@ -9,7 +9,11 @@ import { ReservationDetailCard } from '../../components/reservationDetailCard';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export const ReservationForm = ({ product }) => {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({
+        firstName: '',
+        lastName: '',
+        email: ''
+    });
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [resevations, setResevations] = useState([])
