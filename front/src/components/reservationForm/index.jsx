@@ -123,7 +123,7 @@ export const ReservationForm = ({ product }) => {
     const verifyCheckTime = () => {
         if (checkTime === null) {
             document.getElementById('checkTime').classList.add('is-invalid');
-            toast.error('Selecione um horário');
+            toast.error('Selecione um horário', {theme: "colored"});
             return false;
         } else {
             document.getElementById('checkTime').classList.remove('is-invalid');
@@ -132,7 +132,7 @@ export const ReservationForm = ({ product }) => {
     }
     const verifyCheckDates = () => {
         if (startDate === null || endDate === null) {
-            toast.error('Selecione uma data de entrada e saída');
+            toast.error('Selecione uma data de entrada e saída', {theme: "colored",});
             return false;
         } else {
             return true;

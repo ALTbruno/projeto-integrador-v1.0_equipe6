@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import api from "../../services/index";
 import visible from '../../assets/icons/visible.svg'
 import invisible from '../../assets/icons/invisible.svg'
@@ -33,6 +33,7 @@ const RegisterForm = () => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
+            theme: "colored",
             onClose: () => {
                 window.location.href = '/login'
             }
@@ -170,7 +171,6 @@ const RegisterForm = () => {
                     </form>
                 </div>
             </div>
-            <ToastContainer />
         </>
     )
 }

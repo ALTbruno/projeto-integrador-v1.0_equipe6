@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../context/context";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import api from "../../services/index";
 import visible from '../../assets/icons/visible.svg';
 import invisible from '../../assets/icons/invisible.svg';
@@ -102,6 +102,7 @@ const LoginForm = () => {
                 toast.error("Por favor, tente novamente, suas credenciais são inválidas", {
                     position: "top-right",
                     autoClose: 5000,
+                    theme: "colored",
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -163,7 +164,6 @@ const LoginForm = () => {
                     </form>
                     <p>Ainda não tem conta? <Link to='/register'>Registre-se</Link></p>
                 </div>
-                <ToastContainer />
             </div>
         </>
     )
