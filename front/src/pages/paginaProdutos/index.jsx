@@ -77,8 +77,6 @@ const PaginaProdutos = () => {
                 "icon": ""
             }
         ],
-        "latitude": 0,
-        "longitude": 0,
     });
 
     useEffect(() => {

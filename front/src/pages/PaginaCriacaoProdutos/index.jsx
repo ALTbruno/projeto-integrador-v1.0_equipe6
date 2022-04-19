@@ -5,14 +5,102 @@ import api from "../../services";
 
 const CriacaoProdutos = () => {
 
-    const [protudoNovo, setProdutoNovo] = useState({
+    const [produtos, setProdutos] = useState({
+        "id": null,
         "name": "",
-    })
+        "description": "",
+        "category": {
+            "id": null,
+            "title": "",
+            "description": "",
+            "imageUrl": "",
+            "totalProducts": null
+        },
+        "city": {
+            "id": null,
+            "name": "",
+            "country": ""
+        },
+        "images": [
+            {
+                "id": null,
+                "title": "",
+                "url": ""
+            },
+            {
+                "id": null,
+                "title": "",
+                "url": ""
+            },
+            {
+                "id": null,
+                "title": "",
+                "url": ""
+            },
+            {
+                "id": null,
+                "title": "",
+                "url": ""
+            },
+            {
+                "id": null,
+                "title": "",
+                "url": ""
+            }
+        ],
+        "characteristics": [
+            {
+                "id": null,
+                "name": "",
+                "icon": ""
+            }
+        ]
+    });
+
 
     useEffect(() => {
-        api.post
+        api.get(`/products`).then(response => {
+            setProdutos(response.data);
+            console.log()
+        })
+    }, []);
+
+    const [form, setForm] = useState({});
+    const [errors, setErrors] = useState({});
+    const [submitting, setSubmitting] = useState(false)
+
+    const handleChange = (e) => {
+        setForm({
+            ...form, [e.target.name] :  e.target.value
+        })
+    } 
+
+    const validate = () => {
+        if (!form.name) {
+            errors.name = "Preencha com um nome valido"
+        }
+        return errors;
+    }
+
+    useEffect(() => {
+        if (Object.Keys(errors).length === 0 && submitting) {
+            sendData();
+        }
     })
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setErrors(validate(form))
+    }
+
+    const sendData = () => {
+        api.post("/products", {form}).then(res => {
+            console.log(res)
+            console.log(res.data)
+        })
+    }
+
+    console.log(form)
 
     return (
         <>
@@ -25,51 +113,56 @@ const CriacaoProdutos = () => {
 
             <div  className="p-5">
                 <h4 className="fw-bold">Criar Produto</h4>
-                <Form>
+                <Form onSubmit={handleSubmit}>
                     <div className="d-flex">
                         <FormGroup className="me-2 p-1 w-100">
                             <FormLabel>Nome do Produto</FormLabel>
-                            <FormControl className="shadow" type="text" placeholder="Digite o Nome do Produto" onChange={setProdutoNovo()}/>
+                            <FormControl className="shadow" type="text"  placeholder="Digite o Nome do Produto" name="name" onChange={e => handleChange(e)}/>
                         </FormGroup>
 
                         <FormGroup className=" p-1 w-50 ">
                             <FormLabel>Categoria do Produto</FormLabel>
-                            <Form.Select className="shadow">
+                            <Form.Select className="shadow" name="categories" onChange={e => handleChange(e)}>
                                 <option>selecione uma categoria</option>
+                                <option >Hotel</option>
+                                <option>Hostel</option>
+                                <option>Resort</option>
+                                <option>selecione uma categoria</option>
+
                             </Form.Select>
                         </FormGroup>
                     </div>
 
                     <FormGroup className="my-3 p-1">
                         <FormLabel>Descrição do Produto</FormLabel>
-                        <FormControl className="shadow" as="textarea" rows={5} placeholder="Digite a Descrição do Produto"/>
+                        <FormControl className="shadow" as="textarea" rows={5}  placeholder="Digite a Descrição do Produto" name="description" onChange={e => handleChange(e)}/>
                     </FormGroup>
 
                     <FormGroup className="my-3 p-1">
-                        <FormLabel>Endereço</FormLabel>
-                        <FormControl className="shadow" type="text" placeholder="Digite o Endereço"/>
+                        <FormLabel>Cidade</FormLabel>
+                        <FormControl className="shadow" type="text" placeholder="Digite o Endereço" name="city" onChange={e => handleChange(e)}/>
                     </FormGroup>
 
                     <div className="my-3 p-1 d-flex justify-content-between">
                         <FormGroup className="w-100 me-2">
                             <FormLabel>Latitude</FormLabel>
-                            <FormControl className="shadow"  type="text" placeholder="Digite a Latitude"/>
+                            <FormControl className="shadow"  type="text" placeholder="Digite a Latitude" name="latitude" onChange={e => handleChange(e)}/>
                         </FormGroup>
                         <FormGroup className="w-100 ms-2">
                             <FormLabel>Longitude</FormLabel>
-                            <FormControl className="shadow"  type="text" placeholder="Digite a Longitude"/>
+                            <FormControl className="shadow"  type="text" placeholder="Digite a Longitude" name="longitude" onChange={e => handleChange(e)}/>
                         </FormGroup>
                     </div>
                     
                     <div className="d-flex">
                         <FormGroup className="my-3 me-2 p-1 w-100">
                             <FormLabel>Adicione Atributos</FormLabel>
-                            <Form.Control className="shadow" type="text"/>
+                            <Form.Control className="shadow" type="text" name="characteristcs" onChange={e => handleChange(e)}/>
                         </FormGroup>
 
                         <FormGroup className="my-3 me-2 p-1 w-50">
                             <FormLabel>Selecione um icon</FormLabel>
-                            <FormControl className="shadow"/>
+                            <FormControl className="shadow" name="icon" onChange={e => handleChange(e)}/>
                         </FormGroup>
 
                         <Button className="h-100 align-self-center mt-4 shadow fw-bold" style={{backgroundColor: '#1DBEB4', border: '#1DBEB4'}} size="sm">+</Button>
@@ -78,7 +171,7 @@ const CriacaoProdutos = () => {
                     <div className="d-flex">
                         <FormGroup className="my-3 me-2 p-1 w-100">
                             <FormLabel>Imagens do Produto</FormLabel>
-                            <FormControl className="shadow" type="text" placeholder="coloque aqui o link da imagem do produto"/>
+                            <FormControl className="shadow" type="url" placeholder="coloque aqui o link da imagem do produto" name="image" onChange={e => handleChange(e)}/>
                         </FormGroup>
 
                         <Button className="h-100 align-self-center mt-4 shadow fw-bold" style={{backgroundColor: '#1DBEB4', border: '#1DBEB4'}} size="sm">+</Button>
@@ -89,15 +182,15 @@ const CriacaoProdutos = () => {
                         <div className="d-flex justify-content-between" >
                             <div className="mx-2 w-100">
                                 <FormText>Regras da Casa</FormText>
-                                <FormControl className="shadow" as="textarea" rows={7}/>
+                                <FormControl className="shadow" as="textarea" rows={7} name="rules" onChange={e => handleChange(e)}/>
                             </div>
                             <div className="mx-2 w-100">
                                 <FormText>Saúde e Segurança</FormText>
-                                <FormControl className="shadow" as="textarea" rows={7}/>
+                                <FormControl className="shadow" as="textarea" rows={7} name="healthAndSafety" onChange={e => handleChange(e)}/>
                             </div>
                             <div className="mx-2 w-100">
                                 <FormText>Politicas de Cancelamento</FormText>
-                                <FormControl className="shadow" as="textarea" rows={7}/>
+                                <FormControl className="shadow" as="textarea" rows={7} name="cancellationPolicy" onChange={e => handleChange(e)}/>
                             </div>
                         </div>
                     </FormGroup>
