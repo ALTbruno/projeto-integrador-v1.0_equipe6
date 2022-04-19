@@ -22,4 +22,10 @@ public class CharacteristicController {
 	public ResponseEntity<Characteristic> criar(@ModelAttribute CharacteristicDTO characteristicDTO) throws IOException {
 		return ResponseEntity.status(HttpStatus.CREATED).body(characteristicService.criar(characteristicDTO));
 	}
+
+	@GetMapping
+    public ResponseEntity<List<City>> listar() {
+        return ResponseEntity.ok(characteristicService.listar());
+    }
+
 }

@@ -36,4 +36,8 @@ public class CharacteristicService {
 		characteristic.setIcon(url);
 		return characteristicRepository.save(characteristic);
 	}
+
+	public List<Characteristic> listar() {
+		return characteristicRepository.findAll();
+	}
 }
