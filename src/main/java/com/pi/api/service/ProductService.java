@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -54,7 +55,7 @@ public class ProductService {
         product.setCancellationPolicy(productDTO.getCancellationPolicy());
         product.setCategory(categoryRepository.findById(productDTO.getCategoryId()).get());
         product.setCity(cityRepository.findById(productDTO.getCityId()).get());
-        product.setCharacteristics(productDTO.getCharacteristics());
+        product.setCharacteristics(productDTO.getCharacteristics().stream().map(characteristic -> characteristicRepository.getById(characteristic)).collect(Collectors.toSet()));
         productRepository.save(product);
 
         String fullPath = mainPath + "images/" + "products/";
@@ -93,7 +94,7 @@ public class ProductService {
         product.setCancellationPolicy(productDTO.getCancellationPolicy());
         product.setCategory(categoryRepository.findById(productDTO.getCategoryId()).get());
         product.setCity(cityRepository.findById(productDTO.getCityId()).get());
-        product.setCharacteristics(productDTO.getCharacteristics());
+        product.setCharacteristics(productDTO.getCharacteristics().stream().map(characteristic -> characteristicRepository.getById(characteristic)).collect(Collectors.toSet()));
         productRepository.save(product);
 
         String fullPath = mainPath + "images/" + "products/";

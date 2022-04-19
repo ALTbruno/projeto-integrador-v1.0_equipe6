@@ -5,6 +5,7 @@ import com.pi.api.model.Product;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ProductDTO {
 
@@ -18,13 +19,13 @@ public class ProductDTO {
 	private String cancellationPolicy;
 	private Long categoryId;
 	private Long cityId;
-	private Set<Characteristic> characteristics;
+	private Set<Long> characteristics;
 	private MultipartFile[] images;
 
 	public ProductDTO() {
 	}
 
-	public ProductDTO(Long id, String name, Double latitude, Double longitude, String description, String rules, String healthAndSafety, String cancellationPolicy, Long categoryId, Long cityId, Set<Characteristic> characteristics, MultipartFile[] images) {
+	public ProductDTO(Long id, String name, Double latitude, Double longitude, String description, String rules, String healthAndSafety, String cancellationPolicy, Long categoryId, Long cityId, Set<Long> characteristics, MultipartFile[] images) {
 		this.id = id;
 		this.name = name;
 		this.latitude = latitude;
@@ -50,7 +51,7 @@ public class ProductDTO {
 		this.cancellationPolicy = product.getCancellationPolicy();
 		this.categoryId = product.getCategory().getId();
 		this.cityId = product.getCity().getId();
-		this.characteristics = product.getCharacteristics();
+		this.characteristics = product.getCharacteristics().stream().map(Characteristic::getId).collect(Collectors.toSet());
 	}
 
 	public Long getId() {
@@ -133,11 +134,11 @@ public class ProductDTO {
 		this.cityId = cityId;
 	}
 
-	public Set<Characteristic> getCharacteristics() {
+	public Set<Long> getCharacteristics() {
 		return characteristics;
 	}
 
-	public void setCharacteristics(Set<Characteristic> characteristics) {
+	public void setCharacteristics(Set<Long> characteristics) {
 		this.characteristics = characteristics;
 	}
 
