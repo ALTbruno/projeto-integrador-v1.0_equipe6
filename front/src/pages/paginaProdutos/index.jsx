@@ -24,8 +24,6 @@ const PaginaProdutos = () => {
     const [produtos, setProdutos] = useState({
         "id": null,
         "name": "",
-        "latitude": 0,
-        "longitude": 0,
         "score": 0.0,
         "description": "",
         "rules": "",
@@ -80,12 +78,14 @@ const PaginaProdutos = () => {
     });
 
     useEffect(() => {
-        api.get(`/products/${id}`).then(response => {
+        const get = async ()=> {
+        await api.get(`/products/${id}`).then(response => {
             setProdutos(response.data);
         })
-        api.get(`/reservations/productId=${id}`).then(response => {
+        await api.get(`/reservations/productId=${id}`).then(response => {
             setResevations(response.data);
-        })
+        })}
+        get()
     }, [id]);
 
     useEffect(() => {
@@ -119,6 +119,7 @@ const PaginaProdutos = () => {
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
+        theme: "colored",
         progress: undefined,
     });
 
@@ -284,9 +285,9 @@ const PaginaProdutos = () => {
             {/* Bloco Politicas do Produto */}
             <div className="p-3">
                 <div className="p-1 rounded-3" style={{ backgroundColor: "#bfbfbf" }}>
-                    <h2 className="ms-3 " style={{ backgroundColor: "#bfbfbf" }}>Bloco Politicas do Produto</h2>
+                    <h2 className="ms-3 " style={{ backgroundColor: "#bfbfbf" }}>Politicas da acomodação</h2>
                 </div>
-                <div className="p-4 d-flex justify-content-between">
+                <div className="p-4 d-flex flex-column justify-content-between">
                     <div>
                         <h5>Regras da Casa</h5>
                         <p>{produtos.rules}</p>

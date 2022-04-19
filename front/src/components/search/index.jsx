@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import { useNavigate, useSearchParams, createSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import api from '../../services/index.js';
 import calendar from "../../assets/icons/calendar.svg";
 import menuLocalizador from "../../assets/icons/icon-menu-localizador.svg";
@@ -67,8 +68,23 @@ export default function Search() {
     myRef.setOpen(false);
   };
 
-
-
+  const verifyCityForSearch = () => {
+    if (cityForSearch === '') {
+      toast.error('Por favor, selecione um destino!', {
+        position: "top-right",
+        theme: "colored",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return false;
+    } else {
+      return true
+    }
+  }
   const mostOptions = (event) => {
     let value = event.target.value;
     let options = document.getElementsByClassName("option");
@@ -118,13 +134,15 @@ export default function Search() {
     e.preventDefault();
     let checkin = generateDate(startDate);
     let checkout = generateDate(endDate);
-    navigate({
-      pathname: `/search/${cityForSearch}`,
-      search: `${createSearchParams({
-        checkin: checkin,
-        checkout: checkout,
-      })}`
-    })
+    if (verifyCityForSearch()) {
+      navigate({
+        pathname: `/search/${cityForSearch}`,
+        search: `${createSearchParams({
+          checkin: checkin,
+          checkout: checkout,
+        })}`
+      })
+    }
   }
 
   return (

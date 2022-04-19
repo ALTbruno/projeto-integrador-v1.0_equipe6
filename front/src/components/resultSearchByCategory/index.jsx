@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import Pagination from '../pagination';
 import { useParams } from 'react-router-dom';
 import CardResult from '../../components/cardResult/cardResult';
@@ -23,11 +24,18 @@ export default function ResultByCategory() {
 
   useEffect(() => {
     api.get(`/products/category=${category}?size=2&page=${pageNumber}`).then(response => {
-      console.log(response)
       setPage(response.data);
       setHoteis(response.data.content);
     }).catch((error) => {
-      console.log(error)
+      toast.error('Erro ao buscar os hoteis', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     })
   }, [category, pageNumber])
 

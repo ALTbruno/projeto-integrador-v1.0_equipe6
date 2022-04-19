@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services';
 import DatePicker from 'react-datepicker';
+import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 import { Form, FormGroup, FormControl, FormLabel, Card } from "react-bootstrap";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { ReservationDetailCard } from '../../components/reservationDetailCard';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export const ReservationForm = ({ product }) => {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({
+        firstName: '',
+        lastName: '',
+        email: ''
+    });
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [resevations, setResevations] = useState([])
@@ -20,17 +26,19 @@ export const ReservationForm = ({ product }) => {
         "customer": user,
         "product": product
     });
-    
+    const { id } = useParams();
+
 
     useEffect(() => {
         setUser(JSON.parse(localStorage.getItem('user')));
-    }, [])
-    
+    }, [product])
+
     useEffect(() => {
-        api.get(`/reservations/productId=${product.id}`).then(response => {
+        console.log("chamou")
+        api.get(`/reservations/productId=${id}`).then(response => {
             setResevations(response.data);
         })
-    },[product])
+    }, [product])
 
     useEffect(() => {
         setReservation({
@@ -95,8 +103,7 @@ export const ReservationForm = ({ product }) => {
         setStartDate(start);
         setEndDate(end);
     };
-    // exemplo para lembrar de como colocar uma data no excludeDates
-    // console.log(new Date(2022 , 2 , 1))
+
     const generateNewDate = (date) => {
         let day;
         let month;
@@ -117,26 +124,39 @@ export const ReservationForm = ({ product }) => {
                 end: generateNewDate(reserva.checkoutDate)
             })
         })
-        return dates;    
+        return dates;
+    }
+
+    const verifyCheckTime = () => {
+        if (checkTime === null) {
+            document.getElementById('checkTime').classList.add('is-invalid');
+            toast.error('Selecione um horário', {theme: "colored"});
+            return false;
+        } else {
+            document.getElementById('checkTime').classList.remove('is-invalid');
+            return true;
+        }
+    }
+    const verifyCheckDates = () => {
+        if (startDate === null || endDate === null) {
+            toast.error('Selecione uma data de entrada e saída', {theme: "colored",});
+            return false;
+        } else {
+            return true;
+        }
     }
     return (
         <>
             <div className="w-xl-50 mx-sm-3">
-                <h5>Complete seus Dados</h5>
-                <Form className="card mb-5 p-4 d-flex flex-lg-row justify-content-lg-around w-100">
+                <h5>Complete os dados de sua reversa.</h5>
+                <Form className="card mb-5 p-4 d-flex justify-content-lg-around w-100">
                     <FormGroup className="mx-2 w-100">
-                        <FormLabel className="mb-0">Nome</FormLabel>
-                        <FormControl name='firstName' readOnly={true} disabled value={user.firstName || ''} type="text" placeholder="Digite seu nome" />
-
-                        <FormLabel className="mb-0 mt-4">E-mail</FormLabel>
-                        <FormControl disabled name='email' readOnly={true} value={user.email || ''} type="email" placeholder="name@example.com" />
-                    </FormGroup>
-                    <FormGroup className="mx-2 w-100">
-                        <FormLabel className="mb-0">Sobrenome</FormLabel>
-                        <FormControl disabled name='lastName' readOnly={true} value={user.lastName || ''} type="text" placeholder="Digite seu sobrenome" />
-
-                        <FormLabel className="mb-0 mt-4">Cidade</FormLabel>
-                        <FormControl type="text" name='city' placeholder="Digite sua cidade" />
+                        <FormLabel className='mb-0'>Nome</FormLabel>
+                        <FormControl className="mb-3" name='firstName' readOnly={true} disabled value={user.firstName || ''} type="text" placeholder="Digite seu nome" />
+                        <FormLabel className='mb-0'>Sobrenome</FormLabel>
+                        <FormControl className="mb-3" disabled name='lastName' readOnly={true} value={user.lastName || ''} type="text" placeholder="Digite seu sobrenome" />
+                        <FormLabel className='mb-0'>E-mail</FormLabel>
+                        <FormControl className="mb-3" disabled name='email' readOnly={true} value={user.email || ''} type="email" placeholder="name@example.com" />
                     </FormGroup>
                 </Form>
 
@@ -169,8 +189,12 @@ export const ReservationForm = ({ product }) => {
                     <Card.Body className="d-xl-flex">
                         <FormGroup className="me-2 mb-sm-3 w-100">
                             <FormLabel className="w-100">Hora prevista de chegada</FormLabel>
-                            <Form.Select onChange={(e) => setCheckTime(e.target.value)} >
-                                <option disabled>Selecione um horário</option>
+                            <Form.Select defaultValue={'DEFAULT'} id="checkTime" onChange={(e) => {
+                                e.target.classList.remove('is-invalid')
+                                setCheckTime(e.target.value)
+                            }
+                            } >
+                                <option value="DEFAULT" disabled >Selecione um horário</option>
                                 <option value="07:00">07:00</option>
                                 <option value="07:15">07:15</option>
                                 <option value="07:30">07:30</option>
@@ -197,7 +221,7 @@ export const ReservationForm = ({ product }) => {
 
             </div>
             {/* Detalhes da Reserva */}
-            <ReservationDetailCard reservation={reservation} />
+            <ReservationDetailCard reservation={reservation} verifyTime={verifyCheckTime} verifyDates={verifyCheckDates} />
 
         </>
     )

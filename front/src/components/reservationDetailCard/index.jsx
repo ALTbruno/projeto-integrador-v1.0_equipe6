@@ -1,13 +1,14 @@
 import { Card, CardImg, Form } from "react-bootstrap";
 import StarRating from "../../components/avaliationStars";
+import { toast } from 'react-toastify';
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../services";
 
-export const ReservationDetailCard = ({reservation}) => {
+export const ReservationDetailCard = ({ reservation, verifyTime, verifyDates }) => {
     const { id } = useParams();
     const [reserva, setReserva] = useState(reservation);
-    const [produtos, setProdutos] = useState({  
+    const [produtos, setProdutos] = useState({
         "id": null,
         "name": "",
         "description": "",
@@ -61,7 +62,7 @@ export const ReservationDetailCard = ({reservation}) => {
     const setDateForPost = (date) => {
         if (date !== null) {
             let day = date.getDate().toString().length === 1 ? `0${date.getDate()}` : date.getDate();
-            let month = date.getMonth().toString().length === 1 ? `0${date.getMonth() +1}` : date.getMonth() +1;
+            let month = date.getMonth().toString().length === 1 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
             let year = date.getFullYear();
             return year + '-' + month + '-' + day;
         }
@@ -79,10 +80,10 @@ export const ReservationDetailCard = ({reservation}) => {
         "customer": reserva.customer,
         "product": reserva.product
     }
-    
+
     useEffect(() => {
         setReserva(reservation);
-    },[reservation])
+    }, [reservation])
 
     useEffect(() => {
         api.get(`/products/${id}`).then(response => {
@@ -93,18 +94,31 @@ export const ReservationDetailCard = ({reservation}) => {
 
     const generateDate = (date) => {
         let day = date.getDate().toString().length === 1 ? `0${date.getDate()}` : date.getDate();
-        let month = date.getMonth().toString().length === 1 ? `0${date.getMonth() +1}` : date.getMonth() +1;
+        let month = date.getMonth().toString().length === 1 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
         let year = date.getFullYear();
         return day + '/' + month + '/' + year;
     }
 
     const postReserva = (e) => {
         e.preventDefault();
-        api.post('reservations/book', initialReservation).then(response => {
-            console.log(response.data);
-        }).catch(error => {
-            console.log(error);
-        })
+        if (verifyTime() && verifyDates()) {
+            api.post('reservations/book', initialReservation).then(response => {
+                toast.success('Reserva realizada com sucesso!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored"
+                });
+            }).catch(error => {
+                if (error.response.status === 500) {
+                    toast.error('Reserva já marcada no intervalo de data selecionada!');
+                }
+            })
+        }
     }
 
     return (
@@ -113,13 +127,13 @@ export const ReservationDetailCard = ({reservation}) => {
                 <Card.Title className="p-1 text-center ">
                     Detalhes da Reserva
                 </Card.Title>
-                
+
                 <CardImg src={produtos.images[0].url} />
 
                 <Card.Body>
                     <Card.Subtitle className="mb-1 d-flex flex-row align-items-center fw-bold" style={{ fontSize: '12px' }}>{produtos.category.title}</Card.Subtitle>
                     <Card.Title className="fw-bold">{produtos.name}</Card.Title>
-                    <StarRating/>
+                    <StarRating />
                 </Card.Body>
                 <Form onSubmit={(e) => postReserva(e)}>
                     <Card.Subtitle className="">{produtos.city.name}</Card.Subtitle>
