@@ -8,6 +8,7 @@ import FavoriteHeart from "../favoriteHeart";
 import { useNavigate } from "react-router-dom"
 import React from 'react'
 import LocationMapModal from "../locationMapModal";
+import './index.scss'
 
 const RecomendationList = () => {
     const navigate = useNavigate();
@@ -82,10 +83,10 @@ const RecomendationList = () => {
                 <section className="justify-content-center d-flex flex-wrap">
                     {produtos.map((item, i) => (
 
-                        <Card item={item} key={item.id} className="shadow rounded m-3 p-0 d-flex flex-md-row justify-content-md-center " style={{ maxWidth: '40rem' }}>
+                        <Card item={item} key={item.id} className="shadow rounded m-3 p-0 d-flex flex-md-row justify-content-md-center w-100" style={{ maxWidth: '40rem' }}>
 
-                            <Card.Body className="m-0 p-0 d-flex position-relative" style={{ width: "640px", height: "300px" }}>
-                                <Card.Img className="w-100" style={{ objectFit: "cover" }} src={getCoverImage(item.images, item.name)} />
+                            <Card.Body className="m-0 p-0 d-flex position-relative" style={{height: "300px" }}>
+                                <Card.Img className="img" style={{width: '335px', objectFit: "cover" }} src={getCoverImage(item.images, item.name)} />
                                 <FavoriteHeart />
                             </Card.Body>
 
