@@ -49,7 +49,8 @@ const Header = () => {
                              ${user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1)}`}</span>
                         </p>
                         <button id="logout" onClick={() => (handleLogout())}>X</button>
-                    </div> :
+                    </div> 
+                    :
                     <div className='navigation'>
                         <ul>
                             {location.pathname === '/register'?

@@ -5,69 +5,8 @@ import api from "../../services";
 
 const CriacaoProdutos = () => {
 
-    const [produtos, setProdutos] = useState({
-        "id": null,
-        "name": "",
-        "description": "",
-        "category": {
-            "id": null,
-            "title": "",
-            "description": "",
-            "imageUrl": "",
-            "totalProducts": null
-        },
-        "city": {
-            "id": null,
-            "name": "",
-            "country": ""
-        },
-        "images": [
-            {
-                "id": null,
-                "title": "",
-                "url": ""
-            },
-            {
-                "id": null,
-                "title": "",
-                "url": ""
-            },
-            {
-                "id": null,
-                "title": "",
-                "url": ""
-            },
-            {
-                "id": null,
-                "title": "",
-                "url": ""
-            },
-            {
-                "id": null,
-                "title": "",
-                "url": ""
-            }
-        ],
-        "characteristics": [
-            {
-                "id": null,
-                "name": "",
-                "icon": ""
-            }
-        ]
-    });
-
-
-    useEffect(() => {
-        api.get(`/products`).then(response => {
-            setProdutos(response.data);
-            console.log()
-        })
-    }, []);
-
     const [form, setForm] = useState({});
     const [errors, setErrors] = useState({});
-    const [submitting, setSubmitting] = useState(false)
 
     const handleChange = (e) => {
         setForm({
@@ -82,23 +21,21 @@ const CriacaoProdutos = () => {
         return errors;
     }
 
-    useEffect(() => {
-        if (Object.Keys(errors).length === 0 && submitting) {
-            sendData();
-        }
-    })
+    const sendData = () => {
+        api.post("/products/add", {form}).then(res => {
+            console.log(res)
+            console.log(res.data)
+        })
+        console.log(form)
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors(validate(form))
+        sendData()
     }
 
-    const sendData = () => {
-        api.post("/products", {form}).then(res => {
-            console.log(res)
-            console.log(res.data)
-        })
-    }
+    
 
     console.log(form)
 
@@ -113,7 +50,8 @@ const CriacaoProdutos = () => {
 
             <div  className="p-5">
                 <h4 className="fw-bold">Criar Produto</h4>
-                <Form onSubmit={handleSubmit}>
+
+                <Form onSubmit={e => handleSubmit(e)}>
                     <div className="d-flex">
                         <FormGroup className="me-2 p-1 w-100">
                             <FormLabel>Nome do Produto</FormLabel>
@@ -195,7 +133,7 @@ const CriacaoProdutos = () => {
                         </div>
                     </FormGroup>
                     
-                        <Button className="mt-5 fw-bold" style={{backgroundColor: '#1DBEB4', border: '#1DBEB4'}}>Criar</Button>
+                        <Button className="mt-5 fw-bold" type="submit" style={{backgroundColor: '#1DBEB4', border: '#1DBEB4'}}>Criar</Button>
                        
                 </Form>
             </div>
