@@ -85,17 +85,6 @@ const PaginaReserva = () => {
                 {/* Formulario */}
                 <ReservationForm product={produtos} />
             </div>
-
-            {/* Bloco Politicas do Produto */}
-            <div className="mt-5 p-3">
-                <div className="p-1" style={{ backgroundColor: "#bfbfbf" }}>
-                    <h2 className="ms-3" style={{ backgroundColor: "#bfbfbf" }}>Politicas do Produto</h2>
-                </div>
-                <div className="p-1">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam adipisci modi blanditiis harum velit repellat et nisi qui delectus! Earum culpa ex natus non laudantium repellat voluptatibus, incidunt amet quibusdam!</p>
-                </div>
-            </div>
-
         </>
     )
 }
