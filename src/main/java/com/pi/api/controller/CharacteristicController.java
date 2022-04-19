@@ -24,7 +24,7 @@ public class CharacteristicController {
 	}
 
 	@GetMapping
-    public ResponseEntity<List<City>> listar() {
+    public ResponseEntity<List<Characteristic>> listar() {
         return ResponseEntity.ok(characteristicService.listar());
     }
 
