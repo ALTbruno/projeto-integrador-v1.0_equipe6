@@ -10,7 +10,7 @@ const CriacaoProdutos = () => {
     const [form, setForm] = useState({
         "categoryId": 1,
         "cityId": 1,
-        "images" : ["https://www.img.com"],
+        "images" : [],
         "characteristics": [
             1
         ]
@@ -47,17 +47,17 @@ const CriacaoProdutos = () => {
         parseLatAndLongForInt(form.latitude, form.longitude);
         var formData = new FormData();
         // gerar um formData com os dados do form para post
-        formData.append("name", form.name);
-        formData.append("description", form.description);
-        formData.append("categoryId", form.categoryId);
-        formData.append("cityId", form.cityId);
-        formData.append("latitude", form.latitude);
-        formData.append("longitude", form.longitude);
-        formData.append("characteristics", form.characteristics[0]);;
+        formData.append("name", JSON.stringify(form.name));
+        formData.append("description", JSON.stringify(form.description));
+        formData.append("categoryId", JSON.stringify(form.categoryId));
+        formData.append("cityId", JSON.stringify(form.cityId));
+        formData.append("latitude", JSON.stringify(form.latitude));
+        formData.append("longitude", JSON.stringify(form.longitude));
+        formData.append("characteristics", JSON.stringify(form.characteristics[0]));;
         formData.append("image", form.images[0]);
-        formData.append("rules", form.rules);
-        formData.append("healthAndSafety", form.healthAndSafety);
-        formData.append("cancellationPolicy", form.cancellationPolicy);
+        formData.append("rules", JSON.stringify(form.rules));
+        formData.append("healthAndSafety", JSON.stringify(form.healthAndSafety));
+        formData.append("cancellationPolicy", JSON.stringify(form.cancellationPolicy));
         console.log(form.characteristics)
         console.log(form)
         // enviar o formData para o backend
