@@ -17,7 +17,7 @@ const Map = ({product}) => {
   }, [product])
 
   const containerStyle = {
-    width: '1139px',
+    width: '100%',
     height: '570px'
   };
 
@@ -32,7 +32,7 @@ const Map = ({product}) => {
       })
     
       return (
-        <div>
+        <div style={{maxWidth: '1139px', width: '100%'}}>
           {isLoaded ? (
             <GoogleMap mapContainerClassName='rounded-3' mapContainerStyle={containerStyle} center={center} zoom={15}>
               <Marker position={center}/>
