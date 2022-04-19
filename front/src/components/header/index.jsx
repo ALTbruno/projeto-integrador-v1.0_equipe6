@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Context } from '../../context/context';
 import logo from '../../assets/pictures/logo.svg';
@@ -8,7 +8,6 @@ import instagram from '../../assets/icons/ig.svg';
 import twitter from '../../assets/icons/twitter.svg';
 import linkedin from '../../assets/icons/linkedin.svg';
 import './index.scss';
-import React, { Component } from 'react'
 
 const Header = () => {
     const { handleLogout, logado } = useContext(Context)
@@ -41,7 +40,8 @@ const Header = () => {
                     <h1 className="align-items-end" >Sinta-se em casa</h1>
                 </div>
                 {initials ?
-                    <div id="registrado">
+                    <div className={user.role === 'ADMIN' ? "registrado admin" : 'registrado'}>
+                        {user.role === 'ADMIN' ? <Link to='/criacaoProdutos' className='admin-create-product'>Criar produto</Link>: ''}
                         <div id="icon">{initials}</div>
                         <p>
                             Olá,<br />
