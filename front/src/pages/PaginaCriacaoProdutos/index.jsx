@@ -5,7 +5,15 @@ import api from "../../services";
 
 const CriacaoProdutos = () => {
 
-    const [form, setForm] = useState({});
+    const [form, setForm] = useState({
+        "categoryId": 1,
+        "cityId": 1,
+        "characteristics": [
+            {
+              "id": 2
+            }
+          ]
+    });
     const [errors, setErrors] = useState({});
 
     const handleChange = (e) => {
@@ -22,10 +30,10 @@ const CriacaoProdutos = () => {
     }
 
     const sendData = () => {
-        api.post("/products/add", {form}).then(res => {
+        api.post("/products/add", form).then(res => {
             console.log(res)
             console.log(res.data)
-        })
+        }).then(error => console.log(error))
         console.log(form)
     }
 
@@ -35,9 +43,6 @@ const CriacaoProdutos = () => {
         sendData()
     }
 
-    
-
-    console.log(form)
 
     return (
         <>
