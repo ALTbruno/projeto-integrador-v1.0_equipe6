@@ -46,6 +46,7 @@ const CriacaoProdutos = () => {
 
     const sendData = () => {
         parseLatAndLongForFloat(form.latitude, form.longitude);
+        setCityIdInt()
         var formData = new FormData();
         // gerar um formData com os dados do form para post
         formData.append("name", form.name);
@@ -108,6 +109,13 @@ const CriacaoProdutos = () => {
             longitude: long
         })
     }
+    const setCityIdInt = () => {
+        const cityId = parseInt(form.cityId);
+        setForm({
+            ...form,
+            "cityId": cityId
+        })
+    }
 
     return (
         <>
@@ -128,7 +136,7 @@ const CriacaoProdutos = () => {
                             <FormControl className="shadow" type="text" placeholder="Digite o Nome do Produto" name="name" onChange={e => handleChange(e)} />
                         </FormGroup>
 
-                        <FormGroup className=" p-1 w-50 cat-prod ">
+                        <FormGroup className=" p-1 w-100 cat-prod ">
                             <FormLabel>Categoria do Produto</FormLabel>
                             <Form.Select
                                 className="shadow"
@@ -186,9 +194,9 @@ const CriacaoProdutos = () => {
                         </FormGroup>
                     </div>
 
-                    <FormGroup className="my-3 p-1 politicas">
+                    <FormGroup className="my-3 p-1">
                         <FormLabel>Politicas do Produto</FormLabel>
-                        <div className="d-flex justify-content-between" >
+                        <div className="d-flex justify-content-between politicas" >
                             <div className="mx-2 w-100">
                                 <FormText>Regras da Casa</FormText>
                                 <FormControl className="shadow" as="textarea" rows={7} name="rules" onChange={e => handleChange(e)} />
