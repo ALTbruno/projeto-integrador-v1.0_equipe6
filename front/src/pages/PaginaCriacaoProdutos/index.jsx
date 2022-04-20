@@ -35,6 +35,10 @@ const CriacaoProdutos = () => {
         setForm({
             ...form, [e.target.name]: e.target.value
         })
+        if (e.target.name === "categoryId") {
+            setForm({
+                ...form, [e.target.name]: parseInt(e.target.value)})
+            }
     }
 
     const validate = () => {
@@ -46,7 +50,7 @@ const CriacaoProdutos = () => {
 
     const sendData = () => {
         parseLatAndLongForFloat(form.latitude, form.longitude);
-        setCityIdInt()
+        setCityIdInt();
         var formData = new FormData();
         // gerar um formData com os dados do form para post
         formData.append("name", form.name);
@@ -55,12 +59,12 @@ const CriacaoProdutos = () => {
         formData.append("cityId", form.cityId);
         formData.append("latitude", form.latitude);
         formData.append("longitude", form.longitude);
-        formData.append("characteristics", form.characteristics);;
+        formData.append("characteristics", parseInt(form.characteristics));;
         formData.append("images", form.images);
         formData.append("rules", form.rules);
         formData.append("healthAndSafety", form.healthAndSafety);
         formData.append("cancellationPolicy", form.cancellationPolicy);
-        console.log(form.characteristics)
+        console.log(parseInt(form.characteristics))
         console.log(form)
         let productimages = [];
         for (let i = 0; i < form.images.length; i++) {
@@ -182,7 +186,7 @@ const CriacaoProdutos = () => {
                         <FormGroup className="p-1 w-100">
                             <FormLabel>Caracteristicas do Produto</FormLabel>
                             {characteristics.map(characteristic => (
-                                <Form.Check key={characteristic.id} type="checkbox" label={characteristic.name} name="characteristics" value={characteristic.id} onChange={e => handleChange(e)} />
+                                <Form.Check key={characteristic.id} type="checkbox" name='characteristics' label={characteristic.name} value={characteristic.id} onChange={e => handleChange(e)} />
                             ))}
                         </FormGroup>
                     </div>
