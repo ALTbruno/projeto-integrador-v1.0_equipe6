@@ -22,12 +22,24 @@ header {
     background: none;
     margin: 0;
 }
-
-#registrado {
+.registrado {
     position: relative;
     width: 206px;
     display: flex;
     align-items: center;
+    margin-right: 5px;
+    &.admin{
+        width: 310px;
+    }
+    .admin-create-product{
+        border-right: 2px solid $color-principal;
+        margin-right: 10px;
+        height: 50px;
+        padding-right: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
   }
   #icon {
     font-size: $roboto-bold-20;
