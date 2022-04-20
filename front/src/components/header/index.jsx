@@ -41,7 +41,7 @@ const Header = () => {
                 </div>
                 {initials ?
                     <div className={user.role === 'ADMIN' ? "registrado admin" : 'registrado'}>
-                        {user.role === 'ADMIN' ? <Link to='/criacaoProdutos' className='admin-create-product'>Criar produto</Link>: ''}
+                        {user.role === 'ADMIN' ? <Link to='/criacaoProdutos'  className='admin-create-product'>Criar produto</Link> : ''}
                         <div id="icon">{initials}</div>
                         <p>
                             Olá,<br />
@@ -49,11 +49,11 @@ const Header = () => {
                              ${user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1)}`}</span>
                         </p>
                         <button id="logout" onClick={() => (handleLogout())}>X</button>
-                    </div> 
+                    </div>
                     :
                     <div className='navigation'>
                         <ul>
-                            {location.pathname === '/register'?
+                            {location.pathname === '/register' ?
                                 '' : <Link to='/register' >Criar conta</Link>}
                             {location.pathname === '/login' ?
                                 '' : <Link to='/login' >Iniciar sessão</Link>}
@@ -73,10 +73,12 @@ const Header = () => {
                             <h2>MENU</h2>}
                     </div>
                     {initials ?
+                    <>
+                    {user.role === 'ADMIN' ? <p><Link onClick={toggleHamburger} to='/criacaoProdutos' className='admin-create-product'>Criar produto</Link></p> : ''}
                         <nav className='logout'>
                             <p>Deseja <span onClick={() => (handleLogout())}>encerrar a sessão</span>?</p>
                             <div id="linha-horizontal" />
-                        </nav> :
+                        </nav> </> :
                         <nav>
                             {location.pathname === "/register" ?
                                 '' : <p><Link to="/register" onClick={toggleHamburger}>Criar conta</Link></p>}
