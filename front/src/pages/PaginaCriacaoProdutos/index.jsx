@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Form, FormGroup, FormLabel, FormControl, FormText, Button } from "react-bootstrap";
 import api from "../../services";
+import './index.scss';
 
 
 const CriacaoProdutos = () => {
@@ -10,7 +11,7 @@ const CriacaoProdutos = () => {
     const [form, setForm] = useState({
         "categoryId": 1,
         "cityId": 1,
-        "images" : [],
+        "images": [],
         "characteristics": [
             1
         ]
@@ -53,13 +54,21 @@ const CriacaoProdutos = () => {
         formData.append("cityId", JSON.stringify(form.cityId));
         formData.append("latitude", JSON.stringify(form.latitude));
         formData.append("longitude", JSON.stringify(form.longitude));
-        formData.append("characteristics", JSON.stringify(form.characteristics[0]));;
-        formData.append("image", form.images[0]);
+        formData.append("characteristics", JSON.stringify(form.characteristics[0]));
         formData.append("rules", JSON.stringify(form.rules));
         formData.append("healthAndSafety", JSON.stringify(form.healthAndSafety));
         formData.append("cancellationPolicy", JSON.stringify(form.cancellationPolicy));
         console.log(form.characteristics)
         console.log(form)
+        let productimages = [];
+        for (let i = 0; i < form.images.length; i++) {
+            productimages.push(form.images[i]);
+        }
+        formData.append('productPhotos', productimages);
+        for (var pair of formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]); 
+        }
+        console.log(productimages)
         // enviar o formData para o backend
         api.post("/products/add", formData, {
             headers: {
@@ -112,19 +121,19 @@ const CriacaoProdutos = () => {
                 <h4 className="fw-bold">Criar Produto</h4>
 
                 <Form onSubmit={e => handleSubmit(e)}>
-                    <div className="d-flex">
+                    <div className="d-flex div-nome-cat">
                         <FormGroup className="me-2 p-1 w-100">
                             <FormLabel>Nome do Produto</FormLabel>
                             <FormControl className="shadow" type="text" placeholder="Digite o Nome do Produto" name="name" onChange={e => handleChange(e)} />
                         </FormGroup>
 
-                        <FormGroup className=" p-1 w-50 ">
+                        <FormGroup className=" p-1 w-50 cat-prod ">
                             <FormLabel>Categoria do Produto</FormLabel>
-                            <Form.Select 
+                            <Form.Select
                                 className="shadow"
                                 name="categoryId"
                                 onChange={e => handleCheck(e)}
-                                >
+                            >
                                 <option>selecione uma categoria</option>
                                 {categories.map(category => (
                                     <option key={category.id} value={category.id}>{category.title}</option>
@@ -148,24 +157,24 @@ const CriacaoProdutos = () => {
                         </Form.Select>
                     </FormGroup>
 
-                    <div className="my-3 p-1 d-flex justify-content-between">
-                        <FormGroup className="w-100 me-2">
+                    <div className="my-3 p-1 d-flex justify-content-between lat-long">
+                        <FormGroup className="w-100 mb-3">
                             <FormLabel>Latitude</FormLabel>
                             <FormControl className="shadow" type="text" placeholder="Digite a Latitude" name="latitude" onChange={e => handleChange(e)} />
                         </FormGroup>
-                        <FormGroup className="w-100 ms-2">
+                        <FormGroup className="w-100">
                             <FormLabel>Longitude</FormLabel>
                             <FormControl className="shadow" type="text" placeholder="Digite a Longitude" name="longitude" onChange={e => handleChange(e)} />
                         </FormGroup>
                     </div>
 
                     <div className="d-flex">
-                            {/* setCharacteristics por um checkBox */}
-                            <FormGroup className="p-1 w-100">
+                        {/* setCharacteristics por um checkBox */}
+                        <FormGroup className="p-1 w-100">
                             <FormLabel>Caracteristicas do Produto</FormLabel>
                             {characteristics.map(characteristic => (
                                 <Form.Check key={characteristic.id} type="checkbox" label={characteristic.name} name="characteristics" value={characteristic.id} onChange={e => handleChange(e)} />
-                                ))}
+                            ))}
                         </FormGroup>
                     </div>
 
@@ -176,7 +185,7 @@ const CriacaoProdutos = () => {
                         </FormGroup>
                     </div>
 
-                    <FormGroup className="my-3 p-1">
+                    <FormGroup className="my-3 p-1 politicas">
                         <FormLabel>Politicas do Produto</FormLabel>
                         <div className="d-flex justify-content-between" >
                             <div className="mx-2 w-100">
