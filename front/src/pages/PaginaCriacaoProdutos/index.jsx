@@ -3,6 +3,7 @@ import { Form, FormGroup, FormLabel, FormControl, FormText, Button } from "react
 import api from "../../services";
 import './index.scss';
 
+const token = window.localStorage.getItem('token');
 
 const CriacaoProdutos = () => {
     const [categories, setCategories] = useState([]);
@@ -60,25 +61,18 @@ const CriacaoProdutos = () => {
         formData.append("latitude", form.latitude);
         formData.append("longitude", form.longitude);
         formData.append("characteristics", parseInt(form.characteristics));;
-        formData.append("images", form.images);
+        for(let i = 0; i < form.images.length; i++) {
+            formData.append("images", form.images[i])
+        }
         formData.append("rules", form.rules);
         formData.append("healthAndSafety", form.healthAndSafety);
         formData.append("cancellationPolicy", form.cancellationPolicy);
         console.log(parseInt(form.characteristics))
         console.log(form)
-        let productimages = [];
-        for (let i = 0; i < form.images.length; i++) {
-            productimages.push(form.images[i]);
-        }
-        formData.append('productPhotos', productimages);
-        for (var pair of formData.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]); 
-        }
-        console.log(productimages)
         // enviar o formData para o backend
         api.post("/products/add", formData, {
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'multipart/form-data', 'Authorization': `Bearer ${token.replace(/['"]+/g, '')}`
             }
         }).then(response => {
             console.log(response)
@@ -113,6 +107,7 @@ const CriacaoProdutos = () => {
             longitude: long
         })
     }
+
     const setCityIdInt = () => {
         const cityId = parseInt(form.cityId);
         setForm({
