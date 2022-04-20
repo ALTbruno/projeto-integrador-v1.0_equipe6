@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Form, FormGroup, FormLabel, FormControl, FormText, Button } from "react-bootstrap";
+import { toast } from "react-toastify";
 import api from "../../services";
 import './index.scss';
 
@@ -10,9 +11,16 @@ const CriacaoProdutos = () => {
     const [city, setCities] = useState([]);
     const [characteristics, setCharacteristics] = useState([]);
     const [form, setForm] = useState({
+        "cancellationPolicy": "",
+        "healthAndSafety": "",
+        "rules": "",
+        "name": '',
+        "latitude": '',
+        "longitude": '',
+        "description": "",
         "categoryId": 1,
         "cityId": 1,
-        "images": [],
+        "image": [],
         "characteristics": [
             1, 2, 3
         ]
@@ -29,24 +37,87 @@ const CriacaoProdutos = () => {
         api.get("characteristics").then(response => {
             setCharacteristics(response.data);
         })
-        console.log(characteristics)
     }, [])
 
     const handleChange = (e) => {
+        document.getElementsByName(e.target.name)[0].classList.remove('is-invalid');
         setForm({
             ...form, [e.target.name]: e.target.value
         })
         if (e.target.name === "categoryId") {
             setForm({
-                ...form, [e.target.name]: parseInt(e.target.value)})
-            }
+                ...form, [e.target.name]: parseInt(e.target.value)
+            })
+        }
     }
 
     const validate = () => {
-        if (!form.name) {
-            errors.name = "Preencha com um nome valido"
+        function valid() {
+            let retorno;
+            if (form.name === "") {
+                document.getElementsByName("name")[0].classList.add("is-invalid");
+                retorno = false;
+            }
+            if (form.categoryId === "") {
+                document.getElementsByName("categoryId").classList.add("is-invalid");
+                retorno = false;
+            }
+            if (form.description.length < 10) {
+                document.getElementsByName("description")[0].classList.add("is-invalid");
+                retorno = false;
+            }
+            if (form.cityId === "") {
+                document.getElementByName("cityId").classList.add("is-invalid");
+                retorno = false;
+            }
+            if (form.image.length === 0) {
+                document.getElementsByName("image")[0].classList.add("is-invalid");
+                retorno = false;
+            }
+            if (form.characteristics.length === 0) {
+                document.getElementsByName("characteristics")[0].classList.add("is-invalid");
+                retorno = false;
+            }
+            if (form.latitude === "") {
+                document.getElementsByName("latitude")[0].classList.add("is-invalid");
+                retorno = false;
+            }
+            if (form.longitude === "") {
+                document.getElementsByName("longitude")[0].classList.add("is-invalid");
+                retorno = false;
+            }
+            if (form.rules === "") {
+                document.getElementsByName("rules")[0].classList.add("is-invalid");
+                retorno = false;
+            }
+            if (form.cancellationPolicy === "") {
+                document.getElementsByName("cancellationPolicy")[0].classList.add("is-invalid");
+                retorno = false;
+            }
+            if (form.healthAndSafety === "") {
+                document.getElementsByName("healthAndSafety")[0].classList.add("is-invalid");
+                retorno = false;
+            }
+            if (retorno === false) {
+                return false;
+            } else {
+                return true;
+            }
         }
-        return errors;
+        if (valid()) {
+            return true
+        } else {
+            toast.error("Preencha todos os campos corretamente!", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored"
+            });
+        }
     }
 
     const sendData = () => {
@@ -61,40 +132,51 @@ const CriacaoProdutos = () => {
         formData.append("latitude", form.latitude);
         formData.append("longitude", form.longitude);
         formData.append("characteristics", parseInt(form.characteristics));;
-        for(let i = 0; i < form.images.length; i++) {
-            formData.append("images", form.images[i])
+        for (let i = 0; i < form.image.length; i++) {
+            // if para pegar a primeira imagem do array e setar o name com o form.name
+            if (i === 0) {
+                formData.append("images", form.image[i], form.name + ".jpg");
+            } else {
+            formData.append("images", form.image[i])
+            }
         }
         formData.append("rules", form.rules);
         formData.append("healthAndSafety", form.healthAndSafety);
         formData.append("cancellationPolicy", form.cancellationPolicy);
-        console.log(parseInt(form.characteristics))
-        console.log(form)
         // enviar o formData para o backend
         api.post("/products/add", formData, {
             headers: {
                 'Content-Type': 'multipart/form-data', 'Authorization': `Bearer ${token.replace(/['"]+/g, '')}`
             }
         }).then(response => {
-            console.log(response)
+            toast.success("Produto cadastrado com sucesso!", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored"
+            })
         })
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setErrors(validate(form))
-        sendData()
+        if (validate()) {
+            sendData()
+        }
     }
     const setImages = (e) => {
-        console.log(e.target.files)
         setForm({
-            ...form, "images": e.target.files
+            ...form, "image": e.target.files
         })
     }
 
     const handleCheck = (e) => {
         const { name, value } = e.target;
         const newForm = { ...form };
-        newForm.characteristics = newForm.characteristics.filter(characteristic => characteristic.id !== parseInt(value));
         setForm(newForm);
     }
 

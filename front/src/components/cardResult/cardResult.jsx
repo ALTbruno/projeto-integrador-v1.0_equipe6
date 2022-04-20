@@ -44,7 +44,7 @@ export default function cardResult({ item }) {
   const getCoverImage = (images, name) => {
     let url = "";
     images.map(image => {
-      if (image.title === name) {
+      if (image.title.replace(".jpg", "")=== name) {
         url = image.url;
       }
     })

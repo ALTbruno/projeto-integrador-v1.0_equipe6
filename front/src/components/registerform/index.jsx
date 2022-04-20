@@ -22,6 +22,7 @@ const RegisterForm = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
+        theme: "colored"
     });
     const notifyError = () => toast.error(' Email já cadastrado!', {
         position: "top-right",
@@ -31,6 +32,7 @@ const RegisterForm = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
+        theme: "colored"
     });
 
     const registerConfirm = () => {
