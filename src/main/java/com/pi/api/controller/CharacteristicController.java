@@ -24,6 +24,15 @@ public class CharacteristicController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(characteristicService.criar(characteristicDTO));
 	}
 
+	@PutMapping("/edit/{id}")
+	public ResponseEntity<Characteristic> editar(@PathVariable Long id, @ModelAttribute CharacteristicDTO characteristicDTO) throws IOException {
+		if (characteristicService.idExiste(id)) {
+			characteristicDTO.setId(id);
+			return ResponseEntity.ok(characteristicService.editar(characteristicDTO));
+		}
+		return ResponseEntity.badRequest().build();
+	}
+
 	@GetMapping
     public ResponseEntity<List<Characteristic>> listar() {
         return ResponseEntity.ok(characteristicService.listar());

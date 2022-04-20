@@ -23,6 +23,10 @@ public class CharacteristicService {
 	@Value("${mainPath}")
 	private String mainPath;
 
+	public boolean idExiste(Long id) {
+		return characteristicRepository.existsById(id);
+	}
+
 	public Characteristic criar(CharacteristicDTO characteristicDTO) throws IOException {
 
 		MultipartFile image = characteristicDTO.getImage();
@@ -33,6 +37,22 @@ public class CharacteristicService {
 		String url = s3Service.uploadFileTos3bucket(fullPath, image);
 
 		Characteristic characteristic = new Characteristic();
+		characteristic.setName(characteristicDTO.getName());
+		characteristic.setIcon(url);
+		return characteristicRepository.save(characteristic);
+	}
+
+	public Characteristic editar(CharacteristicDTO characteristicDTO) throws IOException {
+
+		MultipartFile image = characteristicDTO.getImage();
+
+		if (!image.getOriginalFilename().toLowerCase().endsWith(".svg")) throw new IOException("O ícone deve ser do tipo SVG");
+
+		String fullPath = mainPath + "images/" + "characteristics/";
+		String url = s3Service.uploadFileTos3bucket(fullPath, image);
+
+		Characteristic characteristic = new Characteristic();
+		characteristic.setId(characteristicDTO.getId());
 		characteristic.setName(characteristicDTO.getName());
 		characteristic.setIcon(url);
 		return characteristicRepository.save(characteristic);
