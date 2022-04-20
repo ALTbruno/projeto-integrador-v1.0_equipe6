@@ -13,7 +13,7 @@ const CriacaoProdutos = () => {
         "cityId": 1,
         "images": [],
         "characteristics": [
-            1
+            1, 2, 3
         ]
     });
     const [errors, setErrors] = useState({});
@@ -45,19 +45,20 @@ const CriacaoProdutos = () => {
     }
 
     const sendData = () => {
-        parseLatAndLongForInt(form.latitude, form.longitude);
+        parseLatAndLongForFloat(form.latitude, form.longitude);
         var formData = new FormData();
         // gerar um formData com os dados do form para post
-        formData.append("name", JSON.stringify(form.name));
-        formData.append("description", JSON.stringify(form.description));
-        formData.append("categoryId", JSON.stringify(form.categoryId));
-        formData.append("cityId", JSON.stringify(form.cityId));
-        formData.append("latitude", JSON.stringify(form.latitude));
-        formData.append("longitude", JSON.stringify(form.longitude));
-        formData.append("characteristics", JSON.stringify(form.characteristics[0]));
-        formData.append("rules", JSON.stringify(form.rules));
-        formData.append("healthAndSafety", JSON.stringify(form.healthAndSafety));
-        formData.append("cancellationPolicy", JSON.stringify(form.cancellationPolicy));
+        formData.append("name", form.name);
+        formData.append("description", form.description);
+        formData.append("categoryId", form.categoryId);
+        formData.append("cityId", form.cityId);
+        formData.append("latitude", form.latitude);
+        formData.append("longitude", form.longitude);
+        formData.append("characteristics", form.characteristics);;
+        formData.append("images", form.images);
+        formData.append("rules", form.rules);
+        formData.append("healthAndSafety", form.healthAndSafety);
+        formData.append("cancellationPolicy", form.cancellationPolicy);
         console.log(form.characteristics)
         console.log(form)
         let productimages = [];
@@ -98,7 +99,7 @@ const CriacaoProdutos = () => {
         setForm(newForm);
     }
 
-    const parseLatAndLongForInt = (latitude, longitude) => {
+    const parseLatAndLongForFloat = (latitude, longitude) => {
         const lat = parseFloat(latitude);
         const long = parseFloat(longitude);
         setForm({
