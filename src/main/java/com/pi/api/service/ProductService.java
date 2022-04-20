@@ -13,10 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,7 +52,12 @@ public class ProductService {
         product.setCancellationPolicy(productDTO.getCancellationPolicy());
         product.setCategory(categoryRepository.findById(productDTO.getCategoryId()).get());
         product.setCity(cityRepository.findById(productDTO.getCityId()).get());
-        product.setCharacteristics(productDTO.getCharacteristics().stream().map(characteristic -> characteristicRepository.getById(characteristic)).collect(Collectors.toSet()));
+        Set<Characteristic> characteristics = new HashSet<>();
+        for (Long characteristicId : productDTO.getCharacteristics()) {
+            Characteristic characteristic = characteristicRepository.findById(characteristicId).get();
+            characteristics.add(characteristic);
+        }
+        product.setCharacteristics(characteristics);
         productRepository.save(product);
 
         String fullPath = mainPath + "images/" + "products/";
