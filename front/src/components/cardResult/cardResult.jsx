@@ -74,8 +74,9 @@ export default function cardResult({ item }) {
             <p>{hotel.city.name} - <span>MOSTRAR NO MAPA</span></p>
           </section>
           <div className='characteristics-result'>
-            <img className='icon-characteristics-result' src={wifi} alt="" />
-            <img className='icon-characteristics-result' src={natacao} alt="" />
+            {hotel.characteristics.map(characteristic => (
+              <img className='icon-characteristics-result' src={characteristic.icon} alt={characteristic.name} />
+            ))}
           </div>
           <p className='description-result'>{hotel.description}  <span>mais...</span></p>
         </section>

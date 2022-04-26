@@ -19,6 +19,7 @@ body {
     .container-calendar {
       display: flex;
       align-items: center;
+      justify-content: space-evenly;
       .content-calendar {
         background-color: #fff;
         box-shadow: 0 4px 4px #00000025;

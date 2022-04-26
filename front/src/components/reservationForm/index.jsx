@@ -34,7 +34,6 @@ export const ReservationForm = ({ product }) => {
     }, [product])
 
     useEffect(() => {
-        console.log("chamou")
         api.get(`/reservations/productId=${id}`).then(response => {
             setResevations(response.data);
         })
