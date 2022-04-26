@@ -15,9 +15,9 @@ const LocationMapModal = () => {
         <>
             <Card.Link className="btn text-decoration-none fw-bold" style={{ color: '#1DBEB4' }} onClick={handleShow}>Mostrar no Mapa</Card.Link>
             
-            <Modal className="rounded-3" size="xl" autoFocus={true} show={show} onHide={handleClose} animation={false}>
+            <Modal className="rounded-3" size="lg" autoFocus={true} show={show} onHide={handleClose} animation={false}>
                 
-                    <Map/>
+                    <Map product={produtos}/>
                 
             </Modal>
         </>
