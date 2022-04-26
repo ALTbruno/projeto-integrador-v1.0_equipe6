@@ -86,11 +86,17 @@
                     color: $white;
                     font-size: $roboto-bold-16;
                     font-weight: $roboto-bold-16-font-weight;
-                    &:hover{
-                        background: #0d6efd;
-                        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                        &:active{
+                            top: 1px
+                        }
+                        &:hover{
+                            background: #0d6efd;
+                            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                        }
                     }
-                }
             }
         }
         p{

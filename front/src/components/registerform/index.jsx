@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import api from "../../services/index";
-import visible from '../../assets/icons/visible.svg'
-import invisible from '../../assets/icons/invisible.svg'
+import visible from '../../assets/icons/visible.svg';
+import invisible from '../../assets/icons/invisible.svg';
+import { setLoading, removeLoading } from "../functions/loading";
 import './index.scss';
 
 const RegisterForm = () => {
+    const navigate = useNavigate();
     const [userForRegister, setUserForRegister] = useState({
         firstName: '',
         lastName: '',
@@ -46,7 +48,7 @@ const RegisterForm = () => {
             progress: undefined,
             theme: "colored",
             onClose: () => {
-                window.location.href = '/login'
+                navigate('/');
             }
         })
     }
@@ -78,15 +80,20 @@ const RegisterForm = () => {
     /** Função que faz o cadastro do usuário */
     const registerUser = async (e) => {
         e.preventDefault();
+        const submit = e.nativeEvent.submitter;
+        setLoading(submit);
         if (verifyInputs()) {
-            api.post('/users/customers/register', userForRegister)
+            await api.post('/users/customers/register', userForRegister)
                 .then(response => {
                     registerConfirm()
                     resetInputs();
+                    removeLoading(submit);
                 }).catch(error => {
+                    removeLoading(submit);
                     notifyError()
                 })
         }
+        removeLoading(submit);
     }
 
     const verifyInputs = () => {

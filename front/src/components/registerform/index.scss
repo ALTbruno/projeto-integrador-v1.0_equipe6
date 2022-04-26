@@ -80,7 +80,15 @@
                 }
             .btn{
                 margin-top: 51px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
                 button{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
                     height: 40px;
                     width: 206px;
                     outline: none;
