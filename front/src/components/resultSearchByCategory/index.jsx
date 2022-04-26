@@ -23,7 +23,7 @@ export default function ResultByCategory() {
   const { category } = useParams();
 
   useEffect(() => {
-    api.get(`/products/category=${category}?size=2&page=${pageNumber}`).then(response => {
+    api.get(`/products/category=${category}?size=5&page=${pageNumber}`).then(response => {
       setPage(response.data);
       setHoteis(response.data.content);
     }).catch((error) => {

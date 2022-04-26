@@ -7,6 +7,7 @@ import visible from '../../assets/icons/visible.svg';
 import invisible from '../../assets/icons/invisible.svg';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.scss';
+import { setLoading, removeLoading } from "../functions/loading";
 import React from "react";
 
 const LoginForm = () => {
@@ -16,6 +17,7 @@ const LoginForm = () => {
         email: '',
         password: ''
     })
+
     useEffect(() => {
         if (logado) {
             navigate('/');
@@ -89,16 +91,21 @@ const LoginForm = () => {
     };
 
     /** Ofetua o login do usuario e o redireciona para a home */
-    const loginUser = (e) => {
+    const loginUser = async (e) => {
         e.preventDefault()
+        const submit = e.nativeEvent.submitter;
         let { email, password} = login;
+        setLoading(submit)
         if (verifyInputs()) {
-            api.post('/users/login', { email, password }).then(response => {
+            setLoading(submit)
+             await api.post('/users/login', { email, password }).then(response => {
                 let token = response.data.accessToken;
                 let user = parseJwt(token);
                 handleLogin(token, user);
                 navigate('/', {replace: true});
+                removeLoading(submit)
             }).catch(error => {
+                removeLoading(submit);
                 toast.error("Por favor, tente novamente, suas credenciais são inválidas", {
                     position: "top-right",
                     autoClose: 5000,
@@ -111,7 +118,7 @@ const LoginForm = () => {
                 })
             })
         }
-
+        removeLoading(submit)
     }
 
 
@@ -159,7 +166,7 @@ const LoginForm = () => {
                             </div>
                         </div>
                         <div className="button" >
-                            <button type="submit" >Entrar</button>
+                            <button type="submit">Entrar</button>
                         </div>
                     </form>
                     <p>Ainda não tem conta? <Link to='/register'>Registre-se</Link></p>

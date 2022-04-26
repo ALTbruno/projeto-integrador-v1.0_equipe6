@@ -28,7 +28,7 @@ export default function ResultByCity() {
 
 
   useEffect(() => {
-    api.get(`products/search?city=${city}&checkin=${checkin}&checkout=${checkout}&size=1&page=${pageNumber}`).then(response => {
+    api.get(`products/search?city=${city}&checkin=${checkin}&checkout=${checkout}&size=5&page=${pageNumber}`).then(response => {
       setPage(response.data);
       setHoteis(response.data.content);
     }).catch((error) => {

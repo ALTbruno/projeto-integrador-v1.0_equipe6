@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Form, FormGroup, FormLabel, FormControl, FormText, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 import api from "../../services";
+import { setLoading, removeLoading } from '../../components/functions/loading';
 import './index.scss';
 
-const token = window.localStorage.getItem('token');
 
 const CriacaoProdutos = () => {
     const [categories, setCategories] = useState([]);
@@ -14,18 +14,15 @@ const CriacaoProdutos = () => {
         "cancellationPolicy": "",
         "healthAndSafety": "",
         "rules": "",
-        "name": '',
-        "latitude": '',
-        "longitude": '',
+        "name": "",
+        "latitude": "",
+        "longitude": "",
         "description": "",
-        "categoryId": 1,
-        "cityId": 1,
+        "categoryId": "",
+        "cityId": "",
         "image": [],
-        "characteristics": [
-            1, 2, 3
-        ]
+        "characteristics": []
     });
-    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         api.get("categories").then(response => {
@@ -59,7 +56,7 @@ const CriacaoProdutos = () => {
                 retorno = false;
             }
             if (form.categoryId === "") {
-                document.getElementsByName("categoryId").classList.add("is-invalid");
+                document.getElementsByName("categoryId")[0].classList.add("is-invalid");
                 retorno = false;
             }
             if (form.description.length < 10) {
@@ -67,7 +64,7 @@ const CriacaoProdutos = () => {
                 retorno = false;
             }
             if (form.cityId === "") {
-                document.getElementByName("cityId").classList.add("is-invalid");
+                document.getElementsByName("cityId")[0].classList.add("is-invalid");
                 retorno = false;
             }
             if (form.image.length === 0) {
@@ -120,7 +117,8 @@ const CriacaoProdutos = () => {
         }
     }
 
-    const sendData = () => {
+    const sendData = async (e) => {
+        setLoading(e.nativeEvent.submitter);
         parseLatAndLongForFloat(form.latitude, form.longitude);
         setCityIdInt();
         var formData = new FormData();
@@ -131,7 +129,7 @@ const CriacaoProdutos = () => {
         formData.append("cityId", form.cityId);
         formData.append("latitude", form.latitude);
         formData.append("longitude", form.longitude);
-        formData.append("characteristics", parseInt(form.characteristics));;
+        formData.append("characteristics", form.characteristics);;
         for (let i = 0; i < form.image.length; i++) {
             // if para pegar a primeira imagem do array e setar o name com o form.name
             if (i === 0) {
@@ -144,11 +142,12 @@ const CriacaoProdutos = () => {
         formData.append("healthAndSafety", form.healthAndSafety);
         formData.append("cancellationPolicy", form.cancellationPolicy);
         // enviar o formData para o backend
-        api.post("/products/add", formData, {
+        await api.post("/products/add", formData, {
             headers: {
-                'Content-Type': 'multipart/form-data', 'Authorization': `Bearer ${token.replace(/['"]+/g, '')}`
+                'Content-Type': 'multipart/form-data'
             }
         }).then(response => {
+            removeLoading(e.nativeEvent.submitter)
             toast.success("Produto cadastrado com sucesso!", {
                 position: "top-right",
                 autoClose: 5000,
@@ -159,13 +158,27 @@ const CriacaoProdutos = () => {
                 progress: undefined,
                 theme: "colored"
             })
+        }).catch(error => {
+            removeLoading(e.nativeEvent.submitter)
+            toast.error("Erro ao cadastrar produto!", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored"
+            })
         })
+        removeLoading(e.nativeEvent.submitter)
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(form)
         if (validate()) {
-            sendData()
+            sendData(e)
         }
     }
     const setImages = (e) => {
@@ -175,9 +188,15 @@ const CriacaoProdutos = () => {
     }
 
     const handleCheck = (e) => {
-        const { name, value } = e.target;
-        const newForm = { ...form };
-        setForm(newForm);
+        if (e.target.checked) {
+            setForm({
+                ...form, "characteristics": [...form.characteristics, parseInt(e.target.value)]
+            })
+        } else {
+            setForm({
+                ...form, "characteristics": form.characteristics.filter(item => item !== e.target.value)
+            })
+        }
     }
 
     const parseLatAndLongForFloat = (latitude, longitude) => {
@@ -214,7 +233,7 @@ const CriacaoProdutos = () => {
                     <div className="d-flex div-nome-cat">
                         <FormGroup className="me-2 p-1 w-100">
                             <FormLabel>Nome do Produto</FormLabel>
-                            <FormControl className="shadow" type="text" placeholder="Digite o Nome do Produto" name="name" onChange={e => handleChange(e)} />
+                            <FormControl className="shadow" type="text" maxLength={255} placeholder="Digite o Nome do Produto" name="name" onChange={e => handleChange(e)} />
                         </FormGroup>
 
                         <FormGroup className=" p-1 w-100 cat-prod ">
@@ -222,7 +241,7 @@ const CriacaoProdutos = () => {
                             <Form.Select
                                 className="shadow"
                                 name="categoryId"
-                                onChange={e => handleCheck(e)}
+                                onChange={e => handleChange(e)}
                             >
                                 <option>selecione uma categoria</option>
                                 {categories.map(category => (
@@ -234,7 +253,7 @@ const CriacaoProdutos = () => {
 
                     <FormGroup className="my-3 p-1">
                         <FormLabel>Descrição do Produto</FormLabel>
-                        <FormControl className="shadow" as="textarea" rows={5} placeholder="Digite a Descrição do Produto" name="description" onChange={e => handleChange(e)} />
+                        <FormControl maxLength={1000} className="shadow" as="textarea" rows={5} placeholder="Digite a Descrição do Produto" name="description" onChange={e => handleChange(e)} />
                     </FormGroup>
 
                     <FormGroup className="my-3 p-1">
@@ -263,7 +282,7 @@ const CriacaoProdutos = () => {
                         <FormGroup className="p-1 w-100">
                             <FormLabel>Caracteristicas do Produto</FormLabel>
                             {characteristics.map(characteristic => (
-                                <Form.Check key={characteristic.id} type="checkbox" name='characteristics' label={characteristic.name} value={characteristic.id} onChange={e => handleChange(e)} />
+                                <Form.Check key={characteristic.id} type="checkbox" name='characteristics' label={characteristic.name} value={characteristic.id} onChange={e => handleCheck(e)} />
                             ))}
                         </FormGroup>
                     </div>
@@ -280,20 +299,20 @@ const CriacaoProdutos = () => {
                         <div className="d-flex justify-content-between politicas" >
                             <div className="mx-2 w-100">
                                 <FormText>Regras da Casa</FormText>
-                                <FormControl className="shadow" as="textarea" rows={7} name="rules" onChange={e => handleChange(e)} />
+                                <FormControl maxLength={1000} className="shadow" as="textarea" rows={7} name="rules" onChange={e => handleChange(e)} />
                             </div>
                             <div className="mx-2 w-100">
                                 <FormText>Saúde e Segurança</FormText>
-                                <FormControl className="shadow" as="textarea" rows={7} name="healthAndSafety" onChange={e => handleChange(e)} />
+                                <FormControl maxLength={1000} className="shadow" as="textarea" rows={7} name="healthAndSafety" onChange={e => handleChange(e)} />
                             </div>
                             <div className="mx-2 w-100">
                                 <FormText>Politicas de Cancelamento</FormText>
-                                <FormControl className="shadow" as="textarea" rows={7} name="cancellationPolicy" onChange={e => handleChange(e)} />
+                                <FormControl maxLength={1000} className="shadow" as="textarea" rows={7} name="cancellationPolicy" onChange={e => handleChange(e)} />
                             </div>
                         </div>
                     </FormGroup>
 
-                    <Button className="mt-5 fw-bold" type="submit" style={{ backgroundColor: '#1DBEB4', border: '#1DBEB4' }}>Criar</Button>
+                    <Button className="mt-5 fw-bold d-flex justify-content-center align-items-center" type="submit" style={{ backgroundColor: '#1DBEB4', border: '#1DBEB4' }}>Criar</Button>
 
                 </Form>
             </div>

@@ -3,6 +3,7 @@ import StarRating from "../../components/avaliationStars";
 import { toast } from 'react-toastify';
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { setLoading, removeLoading } from "../functions/loading";
 import api from "../../services";
 
 export const ReservationDetailCard = ({ reservation, verifyTime, verifyDates }) => {
@@ -99,10 +100,12 @@ export const ReservationDetailCard = ({ reservation, verifyTime, verifyDates }) 
         return day + '/' + month + '/' + year;
     }
 
-    const postReserva = (e) => {
+    const postReserva = async (e) => {
         e.preventDefault();
+        setLoading(e.nativeEvent.submitter);
         if (verifyTime() && verifyDates()) {
-            api.post('reservations/book', initialReservation).then(response => {
+             await api.post('reservations/book', initialReservation).then(response => {
+                removeLoading(e.nativeEvent.submitter);
                 toast.success('Reserva realizada com sucesso!', {
                     position: "top-right",
                     autoClose: 5000,
@@ -117,8 +120,10 @@ export const ReservationDetailCard = ({ reservation, verifyTime, verifyDates }) 
                 if (error.response.status === 500) {
                     toast.error('Reserva já marcada no intervalo de data selecionada!');
                 }
+                removeLoading(e.nativeEvent.submitter);
             })
         }
+        removeLoading(e.nativeEvent.submitter);
     }
 
     return (
@@ -139,7 +144,7 @@ export const ReservationDetailCard = ({ reservation, verifyTime, verifyDates }) 
                     <Card.Subtitle className="">{produtos.city.name}</Card.Subtitle>
                     <Card.Text className="my-2">{`Check-in: ${reserva.checkinDate ? generateDate(reserva.checkinDate) : '__/__/__'}`}</Card.Text>
                     <Card.Text className="">{`Check-out: ${reserva.checkoutDate ? generateDate(reserva.checkoutDate) : '__/__/__'}`}</Card.Text>
-                    <button className="mt-4 border btn w-100 decoration-none" style={{ backgroundColor: '#1DBEB4', border: '#1DBEB4' }}>Confirmar Reserva</button>
+                    <button className="mt-4 border btn w-100 decoration-none d-flex justify-content-center align-items-center" style={{ backgroundColor: '#1DBEB4', border: '#1DBEB4' }}>Confirmar Reserva</button>
                 </Form>
             </Card>
         </>
