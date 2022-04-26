@@ -17,7 +17,7 @@ const LocationMapModal = () => {
             
             <Modal className="rounded-3" size="lg" autoFocus={true} show={show} onHide={handleClose} animation={false}>
                 
-                    <Map product={produtos}/>
+                    <Map />
                 
             </Modal>
         </>
